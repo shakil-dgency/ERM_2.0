@@ -17,7 +17,7 @@ function Mission({ data,rotate }) {
 			<div className="flex-1">
 				<p className="highlighted_text">{data?.Eyebrow_headline}</p>
 				<UnderlineHeadline text={data?.headline} />
-				<div className={`mt-[25px] ${styles.card_details}`} dangerouslySetInnerHTML={{__html: data?.description}} />
+				<div className={`mt-[25px] ${styles.card_details}`} dangerouslySetInnerHTML={{__html: data ? data?.description : ""}} />
 			</div>
 		</div>
 	);

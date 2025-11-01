@@ -10,14 +10,14 @@ function BlogCard(data) {
 			
 			className="relative flex flex-col justify-end px-5 lg:px-[45px] py-5 lg:py-[35px] rounded-[10px] bg-blend-multiply bg-cover bg-center bg-no-repeat max-w-full aspect-[780/650] lg:aspect-[780/516]"
 			style={{
-				backgroundImage: `linear-gradient(180deg, rgba(13,17,22,0) 0%, rgba(13,17,22,0.90) 60%, #0D1116 100%), url(${data?.data.main_image ? `${process.env.NEXT_PUBLIC_API_URL}${data?.data.main_image.url}` : ""})`,
+				backgroundImage: `linear-gradient(180deg, rgba(13,17,22,0) 0%, rgba(13,17,22,0.90) 60%, #0D1116 100%), url(${data?.data?.main_image ? `${process.env.NEXT_PUBLIC_API_URL}${data?.data.main_image.url}` : ""})`,
 			}}
 		>
-			<p className="text-[#C8C7C7] text-[12px] lg:text-[16px] font-normal leading-[1.4] pb-2.5 lg:pb-[15px]">{handleDate(data?.data.updated_date)}</p>
+			<p className="text-[#C8C7C7] text-[12px] lg:text-[16px] font-normal leading-[1.4] pb-2.5 lg:pb-[15px]">{handleDate(data?.data?.updated_date)}</p>
 			<p className="text-[#fff] text-[20px] xl:text-[32px] font-[600] border-b-[1px] border-[#2C3640] pb-2.5 lg:pb-[20px] leading-[1.3]">
-				{data?.data.headline}
+				{data?.data?.headline}
 			</p>
-			<Link href={`${data?.data.slug}`} className="group cursor-pointer text-neutral-300 text-[16px] font-[500] flex items-center gap-[5px] pt-2.5 lg:pt-5">
+			<Link href={`${data?.data?.slug}`} className="group cursor-pointer text-neutral-300 text-[16px] font-[500] flex items-center gap-[5px] pt-2.5 lg:pt-5">
 				Learn More
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
@@ -34,7 +34,7 @@ function BlogCard(data) {
 				</svg>
 			</Link>
 			<button className="absolute cursor-pointer z-10 top-5 lg:top-[35px] right-5 lg:right-[45px] border border-primary-800 rounded-[4px] bg-[rgba(32,41,49,0.60)] text-[12px] lg:text-[16px] font-[600] text-neutral-50 py-1.5 sm:py-2.5 px-3 sm:px-5 ">
-				{data?.data.Eyebrow_headline}
+				{data?.data?.Eyebrow_headline}
 			</button>
 		</div>
 	);
