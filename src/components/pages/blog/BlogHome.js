@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 import BlogCard from "@/components/global/BlogCard";
 import Container from "@/components/ui/Container";
 import React from "react";
