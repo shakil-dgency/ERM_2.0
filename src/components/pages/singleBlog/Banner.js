@@ -4,23 +4,23 @@ import React from "react";
 
 function Banner({ data }) {
 	return (
-		<div className="bg-secondary-800 max-w-[1316px] mx-auto mt-[100px] mb-[60px] px-5 py-8 md:p-2 md:h-[184px] rounded-[20px] flex flex-col items-center sm:items-start  md:grid grid-cols-10 md:items-center md:justify-items-center relative">
+		<div className="bg-secondary-800 max-w-[1216px] mx-auto mb-[40px] mt-[100px] md:my-[60px] px-5 py-8 md:p-5 md:h-[184p] rounded-[20px] flex gap-x-[20px] flex-col md:flex-row items-center   relative">
 			<Image
 				src={`${data?.image ? `${process.env.NEXT_PUBLIC_API_URL}${data?.image.url}` : "/pages/blog/captain.png"}`}
 				alt="Banner Image"
 				width={203}
 				height={238}
-				className="h-[200px] lg:h-[238px] w-auto hidden sm:block absolute right-2.5 md:right-0 md:left-2.5 lg:left-5 bottom-[1px]"
+				className="h-[150px] w-[150px] object-contain -mt-[100px] md:mt-0 rounded-full flex-none  "
 			/>
-			<div className="md:ml-12 lg:ml-10 md:col-start-3 md:col-end-8 text-center sm:text-left">
+			<div className=" text-center md:text-start mt-[30px] md:mt-0 ">
 				<p className="text-neutral-50 text-[20px] lg:text-[32px] font-[700] sm:max-w-[500px] md:max-w-none">{data?.headline}</p>
-				<p className="text-[16px] text-neutral-300  sm:max-w-[500px] md:max-w-none">{data?.description}</p>
+				<p className="text-[16px] text-neutral-300  sm:max-w-[500px] md:max-w-none pt-1">{data?.description}</p>
 			</div>
 			{/* <button className="md:col-start-8 md:col-end-11 text-[14px] lg:text-[18px] text-neutral-50 font-[700] uppercase mt-[25px] md:mt-0 px-[15px] lg:px-[35px] py-[15px] rounded-[6px] bg-primary-600">
 				Unlock Marketing Plan
 			</button> */}
 
-			<div className="flex md:col-start-8 md:col-end-11">
+			<div className="flex flex-none">
 				<Link
 					href={"/free-marketing"}
 					className="group flex items-center gap-2.5 text-[14px] lg:text-[18px] text-neutral-50 font-[700] uppercase mt-[25px] md:mt-0 px-[15px] lg:px-[35px] py-[15px] rounded-[6px] bg-primary-600 hover:drop-shadow-[0px_0px_10px_#d42f00] transition-all duration-300"

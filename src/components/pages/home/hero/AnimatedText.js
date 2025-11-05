@@ -1,49 +1,59 @@
 "use client";
-import React from "react";
+
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
 
-const phrases = ["Better Reviews.", "Full Rooms."];
+export default function AnimatedText({ sentences = [] }) {
+  const [index, setIndex] = useState(0);
 
-function AnimatedText() {
-	const [index, setIndex] = useState(0);
-	const [direction, setDirection] = useState(1); // 1 = up, -1 = down
+  // Cycle through sentences every 2.5 seconds
+  useEffect(() => {
+    if (sentences.length === 0) return;
 
-	useEffect(() => {
-		const timer = setTimeout(() => {
-			setIndex((prev) => {
-				if (prev === 0) {
-					setDirection(1); // up
-					return 1;
-				} else {
-					setDirection(-1); // down
-					return 0;
-				}
-			});
-		}, 2000);
-		return () => clearTimeout(timer);
-	}, [index]);
-	return (
-		<AnimatePresence mode="wait">
-			<motion.span
-				key={phrases[index]}
-				initial={{
-					y: direction === 1 ? "100%" : "-100%",
-					opacity: 0,
-				}}
-				animate={{ y: "-20%", opacity: 1 }}
-				exit={{
-					y: direction === 1 ? "100%" : "-100%",
-					opacity: 0,
-				}}
-				transition={{ y: { type: "tween", duration: 0.7 } }}
-				className="absolute left-0 w-full text-primary-100"
-				style={{ whiteSpace: "nowrap" }}
-			>
-				{phrases[index]}
-			</motion.span>
-		</AnimatePresence>
-	);
+    const interval = setInterval(() => {
+      setIndex((prev) => (prev + 1) % sentences.length);
+    }, 2500); // 2.5s for each sentence (2s visible + 0.5s transition)
+
+    return () => clearInterval(interval);
+  }, [sentences]);
+
+  const variants = {
+    enter: {
+      y: "100%",
+      opacity: 0,
+    },
+    center: {
+      y: "0%",
+      opacity: 1,
+      transition: {
+        duration: 0.6,
+        ease: [0.4, 0, 0.2, 1], // smooth easing
+      },
+    },
+    exit: {
+      y: "-100%",
+      opacity: 0,
+      transition: {
+        duration: 0.6,
+        ease: [0.4, 0, 0.2, 1],
+      },
+    },
+  };
+
+  return (
+    <div className="relative h-full w-full overflow-hidden text-primary">
+      <AnimatePresence mode="popLayout" >
+        <motion.span
+          key={index}
+          variants={variants}
+          initial="enter"
+          animate="center"
+          exit="exit"
+          className="absolute left-0 top-0 w-full text-inherit"
+        >
+          {sentences[index]?.title}
+        </motion.span>
+      </AnimatePresence>
+    </div>
+  );
 }
-
-export default AnimatedText;

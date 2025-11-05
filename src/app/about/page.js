@@ -1,4 +1,4 @@
-import Banner from "@/components/pages/about/Banner";
+import Banner from "@/components/global/Banner";
 import Hero from "@/components/pages/about/Hero";
 import Mission from "@/components/pages/about/Mission";
 import StatsAndClients from "@/components/pages/home/StatsAndClients";

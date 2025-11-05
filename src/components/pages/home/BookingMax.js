@@ -2,55 +2,25 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-
 import Container from "@/components/ui/Container";
 import ServiceCard from "@/components/global/ServiceCard";
 import LazyLoadingVideo from "@/components/global/LazyLoadingVideo";
 import VideoStream from "@/components/global/VideoStream";
 import ServiceCarusel from "./ServiceCarusel";
+import UnderlineHeadline from "@/components/ui/UnderlineHeadline";
+import StrokeButton from "@/components/ui/buttons/StrokeButton";
+import FillButton from "@/components/ui/buttons/FillButton";
 
-const slides = [
-	{
-		category: "Marketing",
-		image: "", // Change to your image path
-		title: "Google & Meta Ads",
-		text: "Show up when people search “fun things to do near me.” Our AI-optimized campaigns drive real bookings, not just clicks.",
-		link: "#",
-	},
-	{
-		category: "Website",
-		image: "",
-		title: "Google & Meta Ads",
-		text: "Show up when people search “fun things to do near me.” Our AI-optimized campaigns drive real bookings, not just clicks.",
-		link: "#",
-	},
-	{
-		category: "Website",
-		image: "",
-		title: "Google & Meta Ads",
-		text: "Show up when people search “fun things to do near me.” Our AI-optimized campaigns drive real bookings, not just clicks.",
-		link: "#",
-	},
-	{
-		category: "Website",
-		image: "",
-		title: "Google & Meta Ads",
-		text: "Show up when people search “fun things to do near me.” Our AI-optimized campaigns drive real bookings, not just clicks.",
-		link: "#",
-	},
-	{
-		category: "Website",
-		image: "",
-		title: "Google & Meta Ads",
-		text: "Show up when people search “fun things to do near me.” Our AI-optimized campaigns drive real bookings, not just clicks.",
-		link: "#",
-	},
-];
-
-export default function BookingMax() {
+export default function BookingMax({ data, serviceData }) {
 	const [open, setOpen] = useState(false);
 	const popupVideoRef = useRef(null);
 	const overlayRef = useRef(null);
+
+	// Split by the apostrophe
+	const [before, highlightedWithQuotes] = data?.headline.split("'");
+
+	// Remove extra quotes if any
+	const highlighted = highlightedWithQuotes?.replace(/'/g, "");
 
 	// Lock body scroll when overlay is open
 	useEffect(() => {
@@ -80,7 +50,7 @@ export default function BookingMax() {
 	};
 
 	return (
-		<section className=" min-h-screen overflow-x-hidden bg-[url('/pages/home/bookingMaxBg.png')] bg-repeat bg-[length:240px_240px] ">
+		<section className=" min-h-screen overflow-x-hidden bg-[url('/pages/home/bookingMaxBg.png')] bg-repeat bg-[length:240px_240px] pb-[100px] ">
 			<div className="relative py-[100px] md:py-[140px]">
 				{/* Glow/Gradient Backgrounds */}
 				<div className="glow_background absolute -left-40 top-[300px] w-[300px] h-[300px] rounded-full blur-[120px] bg-primary-500 " />
@@ -90,57 +60,29 @@ export default function BookingMax() {
 				{/* Title & Subheadline */}
 				<div className=" px-2.5 flex flex-col items-center mb-[50px] md:mb-[80px] relative z-10">
 					<h1 className="text-[clamp(50px,15.6vw,160px)]  font-[400] text-neutral-50 mb-1">
-						Booking<span className="text-primary-500 font-[700]">MAX</span>
+						{before}
+						{highlighted && <span className="text-primary-500 font-bold">{highlighted}</span>}
 					</h1>
-					<h2 className=" leading-[1.1] text-neutral-100 text-center mb-2">
-						Finally, Marketing That Solves the Puzzle.
-						<br className="hidden xl:block" />
-						The Escape Room{" "}
-						<span className="text-primary-500 relative">
-							Growth Engine.
-							<svg
-								xmlns="http://www.w3.org/2000/svg"
-								width="413"
-								height="14"
-								viewBox="0 0 413 14"
-								fill="none"
-								className="absolute -bottom-2 left-0 w-full"
-							>
-								<path d="M2.22266 12.1311C32.5774 -6.55895 210.348 6.21491 410.813 12.1311" stroke="#FF492C" strokeWidth="3" strokeLinecap="round" />
-							</svg>
-						</span>
-					</h2>
+					<UnderlineHeadline text={data?.description} text_light={true} text_center={true} />
 				</div>
 				<Container>
 					{/* Hero Card */}
 					<div className="relative max-w-full mx-auto aspect-[398/295]  md:aspect-[1584/700] rounded-[20px] bg-[rgba(22,26,30,0.90)] overflow-hidden">
 						{/* Video or Image Placeholder (can replace with a <video> or <img>) */}
 						<div className="absolute inset-0 z-10 ]">
-							<VideoStream src="video/compresed/bookingMax.m3u8" />
-							<div className="absolute inset-0 bg-gradient-to-t from-[#000000] to-transparent"></div>
+							<LazyLoadingVideo video_url={data?.long_card?.video_url} />
+							<div className="absolute inset-0 z-10 bg-gradient-to-t from-[#000000] to-transparent"></div>
 						</div>
 
 						<div className="flex items-end h-full pb-[30px] md:pb-[50px] px-5 md:px-[32px] relative z-20">
 							<div className="md:flex justify-between w-full">
 								<div>
-									<span className="block text-[20px] sm:text-[24px] text-neutral-50 font-[600] mb-2">How It Works</span>
-									<span className="block text-[14px] sm:text-[18px] text-neutral-300">
-										We handle the marketing, so you can focus on creating unforgettable experiences.
-									</span>
+									<span className="block text-[20px] sm:text-[24px] text-neutral-50 font-[600] mb-2">{data?.long_card?.title}</span>
+									<span className="block text-[14px] sm:text-[18px] text-neutral-300">{data?.long_card?.short_description}</span>
 								</div>
 								<div className="flex gap-3 mt-5 md:mt-0">
-									<button
-										variant="outline"
-										className="text-[14px] md:text-[18px] font-[700] border-primary-500 border-[1px] text-neutral-50 hover:bg-[#1f2327] transition rounded-[10px] px-[15px] md:px-[35px] py-2 md:py-[20px]"
-									>
-										Learn More
-									</button>
-									<button
-										onClick={handleOpen}
-										className="text-[14px] md:text-[18px] bg-primary-700 hover:bg-primary-900 text-neutral-50 flex gap-1 items-center transition rounded-[10px] px-[15px] md:px-[35px] py-2 md:py-[20px]"
-									>
-										Watch Video
-									</button>
+									<StrokeButton text="Learn More" url="/bookingmax" />
+									<FillButton text="Watch Video" handleClick={handleOpen} left_icon="/icons/play.svg" />
 								</div>
 							</div>
 						</div>
@@ -149,47 +91,22 @@ export default function BookingMax() {
 					{/* Features Cards */}
 					<div className="relative z-10 grid grid-cols-1 md:grid-cols-3 gap-6 mt-6 md:mt-[80px] ">
 						{/* Card 1 */}
-						<div className="relative overflow-hidden rounded-[20px] bg-[rgba(22,26,30,0.90)] px-5 md:px-[32px] pb-[45px]  flex flex-col justify-end h-[525px] md:h-[695px]">
-							<span className="highlighted_text mb-1 absolute z-20 top-[30px] md:top-[48px]">Website</span>
-							<div className="relative z-20">
-								<h3 className="text-neutral-50 font-[600] text-[20px] md:text-[24px] mb-[10px]">Seamless UX. Sold-Out Slots.</h3>
-								<p className="text-[14px] md:text-[16px] text-neutral-300 leading-[1.2]">
-									We build high-converting websites that work with your booking system.
-								</p>
+						{data?.other_card?.map((card, index) => (
+							<div
+								key={index}
+								className="relative overflow-hidden rounded-[20px] bg-[rgba(22,26,30,0.90)] px-5 md:px-[32px] pb-[45px]  flex flex-col justify-end h-[525px] md:h-[695px]"
+							>
+								<span className="highlighted_text mb-1 absolute z-20 top-[30px] md:top-[48px]">{card?.tag}</span>
+								<div className="relative z-20">
+									<h3 className="text-neutral-50 font-[600] text-[20px] md:text-[24px] mb-[10px]">{card?.title}</h3>
+									<p className="text-[14px] md:text-[16px] text-neutral-300 leading-[1.2]">{card?.short_description}</p>
+								</div>
+								<div className="absolute inset-0 z-10">
+									<LazyLoadingVideo video_url={card?.video_url} />
+									<div className="absolute inset-0 z-10 bg-gradient-to-t from-[#000000] to-[#00000050]"></div>
+								</div>
 							</div>
-							<div className="absolute inset-0 z-10">
-								<VideoStream src="video/compresed/bookingMax.m3u8" />
-								<div className="absolute inset-0 bg-gradient-to-t from-[#000000] to-[#00000050]"></div>
-							</div>
-						</div>
-						{/* Card 2 */}
-						<div className="relative overflow-hidden rounded-[20px] bg-[rgba(22,26,30,0.90)] px-5 md:px-[32px] pb-[45px]  flex flex-col justify-end h-[525px] md:h-[695px]">
-							<span className=" highlighted_text mb-1 absolute z-20 top-[30px] md:top-[48px] ">Advertising</span>
-							<div className="relative z-20">
-								<h3 className="text-neutral-50 font-[600] text-[20px] md:text-[24px] mb-[10px]">Real Traffic. Real Bookings.</h3>
-								<p className="text-[14px] md:text-[16px] text-neutral-300 leading-[1.2]">
-									We run your ads across all major platforms to reach the right players at the right time.
-								</p>
-							</div>
-							<div className="absolute inset-0 z-10">
-								<VideoStream src="video/compresed/bookingMax.m3u8" />
-								<div className="absolute inset-0 bg-gradient-to-t from-[#000000] to-[#00000050]"></div>
-							</div>
-						</div>
-						{/* Card 3 */}
-						<div className="relative overflow-hidden rounded-[20px] bg-[rgba(22,26,30,0.90)] px-5 md:px-[32px] pb-[45px]  flex flex-col justify-end h-[525px] md:h-[695px]">
-							<span className="highlighted_text mb-1 absolute z-20 top-[30px] md:top-[48px]">Marketing</span>
-							<div className="relative z-20">
-								<h3 className="text-neutral-50 font-[600] text-[20px] md:text-[24px] mb-[10px]">Loyalty. Buzz. Bookings.</h3>
-								<p className="text-[14px] md:text-[16px] text-neutral-300 leading-[1.2]">
-									We build your brand, boost your reviews, and keep players coming back.
-								</p>
-							</div>
-							<div className="absolute inset-0 z-10">
-								<VideoStream src="video/compresed/bookingMax.m3u8" />
-								<div className="absolute inset-0 bg-gradient-to-t from-[#000000] to-[#00000050]"></div>
-							</div>
-						</div>
+						))}
 					</div>
 				</Container>
 			</div>
@@ -220,15 +137,20 @@ export default function BookingMax() {
 							transition={{ duration: 0.6, ease: "easeInOut" }}
 							className="w-full h-full sm:h-auto "
 						>
-							<video ref={popupVideoRef} muted={false} playsInline preload="metadata" className="w-full h-full sm:h-auto object-cover ">
-								<source src="/video/bookingMax.webm" type="video/webm" />
-							</video>
+							<video
+								src={data?.long_card?.video_url}
+								ref={popupVideoRef}
+								muted={false}
+								playsInline
+								preload="metadata"
+								className="w-full h-full sm:h-auto object-cover "
+							/>
 						</motion.div>
 					</motion.div>
 				)}
 			</AnimatePresence>
 
-			<ServiceCarusel />
+			<ServiceCarusel data={serviceData} />
 		</section>
 	);
 }

@@ -276,7 +276,7 @@ function Navbar({ marketingBanner }) {
 									</li>
 
 									<li id="nav6" className=" hover:text-primary-500 duration-300 flex items-center text-[14px] xl:text-[15px] relative z-20">
-										<Link href={"/case-studies"} className={`${router.asPath === "/blog" ? "text-primary-500" : " "}`}>
+										<Link href={"/bookingmax"} className={`${router.asPath === "/blog" ? "text-primary-500" : " "}`}>
 											BookingMAX
 										</Link>
 									</li>
@@ -316,7 +316,8 @@ function Navbar({ marketingBanner }) {
 											<NavCard slug="" img="/navbar/team.svg" title="Team" router={router} />
 											<NavCard slug="" img="/navbar/faq.svg" title="FAQs" router={router} />
 											<NavCard slug="/blog" img="/navbar/blog.svg" title="Blog" router={router} />
-											<NavCard slug="" img="/navbar/testimonial.svg" title="Testimonial" router={router} />
+											{/* <NavCard slug="" img="/navbar/testimonial.svg" title="Testimonial" router={router} /> */}
+											<NavCard slug="find-a-room" img="/navbar/testimonial.svg" title="Escape Room Directory" router={router} />
 										</div>
 									</div>
 

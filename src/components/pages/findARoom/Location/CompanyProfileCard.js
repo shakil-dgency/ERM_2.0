@@ -12,8 +12,9 @@ import { Pagination } from "swiper/modules";
 import Image from "next/image";
 import React from "react";
 import GameCard from "./GameCard";
+import Link from "next/link";
 
-function CompanyProfileCard() {
+function CompanyProfileCard({ data }) {
 	return (
 		<div className="relative overflow-hidden w-full bg-[url('/pages/home/bookingMaxBg.png')] bg-repeat bg-[length:240px_240px] rounded-[20px] p-2.5 lg:px-[60px] py-[30px] md:py-[60px]">
 			{/* Glow/Gradient Backgrounds */}
@@ -21,10 +22,32 @@ function CompanyProfileCard() {
 			<div className="glow_background absolute -right-32 bottom-[-50px] w-[250px] h-[250px] rounded-full blur-[150px] bg-primary-500 " />
 			<div className="md:flex justify-between relative z-10">
 				<div className="md:flex gap-5 items-center">
-					<Image src={"/pages/findRooms/location/company_logo.svg"} alt="" height={66} width={92} className="mb-1.5 md:mb-0" />
+					<Image
+						src={data?.logo ? process.env.NEXT_PUBLIC_API_URL + data.logo.url : "/"}
+						alt=""
+						height={66}
+						width={92}
+						className="mb-1.5 md:mb-0 h-[66px] w-[92px] object-contain"
+					/>
 					<div>
-						<p className="text-neutral-50 text-[20px] md:text-[32px] font-[700]">All In Adventures</p>
-						<p className="text-neutral-300 text-[14px] md:text-[18px] font-[400]">Total 8 escape room at East Brunswick NJ, Brunswick Square | Visit Website </p>
+						<div className="flex items-center gap-1">
+							<p className="text-neutral-50 text-[20px] md:text-[32px] font-[700]">{data?.company_name}</p>
+							<Image src="/pages/findRooms/location/verified.svg" height={15} width={15} alt="" className="h-[20px] w-[21px]" />
+						</div>
+						<p className="text-neutral-300 text-[14px] md:text-[16px] font-[400]">
+							<span className="font-[600]">Escape Room:</span> {data?.games.length} | <span className="font-[600]">Address:</span>{" "}
+							<span>
+								<a href={`${data?.location_url}`} target="_blank" className="text-[#99C3FF]">
+									{data?.location_details}
+								</a>
+							</span>{" "}
+							| <span className="font-[600]">Visit:</span>{" "}
+							<span>
+								<a href={`${data?.website_url}`} target="_blank" className="text-[#99C3FF]">
+									Website
+								</a>
+							</span>{" "}
+						</p>
 					</div>
 				</div>
 				<div className="flex-none flex gap-2.5 items-center mt-3 md:mt-0">
@@ -40,15 +63,7 @@ function CompanyProfileCard() {
 				</div>
 			</div>
 			<div className="max-w-[920px] mt-5 mb-12 md:my-[50px] relative z-10">
-				<p className="text-neutral-300 text-[18px]  mb-4">
-					Most of our facilities offer 8 - 10 different types of escape room themes. The game themes range from Black Ops and Zombie Apocalypse to
-					Escape from Alcatraz and Super Hero. Pick the room of your choice or try your best to break out of them all.
-				</p>
-				<p className="text-neutral-300 text-[18px] ">
-					Escape rooms have become super popular over the last couple of years. We've built all our facilities perfect for all ages and skill levels.
-					People from all different ages and backgrounds have found themselves enjoying the thrill and challenge of trying to escape one or more of
-					our rooms.
-				</p>
+				<p className="text-neutral-300 text-[18px]  mb-4">{data?.description}</p>
 			</div>
 
 			<Swiper
@@ -58,7 +73,7 @@ function CompanyProfileCard() {
 					clickable: true,
 				}}
 				modules={[Pagination]}
-				className="mySwiper"
+				className="mySwiper "
 				breakpoints={{
 					520: { slidesPerView: 1.5, spaceBetween: 20 },
 					768: {
@@ -78,15 +93,21 @@ function CompanyProfileCard() {
 					},
 				}}
 			>
-				{[...Array(6)].map((_, i) => (
+				{data?.games?.map((game, i) => (
 					<SwiperSlide key={i} className="relative z-10">
-						<GameCard />
+						<GameCard data={game} />
 					</SwiperSlide>
 				))}
 			</Swiper>
 
 			<div className="mt-[50px] flex justify-center">
-				<button className="px-[20px] py-[12px] rounded-[6px] border-[1px] border-primary-600 text-neutral-50 font-[600] hover:text-primary-500 hover:shadow-[0px_0px_14px_#ff492c] duration-300">BOOK NOW</button>
+				<a
+					href={data?.website_url}
+					target="_blank"
+					className="px-[20px] py-[12px] rounded-[6px] border-[1px] border-primary-600 text-neutral-50 font-[600] hover:text-primary-500 hover:shadow-[0px_0px_14px_#ff492c] duration-300"
+				>
+					BOOK NOW
+				</a>
 			</div>
 		</div>
 	);

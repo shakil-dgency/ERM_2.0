@@ -1,61 +1,21 @@
 "use client";
 import Container from "@/components/ui/Container";
+import Link from "next/link";
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { setToggle } from "@/lib/features/toggleSlice";
 
-const data = [
-	{
-		country_name: "United States",
-		description:
-			"Discover the ultimate escape room experiences in the top cities across the United States! Each city offers unique themes and challenges that will test your problem-solving skills and teamwork.",
-		cities: [
-			{ city_name: "Los Angeles", image: "/pages/findRooms/miami.png", company: "103 companies", games: "335 games" },
-			{ city_name: "Los Angeles", image: "/pages/findRooms/miami.png", company: "103 companies", games: "335 games" },
-			{ city_name: "Los Angeles", image: "", company: "103 companies", games: "335 games" },
-			{ city_name: "Los Angeles", image: "/pages/findRooms/miami.png", company: "103 companies", games: "335 games" },
-			{ city_name: "Los Angeles", image: "", company: "103 companies", games: "335 games" },
-			{ city_name: "Los Angeles", image: "", company: "103 companies", games: "335 games" },
-			{ city_name: "Los Angeles", image: "/pages/findRooms/miami.png", company: "103 companies", games: "335 games" },
-			{ city_name: "Los Angeles", image: "", company: "103 companies", games: "335 games" },
-		],
-	},
-	{
-		country_name: "United Kingdom",
-		description:
-			"Discover the ultimate escape room experiences in the top cities across the United States! Each city offers unique themes and challenges that will test your problem-solving skills and teamwork.",
-		cities: [
-			{ city_name: "Los Angeles", image: "", company: "103 companies", games: "335 games" },
-			{ city_name: "Los Angeles", image: "", company: "103 companies", games: "335 games" },
-			{ city_name: "Los Angeles", image: "", company: "103 companies", games: "335 games" },
-			{ city_name: "Los Angeles", image: "", company: "103 companies", games: "335 games" },
-			{ city_name: "Los Angeles", image: "", company: "103 companies", games: "335 games" },
-			{ city_name: "Los Angeles", image: "", company: "103 companies", games: "335 games" },
-			{ city_name: "Los Angeles", image: "", company: "103 companies", games: "335 games" },
-			{ city_name: "Los Angeles", image: "", company: "103 companies", games: "335 games" },
-		],
-	},
-	{
-		country_name: "Australia",
-		description:
-			"Discover the ultimate escape room experiences in the top cities across the United States! Each city offers unique themes and challenges that will test your problem-solving skills and teamwork.",
-		cities: [
-			{ city_name: "Los Angeles", image: "", company: "103 companies", games: "335 games" },
-			{ city_name: "Los Angeles", image: "", company: "103 companies", games: "335 games" },
-			{ city_name: "Los Angeles", image: "", company: "103 companies", games: "335 games" },
-			{ city_name: "Los Angeles", image: "", company: "103 companies", games: "335 games" },
-			{ city_name: "Los Angeles", image: "", company: "103 companies", games: "335 games" },
-			{ city_name: "Los Angeles", image: "", company: "103 companies", games: "335 games" },
-			{ city_name: "Los Angeles", image: "", company: "103 companies", games: "335 games" },
-			{ city_name: "Los Angeles", image: "", company: "103 companies", games: "335 games" },
-		],
-	},
-];
-
-function PopupLocationForm() {
+function PopupLocationForm({data}) {
 	const [countryId, setCountryId] = useState(0);
+	const dispatch = useDispatch();
 
 	const handleOpen = (index) => {
 		setCountryId((prev) => (prev === index ? null : index));
+		
 	};
+
+	console.log(data);
+	
 
 	return (
 		<div className="w-full bg-secondary-900 pt-[100px] md:pt-[140px] pb-[150px]">
@@ -64,7 +24,7 @@ function PopupLocationForm() {
 					<p className="highlighted_text text-center">1,000+ cities</p>
 					<h1 className="text-neutral-50 text-[24px] md:text-[54px] font-[700] text-center mb-[60px] md:mb-[80px]">Find your next adventure</h1>
 
-					{data.map((item, i) => (
+					{data?.map((item, i) => (
 						<div key={i} className="pb-[30px] lg:pb-[80px]">
 							<div onClick={() => handleOpen(i)} className="flex items-center gap-3">
 								<p  className="text-neutral-50 text-[18px] md:text-[26px] font-[700] underline underline-offset-8">
@@ -82,10 +42,10 @@ function PopupLocationForm() {
 									countryId === i ? "h-full pt-[20px]" : "h-0 lg:h-full"
 								} overflow-hidden lg:pt-[20px] grid grid-cols-1 lg:grid-cols-5 gap-y-[15px] gap-x-5 lg:gap-x-[100px]`}
 							>
-								{item.cities.map((city, j) => (
-									<p className="hover:text-primary-500 text-[18px] text-neutral-200 cursor-pointer" key={j}>
+								{item?.city_names?.map((city, j) => (
+									<Link href={`/find-a-room/${city?.slug}`} onClick={()=> dispatch(setToggle(false))} className="hover:text-primary-500 text-[18px] text-neutral-200 cursor-pointer" key={j}>
 										{city.city_name}
-									</p>
+									</Link>
 								))}
 							</div>
 						</div>

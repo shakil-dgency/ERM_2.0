@@ -2,12 +2,12 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
-function StrokeButton({ url , small, medium, left_icon, right_icon, text = "click here", handleClick }) {
+function FillButton({ url , small, medium, left_icon, right_icon, text = "click here", handleClick }) {
 	return (
 		<div className="">
 			{ !url ? (
 				<div onClick={handleClick}
-					className={`group cursor-pointer flex justify-center items-center gap-1 border-[1px] border-primary-600 hover:border-primary-700 rounded-[6px] text-neutral-50 hover:bg-primary-800 duration-300 leading-[100%]  ${
+					className={`group cursor-pointer flex justify-center items-center gap-1 border-[1px] border-primary-700 rounded-[6px] text-neutral-50 bg-primary-600 hover:bg-primary-800 duration-300 leading-[100%]  ${
 						small
 							? "px-[20px] py-[13px] text-[14px] font-[500px]"
 							: medium
@@ -21,7 +21,7 @@ function StrokeButton({ url , small, medium, left_icon, right_icon, text = "clic
 							alt="Left Icon"
 							width={20}
 							height={20}
-							className={`inline-block group-hover:translate-x-[-2px] mr-[2px] duration-300 ${
+							className={`inline-block  group-hover:translate-x-[-2px] mr-[2px] duration-300 ${
 								small ? "h-[16px] w-[16px]" : medium ? "h-[20px] w-[20px]" : "h-[21px] w-[21px]"
 							}`}
 						/>
@@ -42,7 +42,7 @@ function StrokeButton({ url , small, medium, left_icon, right_icon, text = "clic
 			) : (
 				<Link
 					href={`${url}`}
-					className={`group flex justify-center items-center gap-1 border-[1px] border-primary-600 hover:border-primary-700 rounded-[6px] text-neutral-50 hover:bg-primary-800 duration-300 leading-[100%]  ${
+					className={`group flex justify-center items-center gap-1 border-[1px] border-primary-700 rounded-[6px] text-neutral-50 bg-primary-600 hover:bg-primary-800 duration-300 leading-[100%]  ${
 						small
 							? "px-[20px] py-[13px] text-[14px] font-[500px]"
 							: medium
@@ -57,7 +57,7 @@ function StrokeButton({ url , small, medium, left_icon, right_icon, text = "clic
 							width={20}
 							height={20}
 							className={`inline-block group-hover:translate-x-[-2px] mr-[2px] duration-300 ${
-								small ? "h-[16px] w-[16px]" : medium ? "h-[20px] w-[20px]" : "h-[21px] w-[21px]"
+								small ? "h-[16px] w-[16px]" : medium ? "h-[20px] w-[20px]" : "h-[22px] w-[22px]"
 							}`}
 						/>
 					)}{" "}
@@ -69,7 +69,7 @@ function StrokeButton({ url , small, medium, left_icon, right_icon, text = "clic
 							width={20}
 							height={20}
 							className={`inline-block group-hover:translate-x-[2px] ml-[2px] duration-300 ${
-								small ? "h-[16px] w-[16px]" : medium ? "h-[20px] w-[20px]" : "h-[21px] w-[21px]"
+								small ? "h-[16px] w-[16px]" : medium ? "h-[20px] w-[20px]" : "h-[22px] w-[22px]"
 							}`}
 						/>
 					)}
@@ -79,4 +79,4 @@ function StrokeButton({ url , small, medium, left_icon, right_icon, text = "clic
 	);
 }
 
-export default StrokeButton;
+export default FillButton;

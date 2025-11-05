@@ -3,7 +3,7 @@ import React from "react";
 
 function ComparisonBox({data}) {
 	return (
-		<div>
+		<div >
 			<div className="max-w-[814px] mx-auto mb-[50px] lg:mb-[100px] px-2.5">
 				<h2 className="text-center mb-3 lg:mb-5 text-neutral-950">{data?.section_header?.headline}</h2>
 

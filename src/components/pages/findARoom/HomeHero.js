@@ -8,7 +8,7 @@ import { usePathname } from "next/navigation";
 import { useDispatch } from "react-redux";
 import { setToggle } from "@/lib/features/toggleSlice";
 
-function HomeHero({ location }) {
+function HomeHero({ location , cityName }) {
 	const dispatch = useDispatch();
 	const pathname = usePathname();
 
@@ -39,7 +39,7 @@ function HomeHero({ location }) {
 						<div className="flex items-center justify-between w-full">
 							<div className="flex items-center gap-2">
 								<IoLocationSharp className="text-[18px]" />
-								<span className="text-[16px] md:text-[20px] font-[700]">FIND YOUR LOCATION</span>
+								<span className="text-[16px] md:text-[20px] font-[700]">{cityName? cityName : "FIND YOUR LOCATION"}</span>
 							</div>
 							<FaChevronDown />
 						</div>

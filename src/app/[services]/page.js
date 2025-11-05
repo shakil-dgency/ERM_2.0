@@ -1,5 +1,5 @@
 import FrequentlyAsk from "@/components/global/faq/FrequentlyAsk";
-import Banner from "@/components/pages/about/Banner";
+import Banner from "@/components/global/Banner";
 import Hero from "@/components/pages/about/Hero";
 import Mission from "@/components/pages/about/Mission";
 import ComparisonBox from "@/components/pages/home/comparisonSection/ComparisonBox";
@@ -17,7 +17,7 @@ async function page({ params }) {
 	const url = `${process.env.NEXT_PUBLIC_API_URL}/api/services/${services}`;
 
 	const data = await getData(url, "Service Page");
-	console.log(data);
+	// console.log(data);
 
 	return (
 		<div>

@@ -11,7 +11,7 @@ function SingleBlogHero({ data }) {
 				<div className="max-w-[1152px] mx-auto pt-[130px] lg:pt-[120px] pb-[50px] lg:pb-[80px] px-2.5 flex flex-col items-center justify-center">
 					<p className="highlighted_text">{data?.Eyebrow_headline}</p>
 					<h1 className="text-neutral-50 py-5 text-[24px] lg:text-[54px] font-[700] text-center leading-[1.3]">{data?.headline}</h1>
-					<p className="text-[14px] text-[#C8C7C7]">
+					<p className="text-[12px] sm:text-[14px] text-[#C8C7C7] text-center">
 						<span>Last Updated on {handleDate(data?.updated_date)}</span> • <span>Escape Room Marketer</span>
 					</p>
 				</div>

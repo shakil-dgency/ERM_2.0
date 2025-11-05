@@ -62,7 +62,7 @@ function Testimonials({ data }) {
 						}}
 						navigation={true}
 						modules={[Pagination, Navigation]}
-						className="mySwiper"
+						className="mySwiper videoTestimonials"
 						breakpoints={{
 							552: { slidesPerView: 1.5, spaceBetween: 20 },
 							768: {

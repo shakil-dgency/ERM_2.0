@@ -4,6 +4,7 @@ import Testimonials from "./Testimonials";
 import CaseStudies from "./CaseStudies";
 import Container from "@/components/ui/Container";
 import ComparisonBox from "./ComparisonBox";
+import Banner from "@/components/global/Banner";
 
 const rows = [
 	{
@@ -56,14 +57,16 @@ const rows = [
 	},
 ];
 
-export default function ComparisonSection() {
+export default function ComparisonSection({ data }) {
 	return (
 		<div className="bg-white py-[100px] lg:py-[120px] bg-[url('/pages/home/papertexture.png')] bg-[length:240px_240px] bg-repeat">
-			
-			<ComparisonBox rows={rows} />
-			<Tools />
-			<Testimonials />
-			<CaseStudies />
+			<Testimonials data={data?.testimonials} />
+			<Banner data={data?.banner} />
+			<div className="pt-[100px] lg:pt-[140px]">
+				<ComparisonBox data={data?.comparison} />
+			</div>
+			<Tools data={data?.tools} />
+			<CaseStudies data={data?.caseStudies} />
 		</div>
 	);
 }

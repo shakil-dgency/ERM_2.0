@@ -1,65 +1,83 @@
 /* eslint-disable react/no-unescaped-entities */
 import HomeHero from "@/components/pages/findARoom/HomeHero";
 import CompanyProfileCard from "@/components/pages/findARoom/Location/CompanyProfileCard";
+import OtherCities from "@/components/pages/findARoom/Location/OtherCities";
 import LocationCard from "@/components/pages/findARoom/LocationCard";
 import MainComponent from "@/components/pages/findARoom/MainComponent";
 import PopupLocationForm from "@/components/pages/findARoom/PopupLocationForm";
 import Container from "@/components/ui/Container";
+import { getData } from "@/services/helper";
+import { notFound } from "next/navigation";
 import React from "react";
+import qs from "qs";
 
-const cities = [
-	{ city_name: "Los Angeles", image: "/pages/findRooms/miami.png", company: "103 companies", games: "335 games" },
-	{ city_name: "Los Angeles", image: "/pages/findRooms/miami.png", company: "103 companies", games: "335 games" },
+export const revalidate = 60;
 
-	{ city_name: "Los Angeles", image: "/pages/findRooms/miami.png", company: "103 companies", games: "335 games" },
+async function page({ params }) {
+	const { location } = params;
+	const url = `${process.env.NEXT_PUBLIC_API_URL}/api/city-names/${location}`;
 
-	{ city_name: "Los Angeles", image: "/pages/findRooms/miami.png", company: "103 companies", games: "335 games" },
-];
+	let data;
 
-function page() {
+	try {
+		const response = await getData(url, "Directory location page");
+		({ data } = response);
+	} catch (error) {
+		return notFound();
+	}
+
+	if (!data) {
+		return notFound();
+	}
+
+	const query = qs.stringify(
+		{
+			populate: {
+				city_names: {
+					populate: {
+						city_image: true,
+						fields: ["city_name", "slug"],
+						companies: {
+							populate: {
+								games: {
+									populate: {
+										fields: ["game_name"],
+									},
+								},
+								fields: ["company_name"],
+							},
+						},
+					},
+				},
+			},
+		},
+		{ encodeValuesOnly: true }
+	);
+
+	const homeUrl = `${process.env.NEXT_PUBLIC_API_URL}/api/countries?${query}`;
+
+	const response = await getData(homeUrl, "directory home");
+
+	console.log(response);
+	
 
 	return (
-		<MainComponent>
-			<HomeHero location={true} />
+		<MainComponent data={response?.data}>
+			<HomeHero location={true} cityName={data?.city_name} />
 			<div className="bg-tertiary-500 pt-[80px] pb-[150px]">
 				<Container>
 					<div className="max-w-[970px] mb-[60px]">
-						<p className="text-[16px] text-neutral-700 italic">
-							Most of our facilities offer 8 - 10 different types of escape room themes. The game themes range from Black Ops and Zombie Apocalypse to
-							Escape from Alcatraz and Super Hero. Pick the room of your choice or try your best to break out of them all.
-						</p>
-						<p className="text-[16px] text-neutral-700 italic mt-5">Last Updated: 15July, 20</p>
+						<div className="text-[16px] text-neutral-700 italic" dangerouslySetInnerHTML={{ __html: data ? data?.disclaimer : "" }} />
 					</div>
 					<div className="space-y-[30px] lg:space-y-[60px]">
-						{[...Array(3)].map((_, i) => (
-							<CompanyProfileCard key={i} />
+						{data?.companies.map((company, i) => (
+							<CompanyProfileCard key={i} data={company} />
 						))}
 					</div>
 
-					<div className="max-w-[970px] mt-[100px] lg:mt-[140px] ">
-						<h2>Explore More Cities</h2>
-						<p className="text-[16px] sm:text-[18px] text-neutral-700 mt-4">
-							Most of our facilities offer 8 - 10 different types of escape room themes. The game themes range from Black Ops and Zombie Apocalypse to
-							Escape from Alcatraz and Super Hero. Pick the room of your choice or try your best to break out of them all.
-						</p>
-						<p className="text-[16px] sm:text-[18px] text-neutral-700  mt-5">
-							Escape rooms have become super popular over the last couple of years. We've built all our facilities perfect for all ages and skill
-							levels. People from all different ages and backgrounds have found themselves enjoying the thrill and challenge of trying to escape one
-							or more of our rooms.Most of our facilities offer 8 - 10 different types of escape room themes. The game themes range from Black Ops and
-							Zombie Apocalypse to Escape from Alcatraz and Super Hero. Pick the room of your choice or try your best to break out of them all.
-						</p>
-					</div>
-					<div className="max-w-[970px] mt-[100px] lg:mt-[140px] ">
-						<h2>Explore More Cities</h2>
-						<p className="text-[16px] sm:text-[18px] text-neutral-700 mt-4">
-							We know you’re in the industry of Internet Software & Services,have around 11-50 employees, and who your competitors are.
-						</p>
-					</div>
-					<div className="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-4 gap-5 xs:gap-2.5 md:gap-[24px] mt-10">
-						{cities.map((item, i) => (
-							<LocationCard key={i} city={item} />
-						))}
-					</div>
+					<div className="max-w-[970px] mt-[100px] lg:mt-[140px] " dangerouslySetInnerHTML={{ __html: data ? data.about_location : "" }} />
+
+					<OtherCities data={data} />
 				</Container>
 			</div>
 		</MainComponent>

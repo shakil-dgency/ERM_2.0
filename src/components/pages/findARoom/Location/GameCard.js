@@ -2,34 +2,39 @@
 import Image from "next/image";
 import React from "react";
 
-function GameCard() {
+function GameCard({ data }) {
 	return (
-		<div className="max-w-auto rounded-[10px] bg-secondary-900 overflow-hidden">
+		<div className="rounded-[10px] bg-secondary-900 overflow-hidden h-full pb-7">
 			<div className="relative">
-				<Image src={"/pages/findRooms/location/game_img.png"} height={300} width={392} alt="miami" className="h-[300px] w-full object-cover" />
+				<Image
+					src={data?.image ? process.env.NEXT_PUBLIC_API_URL + data.image.url : "/"}
+					height={300}
+					width={392}
+					alt=""
+					className="h-[300px] w-full object-cover"
+				/>
 				<div className="w-full h-full absolute top-0 bg-gradient-to-b to-secondary-900 from-transparent"></div>
 			</div>
-			<div className=" pb-7">
-				<div className="flex justify-between px-1.5">
-					<div className="flex items-center gap-1.5">
-						<Image src={"/pages/findRooms/location/age_icon.svg"} height={15} width={15} alt="miami" className="h-[13px] xs:h-[15px] w-auto" />
-						<p className="text-[12px] xs:text-[14px] text-primary-200 font-[600]">Age: 16+</p>
-					</div>
-					<div className="flex items-center gap-1.5">
-						<Image src={"/pages/findRooms/location/time_icon.svg"} height={15} width={15} alt="miami" className="h-[13px] xs:h-[15px] w-auto" />
-						<p className="text-[12px] xs:text-[14px] text-primary-200 font-[600]">Time: 60 Min</p>
-					</div>
-					<div className="flex items-center gap-1.5">
-						<Image src={"/pages/findRooms/location/team_icon.svg"} height={15} width={15} alt="miami" className="h-[13px] xs:h-[15px] w-auto" />
-						<p className="text-[12px] xs:text-[14px] text-primary-200 font-[600]">Team: 2-10</p>
-					</div>
+			<div className="px-6 mt-4 flex justify-between">
+				<div className="flex items-center gap-1.5">
+					<Image src="/pages/findRooms/location/age_icon.svg" height={15} width={15} alt="" />
+					<p className="text-[12px] text-neutral-500 font-[600]">Age: {data?.age}</p>
 				</div>
-				<div className="px-[15px] mt-4">
-					<p className="text-[20px] text-neutral-50 font-[600] text-center">Escape From Alcatraz</p>
-					<p className="text-[14px] text-neutral-300 font-[400] text-center pt-1.5">
-						You've been captured by a notorious gang of pirates. Prove that you're worthy of becoming part of the crew or prepare to walk the plank!
-					</p>
+				<div className="flex items-center gap-1.5">
+					<Image src="/pages/findRooms/location/time_icon.svg" height={15} width={15} alt="" />
+					<p className="text-[12px] text-neutral-500 font-[600]">Time: {data?.time}</p>
 				</div>
+				<div className="flex items-center gap-1.5">
+					<Image src="/pages/findRooms/location/team_icon.svg" height={15} width={15} alt="" />
+					<p className="text-[12px] text-neutral-500 font-[600]">Team: {data?.team}</p>
+				</div>
+			</div>
+			<div className="px-[15px] mt-4 flex-grow">
+				<p className="text-[20px] text-neutral-50 font-[600] text-center uppercase">{data?.game_name}</p>
+				<p className="text-[14px] text-neutral-300 font-[400] text-center pt-1.5">
+					{data?.game_description.slice(0, 150)}
+					{data?.game_description.length > 150 ? "..." : ""}
+				</p>
 			</div>
 		</div>
 	);
