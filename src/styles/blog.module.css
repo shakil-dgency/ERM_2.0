@@ -1,6 +1,5 @@
-
-.blog_details span{
-	/* font-family: var(--font-sans) !important; */
+.blog_details {
+	font-family: var(--font-open-sans) !important;
 }
 
 .blog_details h1 {
@@ -17,13 +16,13 @@
 .blog_details h2 {
 	display: block;
 	margin-bottom: 0.5em;
-	padding-top: 1.5em;
+	padding-top: 1em;
 	font-size: 36px;
 	margin-left: 0;
 	margin-right: 0;
 	font-weight: 700;
 	line-height: 140%;
-	color: #0A0A0B !important;
+	color: #0a0a0b !important;
 }
 .blog_details h3 {
 	display: block;
@@ -34,7 +33,7 @@
 	margin-right: 0;
 	font-weight: 700;
 	line-height: 140%;
-	color: #0A0A0B !important;
+	color: #0a0a0b !important;
 }
 .blog_details h4 {
 	display: block;
@@ -75,7 +74,7 @@
 .blog_details ul {
 	list-style: disc;
 	padding-left: 1.5em;
-	margin-bottom: 2.5em;
+	margin-bottom: 1.5em;
 	color: #353535 !important;
 }
 
@@ -92,13 +91,12 @@
 	margin-bottom: 0.7em;
 }
 
-.blog_details li::marker {
-  color: #ff5a00;        /* change color */
-  font-size: 1.1rem;     /* make it larger */
-  font-weight: bold;     /* make it bolder */
-  content: "✦  ";         /* change the bullet symbol */
+.blog_details ul li::marker {
+	color: #ff5900a4; /* change color */
+	font-size: 1.1rem; /* make it larger */
+	font-weight: bold; /* make it bolder */
+	content: "✦  "; /* change the bullet symbol */
 }
-
 
 .blog_details span {
 	color: inherit !important;
@@ -111,27 +109,35 @@
 }
 
 .blog_details p:has(img) {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 20px; /* space between images */
-  /* flex-wrap: wrap;  */
-  margin: 40px 0;
-  width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 20px; /* space between images */
+	/* flex-wrap: wrap;  */
+	margin: 40px 0;
+	width: 100%;
 }
 
 .blog_details p img {
-  /* border-radius: 10px; */
-  flex: 1;
-  width: 100%;
-  height: auto;
-  object-fit: cover;
-  margin-bottom: -20px;
+	/* border-radius: 10px; */
+	flex: 1;
+	width: 100%;
+	height: auto;
+	object-fit: cover;
+	margin-bottom: -20px;
 }
-
-
-
-
+.blog_details figure {
+	float: none !important;
+}
+.blog_details table {
+	font-size: 16px !important;
+}
+.blog_details table td,
+.blog_details table td p {
+	vertical-align: middle !important;
+	margin-bottom: 0px !important;
+	padding: 6px 8px !important;
+}
 
 @media only screen and (max-width: 768px) {
 	.blog_details h2 {

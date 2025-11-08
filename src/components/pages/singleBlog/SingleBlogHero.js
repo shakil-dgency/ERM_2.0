@@ -22,6 +22,7 @@ function SingleBlogHero({ data }) {
 						width={1152}
 						height={600}
 						className="h-full w-full object-cover rounded-[10px] lg:rounded-[20px]"
+						quality={95}
 					/>
 				</div>
 			</div>

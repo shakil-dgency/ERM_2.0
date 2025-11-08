@@ -4,16 +4,16 @@ import React from "react";
 
 function GameCard({ data }) {
 	return (
-		<div className="rounded-[10px] bg-secondary-900 overflow-hidden h-full pb-7">
-			<div className="relative">
+		<div className="group rounded-[10px] bg-secondary-900 overflow-hidden h-full pb-7">
+			<div className="relative overflow-hidden">
 				<Image
 					src={data?.image ? process.env.NEXT_PUBLIC_API_URL + data.image.url : "/"}
 					height={300}
 					width={392}
 					alt=""
-					className="h-[300px] w-full object-cover"
+					className="h-[300px] w-full object-cover group-hover:scale-105 duration-500"
 				/>
-				<div className="w-full h-full absolute top-0 bg-gradient-to-b to-secondary-900 from-transparent"></div>
+				<div className="w-full h-[100px] absolute bottom-0 bg-gradient-to-b to-secondary-900 from-transparent"></div>
 			</div>
 			<div className="px-6 mt-4 flex justify-between">
 				<div className="flex items-center gap-1.5">

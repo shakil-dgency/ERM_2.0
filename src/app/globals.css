@@ -105,8 +105,8 @@ h2 {
 	line-height: 0;
 }
 
-.mySwiper {
-	/* padding: 0px 0px 70px 0px !important; */
+.boundedSwiper {
+	padding: 0px 0px 70px 0px !important;
 	/* margin: 0 -10px !important; */
 	/* z-index: -1 !important; */
 }

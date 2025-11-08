@@ -9,11 +9,11 @@ function LazyLoadingVideo({ video_url, autoPlay = true, controls = false, muted 
 	const isLoaded = usePageLoaded();
 
 	return (
-		<div className="absolute inset-0 z-10  ">
+		<div className="absolute inset-0 z-10 ">
 			{!isLoaded ? (
 				<img src="/pages/home/heroImage.png" alt="" className="w-full h-full object-cover" aria-hidden="true" draggable={false} />
 			) : (
-				<div className="w-full h-full bg-secondary-900">
+				<div className="w-full h-full bg-secondary-900 ">
 					<video
 						src={video_url}
 						autoPlay={autoPlay}
@@ -22,6 +22,7 @@ function LazyLoadingVideo({ video_url, autoPlay = true, controls = false, muted 
 						playsInline
 						controls={controls}
 						style={{ width: "100%", height: "100%", objectFit: "cover" }}
+						className=""
 					/>
 				</div>
 			)}

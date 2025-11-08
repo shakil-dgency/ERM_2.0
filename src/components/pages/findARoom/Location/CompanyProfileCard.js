@@ -6,13 +6,16 @@ import { Swiper, SwiperSlide } from "swiper/react";
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/pagination";
+import "swiper/css/navigation";
 
 // import required modules
-import { Pagination } from "swiper/modules";
+import { Navigation, Pagination } from "swiper/modules";
 import Image from "next/image";
-import React from "react";
+import React, { useEffect } from "react";
 import GameCard from "./GameCard";
 import Link from "next/link";
+import { useState } from "react";
+import RatingsStar from "@/components/ui/RatingsStar";
 
 function CompanyProfileCard({ data }) {
 	return (
@@ -50,17 +53,13 @@ function CompanyProfileCard({ data }) {
 						</p>
 					</div>
 				</div>
-				<div className="flex-none flex gap-2.5 items-center mt-3 md:mt-0">
-					<Image src={"/pages/findRooms/location/google.svg"} alt="" height={40} width={40} className="h-[26px] md:h-[40px] w-auto" />
-					<div>
-						<div className="flex">
-							{[...Array(5)].map((_, i) => (
-								<Image src={"/pages/findRooms/location/star.svg"} alt="" height={15} width={15} className="h-[8px] md:h-[15px] w-auto" key={i} />
-							))}
-						</div>
-						<p className="text-neutral-300 text-[12px] md:text-[14px]">4.9 of 3578 reviews</p>
+				<Link href={`${data?.location_url}`} target="_blank" className="flex-none flex flex-col items-center mt-3 md:mt-0">
+					<Image src={"/pages/findRooms/location/google.svg"} alt="" height={40} width={40} className="h-[20px] md:h-[30px] w-auto" />
+					<div className="flex items-center-safe gap-2 flex-row-reverse">
+						<RatingsStar rating={data?.google_ratings} idPrefix={data?.id}  />
+						<p className="text-neutral-50 font-[600] text-[20px]">{data?.google_ratings}</p>
 					</div>
-				</div>
+				</Link>
 			</div>
 			<div className="max-w-[920px] mt-5 mb-12 md:my-[50px] relative z-10">
 				<p className="text-neutral-300 text-[18px]  mb-4">{data?.description}</p>
@@ -72,8 +71,9 @@ function CompanyProfileCard({ data }) {
 				pagination={{
 					clickable: true,
 				}}
-				modules={[Pagination]}
-				className="mySwiper "
+				navigation={true}
+				modules={[Pagination, Navigation]}
+				className="mySwiper boundedSwiper"
 				breakpoints={{
 					520: { slidesPerView: 1.5, spaceBetween: 20 },
 					768: {

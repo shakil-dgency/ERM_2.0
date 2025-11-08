@@ -3,7 +3,6 @@ import Container from "@/components/ui/Container";
 import React from "react";
 
 function Banner({ data }) {
-	console.log(data);
 
 	return (
 		<div className="bg-secondary-900">
