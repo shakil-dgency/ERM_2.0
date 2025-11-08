@@ -11,7 +11,7 @@ function GameCard({ data }) {
 					height={300}
 					width={392}
 					alt=""
-					className="h-[300px] w-full object-cover group-hover:scale-105 duration-500"
+					className="h-[300px] w-full object-cover object-center group-hover:scale-105 duration-500"
 				/>
 				<div className="w-full h-[100px] absolute bottom-0 bg-gradient-to-b to-secondary-900 from-transparent"></div>
 			</div>

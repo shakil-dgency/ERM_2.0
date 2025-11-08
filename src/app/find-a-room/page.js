@@ -6,6 +6,7 @@ import React from "react";
 import qs from "qs";
 import { getData } from "@/services/helper";
 
+export const revalidate = 60;
 
 async function page() {
 	const query = qs.stringify(

@@ -89,7 +89,7 @@ function CompanyProfileCard({ data }) {
 					1536: {
 						// >= 768px
 						slidesPerView: 4,
-						spaceBetween: 30,
+						spaceBetween: 28,
 					},
 				}}
 			>
