@@ -7,7 +7,7 @@ import Container from "@/components/ui/Container";
 import { useSelector } from "react-redux";
 import PopupLocationForm from "./PopupLocationForm";
 
-function MainComponent({ children,data}) {
+function MainComponent({ children,data,newData}) {
 	const toggle = useSelector((state) => state.toggle.toggle);
 
 	return (
@@ -15,7 +15,7 @@ function MainComponent({ children,data}) {
 			{!toggle ? (
 				children
 			) : (
-				<PopupLocationForm data={data} />
+				<PopupLocationForm data={data} newData={newData}  />
 			)}
 		</div>
 	);

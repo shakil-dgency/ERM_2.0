@@ -66,6 +66,7 @@ export default function ComparisonSection({ data }) {
 				<ComparisonBox data={data?.comparison} />
 			</div>
 			<Tools data={data?.tools} />
+			
 			<CaseStudies data={data?.caseStudies} />
 		</div>
 	);

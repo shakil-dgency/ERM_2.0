@@ -1,9 +1,40 @@
 /* eslint-disable react/no-unescaped-entities */
+"use client";
 import BlogCard from "@/components/global/BlogCard";
 import Container from "@/components/ui/Container";
-import React from "react";
+import React, { useState } from "react";
+import qs from "qs";
 
-function BlogHome() {
+function BlogHome({ initialData, initialMeta }) {
+	const [blogs, setBlogs] = useState(initialData);
+	const [meta, setMeta] = useState(initialMeta);
+	const [loading, setLoading] = useState(false);
+
+	async function loadMore() {
+		if (meta.pagination.page >= meta.pagination.pageCount) return;
+
+		setLoading(true);
+
+		const nextPage = meta.pagination.page + 1;
+
+		const query = qs.stringify(
+			{
+				populate: { main_image: true },
+				pagination: {
+					page: nextPage,
+					pageSize: meta.pagination.pageSize,
+				},
+			},
+			{ encodeValuesOnly: true }
+		);
+
+		const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/blogs?${query}`);
+		const json = await res.json();
+
+		setBlogs((prev) => [...prev, ...json.data]);
+		setMeta(json.meta);
+		setLoading(false);
+	}
 	return (
 		<div>
 			<div className="hero bg-secondary-900">
@@ -27,22 +58,24 @@ function BlogHome() {
 						))}
 					</div>
 					<div className="grid grid-cols-1 sm:grid-cols-2 gap-[30px]">
-						{[...Array(6)].map((_, index) => (
-							<BlogCard key={index} />
+						{blogs?.map((blog, index) => (
+							<BlogCard key={index} data={blog} />
 						))}
 					</div>
 					<div className="flex justify-center mt-[50px]">
-						<button className="flex items-center gap-2 border-[1px] border-primary-500 text-[#161A1E] text-[16px] font-[700] py-2 px-4 rounded">
-							<span>Load More</span>{" "}
-							<span className="pt-[2px]">
-								<svg xmlns="http://www.w3.org/2000/svg" width="11" height="8" viewBox="0 0 11 8" fill="none">
-									<path
-										d="M6.42859 7.03312L10.2313 1.47851C10.407 1.22198 10.5 0.963519 10.5 0.748684C10.5 0.333343 10.1667 0.076416 9.60869 0.076416L1.39002 0.0764156C0.832694 0.0764156 0.5 0.333019 0.5 0.747389C0.5 0.962547 0.59309 1.21688 0.769312 1.47397L4.5719 7.03117C4.81684 7.38856 5.14646 7.58647 5.50045 7.58647C5.85419 7.58655 6.18372 7.3909 6.42859 7.03312Z"
-										fill="#161A1E"
-									/>
-								</svg>
-							</span>
-						</button>
+						{meta.pagination.page < meta.pagination.pageCount && (
+							<button onClick={loadMore} className="cursor-pointer flex items-center gap-2 border-[1px] border-primary-500 text-[#161A1E] text-[16px] font-[700] py-2 px-4 rounded">
+								<span>{loading ? "Loading..." : "Load More"}</span>{" "}
+								<span className="pt-[2px]">
+									<svg xmlns="http://www.w3.org/2000/svg" width="11" height="8" viewBox="0 0 11 8" fill="none">
+										<path
+											d="M6.42859 7.03312L10.2313 1.47851C10.407 1.22198 10.5 0.963519 10.5 0.748684C10.5 0.333343 10.1667 0.076416 9.60869 0.076416L1.39002 0.0764156C0.832694 0.0764156 0.5 0.333019 0.5 0.747389C0.5 0.962547 0.59309 1.21688 0.769312 1.47397L4.5719 7.03117C4.81684 7.38856 5.14646 7.58647 5.50045 7.58647C5.85419 7.58655 6.18372 7.3909 6.42859 7.03312Z"
+											fill="#161A1E"
+										/>
+									</svg>
+								</span>
+							</button>
+						)}
 					</div>
 				</Container>
 			</div>

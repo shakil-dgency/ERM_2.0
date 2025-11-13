@@ -7,12 +7,12 @@ function StrokeButton({ url , small, medium, left_icon, right_icon, text = "clic
 		<div className="">
 			{ !url ? (
 				<div onClick={handleClick}
-					className={`group cursor-pointer flex justify-center items-center gap-1 border-[1px] border-primary-600 hover:border-primary-700 rounded-[6px] text-neutral-50 hover:bg-primary-800 duration-300 leading-[100%]  ${
+					className={`group cursor-pointer flex justify-center items-center gap-1 border-[1px] border-primary-600 hover:border-primary-700 rounded-[6px] text-neutral-50 hover:bg-primary-800 duration-300 mt-[2px] leading-[100%]  ${
 						small
-							? "px-[20px] py-[13px] text-[14px] font-[500px]"
+							? "px-[15px] lg:px-[20px] py-[13px] text-[14px] font-[500px]"
 							: medium
 							? "px-[25px] py-[16px] text-[16px] font-[600px]"
-							: "px-[35px] py-[18px] text-[18px] font-[700]"
+							: "px-[15px] sm:px-[35px] py-[10px] sm:py-[18px] text-[12px] xs:text-[14px] sm:text-[18px] font-[700]"
 					}`}
 				>
 					{left_icon && (
@@ -22,7 +22,7 @@ function StrokeButton({ url , small, medium, left_icon, right_icon, text = "clic
 							width={20}
 							height={20}
 							className={`inline-block group-hover:translate-x-[-2px] mr-[2px] duration-300 ${
-								small ? "h-[16px] w-[16px]" : medium ? "h-[20px] w-[20px]" : "h-[21px] w-[21px]"
+								small ? "h-[16px] w-[16px]" : medium ? "h-[20px] w-[20px]" : "h-[12px] sm:h-[16px] w-auto"
 							}`}
 						/>
 					)}{" "}
@@ -34,7 +34,7 @@ function StrokeButton({ url , small, medium, left_icon, right_icon, text = "clic
 							width={20}
 							height={20}
 							className={`inline-block group-hover:translate-x-[2px] ml-[2px] duration-300 ${
-								small ? "h-[16px] w-[16px]" : medium ? "h-[20px] w-[20px]" : "h-[21px] w-[21px]"
+								small ? "h-[16px] w-[16px]" : medium ? "h-[20px] w-[20px]" : "h-[12px] sm:h-[16px] w-auto"
 							}`}
 						/>
 					)}
@@ -44,10 +44,10 @@ function StrokeButton({ url , small, medium, left_icon, right_icon, text = "clic
 					href={`${url}`}
 					className={`group flex justify-center items-center gap-1 border-[1px] border-primary-600 hover:border-primary-700 rounded-[6px] text-neutral-50 hover:bg-primary-800 duration-300 leading-[100%]  ${
 						small
-							? "px-[20px] py-[13px] text-[14px] font-[500px]"
+							? "px-[15px] lg:px-[20px] py-[13px] text-[14px] font-[500px]"
 							: medium
 							? "px-[25px] py-[16px] text-[16px] font-[600px]"
-							: "px-[35px] py-[18px] text-[18px] font-[700]"
+							: "px-[15px] sm:px-[35px] py-[10px] sm:py-[18px] text-[12px] xs:text-[14px] sm:text-[18px] font-[700]"
 					}`}
 				>
 					{left_icon && (
@@ -57,7 +57,7 @@ function StrokeButton({ url , small, medium, left_icon, right_icon, text = "clic
 							width={20}
 							height={20}
 							className={`inline-block group-hover:translate-x-[-2px] mr-[2px] duration-300 ${
-								small ? "h-[16px] w-[16px]" : medium ? "h-[20px] w-[20px]" : "h-[21px] w-[21px]"
+								small ? "h-[16px] w-[16px]" : medium ? "h-[20px] w-[20px]" : "h-[12px] sm:h-[16px] w-auto"
 							}`}
 						/>
 					)}{" "}
@@ -69,7 +69,7 @@ function StrokeButton({ url , small, medium, left_icon, right_icon, text = "clic
 							width={20}
 							height={20}
 							className={`inline-block group-hover:translate-x-[2px] ml-[2px] duration-300 ${
-								small ? "h-[16px] w-[16px]" : medium ? "h-[20px] w-[20px]" : "h-[21px] w-[21px]"
+								small ? "h-[14px] w-auto" : medium ? "h-[20px] w-[20px]" : "h-[12px] sm:h-[16px] w-auto"
 							}`}
 						/>
 					)}

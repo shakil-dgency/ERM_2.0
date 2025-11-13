@@ -74,15 +74,25 @@ input:-webkit-autofill {
 	-webkit-text-fill-color: #fff !important;
 }
 
-/* @media (min-width: 1024px) {
-	.hero-headline {
-		font-size: 120px;
-	}
-} */
+/* --------------Animations------------- */
+/* ------------------------------------ */
 
-/* .hero-headline {
-	font-size: clamp(48px, 15vw, 120px);
-} */
+@keyframes scroll {
+	0% {
+		transform: translateX(0);
+	}
+	100% {
+		transform: translateX(-50%);
+	}
+}
+
+.animate-scroll {
+	width: max-content;
+	animation: scroll 15s linear infinite;
+}
+
+/* ----------------------------------- */
+/* ----------------------------------- */
 
 .highlighted_text {
 	font-size: clamp(10px, 3.1vw, 14px);
@@ -111,17 +121,18 @@ h2 {
 	/* z-index: -1 !important; */
 }
 
-.swiper-slide{
+.swiper-slide {
 	height: auto !important;
 }
-
 
 .mySwiper .swiper-button-prev,
 .mySwiper .swiper-button-next {
 	top: inherit !important;
-	bottom: 0 !important;
-
-	/* border: none; */
+	bottom: 0px !important;
+}
+.custom-next,
+.custom-prev {
+	margin-top: 0 !important;
 }
 
 .mySwiper .swiper-button-prev {
@@ -154,7 +165,7 @@ h2 {
 .swiper-button-next {
 	height: 40px !important;
 	width: 40px !important;
-	background-color: var(--color-secondary-700);
+	background-color: var(--color-secondary-600);
 }
 
 .swiper-button-prev:hover,
@@ -183,10 +194,12 @@ h2 {
 .swiper-pagination-bullet {
 	width: 9px !important;
 	height: 9px !important;
-	background: var(--color-secondary-300) !important;
+	background: var(--color-secondary-400) !important;
+	opacity: 0.4 !important;
 }
 
 .swiper-pagination-bullet-active {
+	opacity: 1 !important;
 	width: 33px !important;
 	border-radius: 50px !important;
 	background: var(--color-primary-600) !important;
@@ -245,9 +258,6 @@ h2 {
 		font-weight: 700;
 		line-height: 1.3;
 	}
-
-
-
 }
 
 @media (min-width: 1024px) {

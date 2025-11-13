@@ -15,7 +15,7 @@ function GameCard({ data }) {
 				/>
 				<div className="w-full h-[100px] absolute bottom-0 bg-gradient-to-b to-secondary-900 from-transparent"></div>
 			</div>
-			<div className="px-6 mt-4 flex justify-between">
+			<div className="px-2.5 xs:px-6 mt-4 flex justify-between">
 				<div className="flex items-center gap-1.5">
 					<Image src="/pages/findRooms/location/age_icon.svg" height={15} width={15} alt="" />
 					<p className="text-[12px] text-neutral-500 font-[600]">Age: {data?.age}</p>

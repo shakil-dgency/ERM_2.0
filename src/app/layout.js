@@ -28,7 +28,7 @@ export default function RootLayout({ children }) {
 	return (
 		<html lang="en">
 			<body className={`${openSans.variable} antialiased `}>
-				<ScrollContext>
+				{/* <ScrollContext> */}
 					<Providers>
 						<ServiceInitializer />
 						<Navbar />
@@ -36,7 +36,7 @@ export default function RootLayout({ children }) {
 						<Footer />
 						<RouteChangeCloser />
 					</Providers>
-				</ScrollContext>
+				{/* </ScrollContext> */}
 			</body>
 		</html>
 	);

@@ -50,7 +50,6 @@ async function page() {
 		return notFound();
 	}
 
-	console.log(data);
 
 	return (
 		<div>

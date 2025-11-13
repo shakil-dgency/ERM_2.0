@@ -238,10 +238,10 @@ function Navbar({ marketingBanner }) {
 	};
 
 	const handleClick = (e) => {
-		e.preventDefault(); // Prevent immediate navigation
-		setTimeout(() => {
-			router.push("/free-marketing"); // Navigate after delay
-		}, 600); // Delay in milliseconds
+		// e.preventDefault(); // Prevent immediate navigation
+		// setTimeout(() => {
+		// 	router.push("/free-marketing"); // Navigate after delay
+		// }, 600); // Delay in milliseconds
 	};
 
 	
@@ -281,7 +281,7 @@ function Navbar({ marketingBanner }) {
 										</Link>
 									</li>
 									<li id="nav1" className=" hover:text-primary-500 duration-300 flex items-center text-[14px] xl:text-[15px] relative z-20">
-										<Link href={"/blog"} className={`${router.asPath === "/blog" ? "text-primary-500" : " "}`}>
+										<Link href={""} className={`${router.asPath === "/blog" ? "text-primary-500" : " "}`}>
 											Testimonials
 										</Link>
 									</li>
@@ -312,10 +312,11 @@ function Navbar({ marketingBanner }) {
 												moreState ? "block" : "hidden"
 											}`}
 										>
-											<NavCard slug="/about" img="/navbar/about.svg" title="About Us" router={router} />
-											<NavCard slug="" img="/navbar/team.svg" title="Team" router={router} />
-											<NavCard slug="" img="/navbar/faq.svg" title="FAQs" router={router} />
-											<NavCard slug="/blog" img="/navbar/blog.svg" title="Blog" router={router} />
+											<NavCard slug="about" img="/navbar/about.svg" title="About Us" router={router} />
+											<NavCard slug="team" img="/navbar/team.svg" title="Team" router={router} />
+											<NavCard slug="faq" img="/navbar/faq.svg" title="FAQs" router={router} />
+											<NavCard slug="blog" img="/navbar/blog.svg" title="Blog" router={router} />
+											<NavCard slug="case-studies" img="/navbar/blog.svg" title="Case Studies" router={router} />
 											{/* <NavCard slug="" img="/navbar/testimonial.svg" title="Testimonial" router={router} /> */}
 											<NavCard slug="find-a-room" img="/navbar/testimonial.svg" title="Escape Room Directory" router={router} />
 										</div>
@@ -339,7 +340,7 @@ function Navbar({ marketingBanner }) {
 										>
 											<NavCard slug="" img="/navbar/demo.svg" title="Book a Demo Call" router={router} />
 											<NavCard slug="" img="/navbar/testimonial.svg" title="Exclusive Client Call" router={router} />
-											<NavCard slug="/contact" img="/navbar/contact.svg" title="Contact Us" router={router} />
+											<NavCard slug="contact" img="/navbar/contact.svg" title="Contact Us" router={router} />
 										</div>
 									</div>
 								</ul>

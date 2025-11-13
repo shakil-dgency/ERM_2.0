@@ -31,7 +31,7 @@ function CaseStudies({ light, data }) {
 					<h2 className={` ${light ? "text-neutral-50" : "text-neutral-950"} `}>{data?.headline}</h2>
 				</div>
 			</Container>
-			<div className=" max-w-[1024px] lg:max-w-[inherit] mx-auto px-2.5 lg:px-0">
+			<div className=" max-w-[1024px] lg:max-w-[inherit] mx-auto px-2.5 lg:px-0 ">
 				<Swiper
 					slidesPerView={1}
 					spaceBetween={30}
@@ -41,6 +41,7 @@ function CaseStudies({ light, data }) {
 						prevEl: prevRef.current,
 						nextEl: nextRef.current,
 					}}
+					speed={1000}
 					pagination={{
 						el: paginationRef.current,
 						clickable: true,

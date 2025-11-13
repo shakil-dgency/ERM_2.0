@@ -1,15 +1,13 @@
 import Container from "@/components/ui/Container";
 import React from "react";
 
-function ComparisonBox({data}) {
+function ComparisonBox({ data }) {
 	return (
-		<div >
+		<div>
 			<div className="max-w-[814px] mx-auto mb-[50px] lg:mb-[100px] px-2.5">
 				<h2 className="text-center mb-3 lg:mb-5 text-neutral-950">{data?.section_header?.headline}</h2>
 
-				<p className="text-center text-[14px] lg:text-lg text-neutral-700 ">
-					{data?.section_header?.description}
-				</p>
+				<p className="text-center text-[14px] lg:text-lg text-neutral-700 ">{data?.section_header?.description}</p>
 			</div>
 			<Container>
 				<div className="w-full h-full overflow-x-scroll lg:overflow-hidden">
@@ -29,8 +27,9 @@ function ComparisonBox({data}) {
 						</div>
 
 						{/* Rows */}
+
 						{data?.comparison_table.map((item, i) => (
-							<React.Fragment key={i}>
+							<React.Fragment key={i} >
 								{/* Label */}
 								<div
 									className={`${i === 0 ? "rounded-tl-[20px]" : "border-t border-secondary-700"} ${

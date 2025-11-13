@@ -50,7 +50,7 @@ function Testimonials({ data }) {
 		<div className=" pb-[100px] lg:pb-[120px]">
 			<div className="max-w-[980px] mx-auto  flex flex-col items-center px-2.5 ">
 				<h2 className="text-center text-neutral-950">{data?.headline}</h2>
-				<p className="text-neutral-700 text-center text-[14px] lg:text-[20px] font-[600] mt-4">{data?.description}</p>
+				<p className="text-neutral-700 text-center text-[14px] lg:text-[18px] font-[400] mt-4">{data?.description}</p>
 			</div>
 			<Container>
 				<div className="mt-[50px] lg:mt-[80px]">
@@ -60,9 +60,10 @@ function Testimonials({ data }) {
 						pagination={{
 							clickable: true,
 						}}
+						speed={1000}
 						navigation={true}
 						modules={[Pagination, Navigation]}
-						className="mySwiper videoTestimonials"
+						className="mySwiper videoTestimonials boundedSwiper"
 						breakpoints={{
 							552: { slidesPerView: 1.5, spaceBetween: 20 },
 							768: {

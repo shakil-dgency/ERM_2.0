@@ -7,13 +7,17 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 
 // import required modules
-import { Pagination, Navigation } from "swiper/modules";
+import { Pagination, Navigation, Autoplay, FreeMode } from "swiper/modules";
 import Image from "next/image";
 
-export default function ToolsCard({ data }) {
+export default function ToolsCard({ data, isAbout, index }) {
 	return (
 		<div>
-			<div className="overflow-hidden relative h-full w-full 2xl:max-w-[536px] px-2.5 sm:px-[30px] lg:px-5 2xl:px-[30px] py-[35px] 2xl:py-[45px] rounded-[10px]   bg-[rgba(27,33,39,0.4)] backdrop-blur-[25px] ">
+			<div
+				className={`${
+					isAbout && index % 2 == 0 ? "md:-mt-[60px]" : ""
+				} overflow-hidden relative h-full w-full 2xl:max-w-[536px] px-2.5 sm:px-[30px] lg:px-5 2xl:px-[30px] py-[35px] 2xl:py-[45px] rounded-[10px]   bg-[rgba(27,33,39,0.4)] backdrop-blur-[25px] `}
+			>
 				{/* <div class="absolute bottom-0 left-0 w-full h-[2px] bg-gradient-to-l from-white/80 to-transparent rounded-b-[10px]"></div>
                   <div class="absolute top-0 right-0 w-[2px] h-full bg-gradient-to-t from-white/80 to-transparent rounded-r-[10px]"></div> */}
 				<div
@@ -34,47 +38,27 @@ export default function ToolsCard({ data }) {
 					</div>
 				</div>
 				<div>
-					<Swiper
-						slidesPerView={4}
-						spaceBetween={20}
-						// pagination={{
-						// 	clickable: true,
-						// }}
-						// navigation={true}
-						modules={[]}
-						className=" "
-						breakpoints={{
-							640: {
-								slidesPerView: 6,
-								spaceBetween: 20,
-							},
-							768: {
-								slidesPerView: 8,
-								spaceBetween: 20,
-							},
-							1024: {
-								// >= 768px
-								slidesPerView: 4,
-								spaceBetween: 20,
-							},
-							1536: {
-								// >= 768px
-								slidesPerView: 6,
-								spaceBetween: 20,
-							},
+					
+					<div className="relative overflow-hidden w-full">
+						{/* Scrolling container */}
+						<div className="flex justify-center animate-scroll">
+							{/** Duplicate the logos twice for seamless infinite effect */}
+							{[...data?.logos_with_alt, ...data?.logos_with_alt, ...data?.logos_with_alt, ...data?.logos_with_alt ].map((logo, i) => (
+								<div key={i} className="flex flex-col items-center gap-2 px-6">
+									<Image
+										src={process.env.NEXT_PUBLIC_API_URL + logo?.url}
+										width={120}
+										height={60}
+										alt={logo?.alternativeText || "Logo"}
+										className="h-[20px] w-auto object-contain"
+									/>
+									<p className="text-[10px] font-[400] text-neutral-100 whitespace-nowrap">{logo?.alternativeText}</p>
+								</div>
+							))}
+						</div>
+
 						
-						}}
-					>
-						{data?.logos_with_alt.map((logo,i)=>(
-							<SwiperSlide key={i}>
-							<div className="flex flex-col items-center gap-2 relative z-10">
-								<Image src={logo ? process.env.NEXT_PUBLIC_API_URL + logo?.url : ""} width={151} height={138} alt="Stats Image" className=" object-cover h-[15px] w-auto " />
-								<p className="text-[10px] font-[400] text-neutral-100">{logo?.alternativeText}</p>
-							</div>
-						</SwiperSlide>
-						))}
-						
-					</Swiper>
+					</div>
 				</div>
 			</div>
 		</div>

@@ -4,31 +4,64 @@ import Mission from "@/components/pages/about/Mission";
 import StatsAndClients from "@/components/pages/home/StatsAndClients";
 import Container from "@/components/ui/Container";
 import React from "react";
+import qs from "qs";
+import { getData } from "@/services/helper";
+import { notFound } from "next/navigation";
+import ToolsCard from "@/components/pages/home/ToolsCard";
 
-function page() {
+async function page() {
+	const query = qs.stringify(
+		{
+			populate: {
+				hero: { populate: ["background_image", "hero_text"] },
+				mission_vision_1: { populate: ["image"] },
+				portfolio: {
+					populate: {
+						statistics: true,
+						logos: true,
+						cards: { populate: ["image", "logos_with_alt"] },
+					},
+				},
+				mission_vision_2: { populate: ["image"] },
+			},
+		},
+		{ encodeValuesOnly: true }
+	);
+
+	const url = `${process.env.NEXT_PUBLIC_API_URL}/api/about-us?${query}`;
+
+	const { data } = await getData(url, "About page");
+
+	if (!data) {
+		return notFound();
+	}
+
+	console.log(data);
 	return (
 		<div>
-			<Hero />
+			<Hero data={data?.hero} />
 			<div className="">
 				<div className="bg-tertiary-500 py-[100px] lg:py-[140px]">
 					<Container>
-						<Mission />
+						<Mission data={data?.mission_vision_1} />
 					</Container>
 				</div>
 				<div className="bg-secondary-900 pt-[140px]">
 					<Container>
 						<div className="grid md:grid-cols-3 gap-6 mt-[60px]">
-							<div className="md:-mt-[60px] w-full h-[350px] rounded-[10px] bg-[rgba(27,33,39,0.40)] backdrop-blur-[25px]"></div>
+							{/* <div className="md:-mt-[60px] w-full h-[350px] rounded-[10px] bg-[rgba(27,33,39,0.40)] backdrop-blur-[25px]"></div>
 							<div className=" w-full h-[350px] rounded-[10px] bg-[rgba(27,33,39,0.40)] backdrop-blur-[25px]"></div>
-							<div className="md:-mt-[60px] w-full h-[350px] rounded-[10px] bg-[rgba(27,33,39,0.40)] backdrop-blur-[25px]"></div>
+							<div className="md:-mt-[60px] w-full h-[350px] rounded-[10px] bg-[rgba(27,33,39,0.40)] backdrop-blur-[25px]"></div> */}
+							{data?.portfolio.cards.map((card,i)=>(
+								<ToolsCard key={i} data={card} isAbout={true} index={i}  />
+							))}
 						</div>
 					</Container>
-					<StatsAndClients about={true} />
+					<StatsAndClients about={true} data={data?.portfolio} />
 				</div>
-				<Banner />
 				<div className="bg-tertiary-500 py-[100px] lg:py-[140px]">
 					<Container>
-						<Mission  />
+						<Mission data={data?.mission_vision_2} />
 					</Container>
 				</div>
 			</div>

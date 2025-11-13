@@ -17,14 +17,7 @@ async function page({ params }) {
 	const { location } = params;
 	const url = `${process.env.NEXT_PUBLIC_API_URL}/api/city-names/${location}`;
 
-	let data;
-
-	try {
-		const response = await getData(url, "Directory location page");
-		({ data } = response);
-	} catch (error) {
-		return notFound();
-	}
+	const { data } = await getData(url, "Directory location page");
 
 	if (!data) {
 		return notFound();
@@ -58,12 +51,27 @@ async function page({ params }) {
 
 	const response = await getData(homeUrl, "directory home");
 
-	console.log(response);
-	
+	// fetch heroData
+
+	const queryHero = qs.stringify(
+		{
+			populate: {
+				
+				search_page: true,
+			},
+		},
+		{ encodeValuesOnly: true }
+	);
+
+	const urlHome = `${process.env.NEXT_PUBLIC_API_URL}/api/directory-home?${queryHero}`;
+
+	const newData = await getData(urlHome, "directory home hero");
+
+	console.log(newData);
 
 	return (
-		<MainComponent data={response?.data}>
-			<HomeHero location={true} cityName={data?.city_name} />
+		<MainComponent data={response?.data} newData={newData?.data?.search_page}>
+			<HomeHero location={true} cityName={data?.city_name} data={data?.hero} image={data?.city_image} />
 			<div className="bg-tertiary-500 pt-[80px] pb-[150px]">
 				<Container>
 					<div className="max-w-[970px] mb-[60px]">

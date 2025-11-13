@@ -21,7 +21,7 @@ async function page({ params }) {
 
 	return (
 		<div>
-			<Hero data={data?.data.hero} />
+			<Hero data={data?.data.hero} video={true} />
 			<div className="bg-tertiary-500 py-[100px] lg:py-[140px]">
 				<Features data={data?.data.key_components} />
 				<Testimonials data={data?.data.video_testimonial} />

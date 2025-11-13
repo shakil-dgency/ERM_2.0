@@ -4,14 +4,15 @@ import React, { useEffect, useState } from "react";
 // import styles from "../styles/contactus.module.css";
 import Image from "next/image";
 // import { sendPricingForm } from "@/lib/pricingapi";
-// import { phoneSchema } from "../services/PhoneNumberValidation";
+import { phoneSchema } from "@/services/PhoneNumberValidation";
 
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
+import { sendFormData } from "@/services/forms";
 // import Head from "next/head";
 // import ContactHero from "@/components/others/ContactHero";
 
-function ContactUs() {
+function ContactUs({ data }) {
 	const [name, setName] = useState("");
 	const [websiteAddress, setWebsiteAddress] = useState("");
 	const [email, setEmail] = useState("");
@@ -23,6 +24,8 @@ function ContactUs() {
 	const [phoneCountryCode, setPhoneCountryCode] = useState("+1");
 
 	let contactObj = {};
+
+	const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 	const handleKeyDown = (e) => {
 		// Prevent the backspace key from removing the country code
@@ -41,90 +44,92 @@ function ContactUs() {
 
 		setPhone(value);
 		setCountry(country.name);
-
 	};
 
-	// const handleSubmit = async (e) => {
-	// 	if (name !== "" && phone === "" && email.includes("@")) {
-	// 		e.preventDefault();
-	// 		setPhone(null);
-	// 		setTimeout(() => {
-	// 			setPhone("");
-	// 		}, 800);
-	// 	}
+	const handleSubmit = async (e) => {
+		if (name !== "" && phone === "" && email.includes("@")) {
+			e.preventDefault();
+			setPhone(null);
+			setTimeout(() => {
+				setPhone("");
+			}, 800);
+		}
 
-	// 	// let phone = (await "+") + phone;
-	// 	if (phone !== "") {
-	// 		e.preventDefault();
-	// 		try {
-	// 			await phoneSchema.validate({ phone });
-	// 			console.log("Phone number is valid");
+		// let phone = (await "+") + phone;
+		if (phone !== "") {
+			e.preventDefault();
+			try {
+				await phoneSchema.validate({ phone });
+				console.log("Phone number is valid");
+				
 
-	// 			if (name !== "" && email.includes("@") && websiteAddress !== "" && message !== "") {
-	// 				e.preventDefault();
-	// 				contactObj = { data: { name, email, phone, country, websiteAddress, message }, subject: "Contact - Escape Room Marketer", form: "contact" };
+				if (name !== "" && regex.test(email) && websiteAddress !== "" && message !== "") {
+					e.preventDefault();
+					contactObj = { data: { name, email, phone, country, websiteAddress, message }, subject: "Contact - Escape Room Marketer", form: "contact" };
 
-	// 				const thankYouParam = name.split(" ")[0];
-	// 				let hexValue = [];
+					const thankYouParam = name.split(" ")[0];
+					let hexValue = [];
 
-	// 				for (let i = 0; i < thankYouParam.length; i++) {
-	// 					hexValue.push("%" +( i===0? thankYouParam.charAt(0).toUpperCase().charCodeAt(0).toString(16):thankYouParam.charCodeAt(i).toString(16)));
-	// 				}
+					for (let i = 0; i < thankYouParam.length; i++) {
+						hexValue.push(
+							"%" + (i === 0 ? thankYouParam.charAt(0).toUpperCase().charCodeAt(0).toString(16) : thankYouParam.charCodeAt(i).toString(16))
+						);
+					}
 
-	// 				let hexString = hexValue.join("")
-	// 				let urlEncodedString = encodeURIComponent(hexString);
+					let hexString = hexValue.join("");
+					let urlEncodedString = encodeURIComponent(hexString);
 
-	// 				setTimeout(() => {
-	// 					location.replace(`https://escaperoommarketer.com/thank-you?%256e=${urlEncodedString}`);
-	// 					// setLoad(false);
-	// 				}, 500);
+					setTimeout(() => {
+						// location.replace(`https://escaperoommarketer.com/thank-you?%256e=${urlEncodedString}`);
+						// setLoad(false);
+					}, 500);
 
-	// 				try {
-	// 					await sendPricingForm(contactObj);
-	// 				} catch (error) {
-	// 					console.log(error);
-	// 				}
-	// 			} else {
-	// 				e.preventDefault();
-	// 				if (websiteAddress === "") {
-	// 					setWebsiteAddress(null);
-	// 					setTimeout(() => {
-	// 						setWebsiteAddress("");
-	// 					}, 800);
-	// 				} else if (name === "") {
-	// 					setName(null);
-	// 					setTimeout(() => {
-	// 						setName("");
-	// 					}, 800);
-	// 				} else if (email === "" || email.indexOf("@") === -1) {
-	// 					setEmail(null);
-	// 					setTimeout(() => {
-	// 						setEmail("");
-	// 					}, 800);
-	// 				} else if (message === "") {
-	// 					setMessage(null);
-	// 					setTimeout(() => {
-	// 						setMessage("");
-	// 					}, 800);
-	// 				}
-	// 			}
-	// 		} catch (error) {
-	// 			console.error(error.errors[0]);
-	// 			setIsphoneValid(error.errors[0]);
-	// 			setTimeout(() => {
-	// 				setIsphoneValid("");
-	// 			}, 800);
-	// 		}
-	// 	}
+					try {
+						await sendFormData(contactObj);
+					} catch (error) {
+						console.log(error);
+					}
+				} else {
+					e.preventDefault();
+					if (websiteAddress === "") {
+						setWebsiteAddress(null);
+						setTimeout(() => {
+							setWebsiteAddress("");
+						}, 800);
+					} else if (name === "") {
+						setName(null);
+						setTimeout(() => {
+							setName("");
+						}, 800);
+					} else if (email === "" || regex.test(email)== false) {
+						setEmail(null);
+						setTimeout(() => {
+							setEmail("");
+						}, 800);
+					} else if (message === "") {
+						setMessage(null);
+						setTimeout(() => {
+							setMessage("");
+						}, 800);
+					}
+				}
+			} catch (error) {
+				console.error(error.errors[0]);
+				setIsphoneValid(error.errors[0]);
+				setTimeout(() => {
+					setIsphoneValid("");
+				}, 800);
+			}
+		}
 
-	// 	// const isValid = await phoneSchema.validate({ phone });
-	// };
+		// const isValid = await phoneSchema.validate({ phone });
+	};
 
 	console.log(phone);
 
 	try {
 		return (
-			<div className="bg-neutral-900">
+			<div className="bg-neutral-900 relative">
 				{/* <Head>
 					<title>{seoData && seoData.data.attributes.seo?.metaTitle}</title>
 					<meta name="description" content={`${seoData && seoData.data.attributes.seo?.metaDescription}`} />
@@ -151,21 +156,22 @@ function ContactUs() {
 							);
 						})}
 				</Head> */}
-				<div className="pt-[150px] px-2.5 pb-[150px] flex flex-col items-center justify-center">
-                    <p className="text-primary-500 text-[12px] sm:text-[14px] font-bold leading-[1] tracking-[5.6px] uppercase">Let's Connect</p>
-                    <h1 className="text-neutral-50 text-[24px] sm:text-[54px] font-[700] text-center">Send Us the Clues</h1>
-                    <p className="text-[14px] sm:text-[16px] text-neutral-300 text-center">Get more first-timers, repeat players, and corporate groups—without lifting a finger.</p>
-                </div>
+				<div className="absolute top-0 h-[200px] w-full bg-[linear-gradient(0deg,rgba(13,17,22,0)_0%,rgba(13,17,22,0)_50%,rgba(230,64,39,0.2)_100%)]"></div>
+				<div className="pt-[100px] lg:pt-[140px] px-2.5 pb-[60px] lg:pb-[140px] flex flex-col items-center justify-center">
+					<p className="highlighted_text">{data?.Eyebrow_headline}</p>
+					<h2 className="text-neutral-50 text-center">{data?.headline}</h2>
+					<p className="text-[14px] sm:text-[16px] text-neutral-300 text-center">{data?.description}</p>
+				</div>
 				<div className=" px-2.5 ">
 					<div className="grid grid-cols-1 xl:grid-cols-3 gap-[65px] xl:gap-7 max-w-[1190px] mx-auto pb-16 md:pb-[150px] font-openSans">
 						<div className={` xl:col-start-1 xl:col-end-2 md:max-w-2xl  xl:max-w-[415px] mx-auto`}>
-							<h3 className="text-[20px] text-neutral-50 leading-[32.4px] font-[600] pb-[20px]">Join forces with Escape Room Marketer if…</h3>
-							
+							<h3 className="text-[20px] text-neutral-50 leading-[32.4px] font-[600] pb-[20px]">{data?.description_title}</h3>
+
 							<div className="pb-[60px] pl-[20px] text-neutral-300">
 								<ul className="list-disc space-y-[25px]">
-									<li>You're a master of communication, like a skilled escape artist</li>
-									<li>You're adventurous in adopting innovative ideas alongside a seasoned guide</li>
-									<li>You view marketing as a strategic map to treasure, not a game of chance</li>
+									{data?.lists?.map((item, i) => (
+										<li key={i}>{item?.title}</li>
+									))}
 								</ul>
 							</div>
 							<div className="">
@@ -174,11 +180,8 @@ function ContactUs() {
 								<p className="text-[16px] text-neutral-300 font-[400] ">Let's talk and get the ball rolling...</p>
 								<div className="h-[2px] w-[300px] bg-neutral-800 my-5"></div>
 								<p className="text-[24px] text-neutral-50 leading-[32.4px] font-[600]">Call Now</p>
-								<a
-									href={`tel:+1 707 681 5030`}
-									className="text-primary-700 text-[24px] font-[700] tracking-[0.9px] cursor-pointer"
-								>
-									+1 707 681 5030
+								<a href={`tel:${data?.phone_number}`} className="text-primary-700 text-[24px] font-[700] tracking-[0.9px] cursor-pointer">
+									{data?.phone_number}
 								</a>
 							</div>
 						</div>
@@ -190,11 +193,9 @@ function ContactUs() {
 								alt=""
 								height={100}
 								width={130}
-								className="contact-key_image w-[70px] md:w-[100px] lg:w-[130px] absolute -top-5 md:-top-12 -right-[5px] sm:-right-[20px]  lg:-right-[55px] "
+								className="contact-key_image w-[70px] md:w-[100px] lg:w-[130px] absolute -top-5 md:-top-12 -right-[5px] sm:-right-[0px]  lg:-right-[55px] "
 							/>
-							<h2 className="text-center text-[#fff] text-[20px] sm:text-[36px] font-[700]">
-								Unlock Communication
-							</h2>
+							<h2 className="text-center text-[#fff] text-[20px] sm:text-[36px] font-[700]">{data?.form_headline}</h2>
 							<div className="pt-[40px] md:pt-[50px] ">
 								<form action="">
 									<div className=" flex flex-col md:flex-row gap-[20px] md:gap-[50px] w-full">
@@ -251,7 +252,7 @@ function ContactUs() {
 													height: "50px",
 													backgroundColor: "rgba(53,65,77,0.20)",
 													border: "1px solid rgba(84,101,119,0.40)",
-                                                    color: "#fff",
+													color: "#fff",
 													borderRadius: "4px ",
 												}}
 												inputProps={{
@@ -298,7 +299,7 @@ function ContactUs() {
 											name=""
 											id=""
 											required
-											placeholder="Share your greatest marketing challenges or dreams!"
+											placeholder="Share your greatest marketing challenges or dreams!🙂"
 											cols="30"
 											rows="7"
 											className="outline-none border-[1px] border-[rgba(84,101,119,0.40)] bg-[rgba(53,65,77,0.20)] w-full h-[150px] resize-none text-[16px] text-neutral-50 font-[400] px-4 py-3 mt-2 rounded-[4px] "
@@ -311,7 +312,7 @@ function ContactUs() {
 									</div>
 									<div className="mt-[20px] ">
 										<input
-											// onClick={handleSubmit}
+											onClick={handleSubmit}
 											type="submit"
 											value="Submit your map to success"
 											className="w-full shadow py-2 px-2 cursor-pointer rounded-[4px] bg-primary-600 hover:bg-[#E74329] text-white text-[16px] font-[700] uppercase "
@@ -328,15 +329,13 @@ function ContactUs() {
 							<p className="text-[#848484] text-[12px] ">Great things ahead!</p>
 						</div>
 					</div>
-					
 				</div>
-				
 			</div>
 		);
 	} catch (error) {
 		return (
 			<>
-            <p>{error.message}</p>
+				<p>{error.message}</p>
 				{/* <div className="md:h-[800px] w-full bg-[#fff7f5] pb-28 md:pb-0 px-[10px]">
 					<div className="flex justify-center pt-20">
 						<Image src="/under_maintanence.svg" height={400} width={700} alt="this page is under maintanence" />

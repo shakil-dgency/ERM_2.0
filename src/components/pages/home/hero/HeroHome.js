@@ -2,6 +2,8 @@ import LazyLoadingVideo from "@/components/global/LazyLoadingVideo";
 
 import Image from "next/image";
 import AnimatedText from "./AnimatedText";
+import FillButton from "@/components/ui/buttons/FillButton";
+import HeroButton from "@/components/ui/buttons/HeroButton";
 
 function HeroHome({ data }) {
 	return (
@@ -25,11 +27,11 @@ function HeroHome({ data }) {
 								<AnimatedText sentences={data?.title_second_line} />
 							</span>
 						</h1>
-						<p className="text-base md:text-[20px] text-neutral-300 mb-[60px]">{data?.description}</p>
+						<p className="max-w-[980px] mx-auto text-base md:text-[20px] text-neutral-300 mb-[60px]">{data?.description}</p>
 
-						<button className="bg-red-600 hover:bg-red-700 text-white font-semibold px-6 py-3 mb-[100px] rounded flex items-center justify-center gap-2 mx-auto">
-							<span>🔒</span> {data?.button_text ? data?.button_text : "UNLOCK MARKETING PLAN"}
-						</button>
+						<div className="flex justify-center">
+							<HeroButton text={data?.button_text ? data?.button_text : "UNLOCK MARKETING PLAN"} />
+						</div>
 					</div>
 
 					{/* Partner Logos */}
@@ -42,7 +44,7 @@ function HeroHome({ data }) {
 									alt={`Partner Logo ${i}`}
 									height={45}
 									width={100}
-									className="h-[35px] sm:h-[45px] w-auto"
+									className="h-[25px] sm:h-[45px] w-auto"
 								/>
 							))}
 						</div>

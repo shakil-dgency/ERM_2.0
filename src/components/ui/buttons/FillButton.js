@@ -12,7 +12,7 @@ function FillButton({ url , small, medium, left_icon, right_icon, text = "click 
 							? "px-[20px] py-[13px] text-[14px] font-[500px]"
 							: medium
 							? "px-[25px] py-[16px] text-[16px] font-[600px]"
-							: "px-[35px] py-[18px] text-[18px] font-[700]"
+							: "px-[15px] sm:px-[35px] py-[10px] sm:py-[18px] text-[12px] xs:text-[14px] sm:text-[18px] font-[700]"
 					}`}
 				>
 					{left_icon && (
@@ -22,7 +22,7 @@ function FillButton({ url , small, medium, left_icon, right_icon, text = "click 
 							width={20}
 							height={20}
 							className={`inline-block  group-hover:translate-x-[-2px] mr-[2px] duration-300 ${
-								small ? "h-[16px] w-[16px]" : medium ? "h-[20px] w-[20px]" : "h-[21px] w-[21px]"
+								small ? "h-[16px] w-[16px]" : medium ? "h-[20px] w-[20px]" : "h-[12px] sm:h-[16px] w-auto"
 							}`}
 						/>
 					)}{" "}
@@ -33,8 +33,8 @@ function FillButton({ url , small, medium, left_icon, right_icon, text = "click 
 							alt="Right Icon"
 							width={20}
 							height={20}
-							className={`inline-block group-hover:translate-x-[2px] ml-[2px] duration-300 ${
-								small ? "h-[16px] w-[16px]" : medium ? "h-[20px] w-[20px]" : "h-[21px] w-[21px]"
+							className={`inline-block group-hover:translate-x-[2px] ml-[2px] duration-300  ${
+								small ? "h-[16px] w-[16px]" : medium ? "h-[20px] w-[20px]" : "h-[12px] sm:h-[16px] w-auto"
 							}`}
 						/>
 					)}
@@ -47,7 +47,7 @@ function FillButton({ url , small, medium, left_icon, right_icon, text = "click 
 							? "px-[20px] py-[13px] text-[14px] font-[500px]"
 							: medium
 							? "px-[25px] py-[16px] text-[16px] font-[600px]"
-							: "px-[35px] py-[18px] text-[18px] font-[700]"
+							: "px-[15px] sm:px-[35px] py-[10px] sm:py-[18px] text-[12px] xs:text-[14px] sm:text-[18px] font-[700]"
 					}`}
 				>
 					{left_icon && (
@@ -57,7 +57,7 @@ function FillButton({ url , small, medium, left_icon, right_icon, text = "click 
 							width={20}
 							height={20}
 							className={`inline-block group-hover:translate-x-[-2px] mr-[2px] duration-300 ${
-								small ? "h-[16px] w-[16px]" : medium ? "h-[20px] w-[20px]" : "h-[22px] w-[22px]"
+								small ? "h-[16px] w-[16px]" : medium ? "h-[20px] w-[20px]" : "h-[12px] sm:h-[16px] w-auto"
 							}`}
 						/>
 					)}{" "}
@@ -68,8 +68,8 @@ function FillButton({ url , small, medium, left_icon, right_icon, text = "click 
 							alt="Right Icon"
 							width={20}
 							height={20}
-							className={`inline-block group-hover:translate-x-[2px] ml-[2px] duration-300 ${
-								small ? "h-[16px] w-[16px]" : medium ? "h-[20px] w-[20px]" : "h-[22px] w-[22px]"
+							className={`inline-block group-hover:translate-x-[2px] ml-[2px] duration-300  ${
+								small ? "h-[16px] w-[16px]" : medium ? "h-[20px] w-[20px]" : "h-[12px] sm:h-[16px] w-auto"
 							}`}
 						/>
 					)}

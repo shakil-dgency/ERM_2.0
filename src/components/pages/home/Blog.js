@@ -1,4 +1,5 @@
 import BlogCard from "@/components/global/BlogCard";
+import StrokeButton from "@/components/ui/buttons/StrokeButton";
 import Container from "@/components/ui/Container";
 import Link from "next/link";
 import React from "react";
@@ -21,25 +22,9 @@ function Blog({ data }) {
 						</div>
 
 						<div className=" mt-[50px] lg:mt-0 flex justify-center lg:absolute lg:top-[-160px] right-0">
-							<Link
-								href="/blog"
-								className="border-[#ff492c] border-[1px] rounded-[4px] px-[20px] py-[16px] flex items-center gap-[8px] bg-[rgba(53,65,77,0.40)] group"
-							>
-								<span className="text-neutral-50">More Blogs</span>
-								<svg
-									xmlns="http://www.w3.org/2000/svg"
-									width="5"
-									height="8"
-									viewBox="0 0 5 8"
-									fill="none"
-									className="mt-[2px] transition-transform duration-300 ease-in-out transform group-hover:translate-x-1 group-hover:scale-110"
-								>
-									<path
-										d="M0.689453 1.07009L0.689453 4.41199L0.689453 7.42132C0.689453 7.93629 1.3117 8.19377 1.67647 7.829L4.45513 5.05033C4.90036 4.6051 4.90036 3.88093 4.45513 3.4357L3.39838 2.37896L1.67647 0.657045C1.3117 0.297644 0.689453 0.555126 0.689453 1.07009Z"
-										fill="#fff"
-									/>
-								</svg>
-							</Link>
+							<div className="flex justify-center ">
+								<StrokeButton text="More Blogs" right_icon="/icons/Right_Arrow.svg" small={true} />
+							</div>
 						</div>
 					</div>
 				</div>

@@ -1,0 +1,116 @@
+/* eslint-disable react/no-unescaped-entities */
+import Container from "@/components/ui/Container";
+import Image from "next/image";
+import Link from "next/link";
+import React from "react";
+
+function DemoCall({ data }) {
+	return (
+		<div className="bg-neutral-900 relative pt-[100px] lg:pt-[140px] pb-[100px] lg:pb-[140px]">
+			{/* <Head>
+					<title>{seoData && seoData.data.attributes.seo?.metaTitle}</title>
+					<meta name="description" content={`${seoData && seoData.data.attributes.seo?.metaDescription}`} />
+					<meta name="keywords" content={`${seoData && seoData.data.attributes.seo?.keywords}`} />
+					<meta name="robots" content={`${seoData && seoData.data.attributes.seo?.metaRobots}`} />
+					<meta property="og:image" content={`${seoData && seoData.data.attributes.seo?.metaImage.data?.attributes.url}`} />
+					<meta property="og:image:width" content="400" />
+					<meta property="og:image:height" content="300" />
+					<meta name="twitter:card" content="summary_large_image" />
+					<meta name="twitter:image" content={`${seoData && seoData.data.attributes.seo?.metaImage.data?.attributes.url}`} />
+					<meta name="viewport" content="width=device-width, initial-scale=1" />
+					<link rel="canonical" href={`${seoData && seoData.data.attributes.seo?.canonicalURL}`} />
+
+					{seoData &&
+						seoData.data.attributes.seo?.structuredData?.map((data, i) => {
+							return (
+								<script
+									key={i}
+									type="application/ld+json"
+									dangerouslySetInnerHTML={{
+										__html: JSON.stringify(data),
+									}}
+								/>
+							);
+						})}
+				</Head> */}
+			<div className="absolute top-0 h-[200px] w-full bg-[linear-gradient(0deg,rgba(13,17,22,0)_0%,rgba(13,17,22,0)_50%,rgba(230,64,39,0.2)_100%)]"></div>
+			<Container>
+				<div className=" flex flex-col items-center justify-center">
+					<p className="highlighted_text">{data?.Eyebrow_headline}</p>
+					<h2 className="text-neutral-50 text-center">{data?.headline}</h2>
+					<p className="text-[14px] sm:text-[16px] text-neutral-300 text-center">{data?.description}</p>
+				</div>
+				<div className="space-y-[20px] sm:space-y-0 sm:flex gap-2.5 lg:gap-5 justify-center mt-[50px]">
+					<button className="group relative overflow-hidden w-full sm:w-auto px-[30px] lg:px-[60px] py-2.5 lg:py-[16px] text-[16px] lg:text-[20px] font-[700] text-neutral-5 rounded-[6px] shadow bg-[url('/pages/demoCall/demo_btn.png')] bg-repeat bg-[length:100%_100%]">
+						<span className="relative z-10 text-neutral-50">Choose Your Time</span>
+						<div className="bg-[#546577] group-hover:bg-primary-500 duration-300 absolute left-2 bottom-[-40px] w-[130px] h-[80px] rounded-[50%] blur-[25px] " />
+					</button>
+					<button className="group relative overflow-hidden w-full sm:w-auto px-[30px] lg:px-[60px] py-2.5 lg:py-[16px] text-[16px] lg:text-[20px] font-[700] text-neutral-5 rounded-[6px] shadow bg-[url('/pages/demoCall/demo_btn.png')] bg-repeat bg-[length:100%_100%]">
+						<span className="relative z-10 text-neutral-50">Provide Your Details</span>
+						<div className="bg-[#546577] group-hover:bg-primary-500 duration-300 absolute left-2 bottom-[-40px] w-[130px] h-[80px] rounded-[50%] blur-[25px] " />
+					</button>
+					<button className="group relative overflow-hidden w-full sm:w-auto px-[30px] lg:px-[60px] py-2.5 lg:py-[16px] text-[16px] lg:text-[20px] font-[700] text-neutral-5 rounded-[6px] shadow bg-[url('/pages/demoCall/demo_btn.png')] bg-repeat bg-[length:100%_100%]">
+						<span className="relative z-10 text-neutral-50">Let’s Talk Growth</span>
+						<div className="bg-[#546577] group-hover:bg-primary-500 duration-300 absolute left-2 bottom-[-40px] w-[130px] h-[80px] rounded-[50%] blur-[25px] " />
+					</button>
+				</div>
+				<div className="text-center text-neutral-200 mt-[100px] mb-[25px] relative z-20">
+					Booking calendar will load in a second (
+					<Link href={`${data?.calendar_url ? data?.calendar_url : "/"}`} target="_blank" className="text-blue-500 underline">
+						click here
+					</Link>{" "}
+					if it isn't loading properly):
+				</div>
+
+				<div className="bg-neutral-100 max-w-[800px] mx-auto p-2">
+					<div
+						className="max-w-[800px] mx-auto text-neutral-200 bg-neutral-50 rounded-[10px]
+               h-[700px] overflow-auto [scrollbar-width:none] [-ms-overflow-style:none]
+               [&::-webkit-scrollbar]:hidden"
+					>
+						<iframe src={data?.calendar_url} width="100%" height="1200" frameBorder="0" className="block"></iframe>
+					</div>
+				</div>
+
+				<div className={`pt-[160px] max-w-[1240px] mx-auto`}>
+					<p className="text-[20px] sm:text-[26px] lg:text-[36px] text-center font-[700] text-neutral-50 mb-[50px]">
+						What You'll Get with Our Live Demo
+					</p>
+					<div className=" text-[#222] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+						{/* {contactData &&
+							contactData.data?.attributes.lists.map((data) => {
+								return ( */}
+						{data?.advices?.cards?.map((card, i) => (
+							<div
+								key={i}
+								className="group bg-[url('/pages/demoCall/demo_card_bg.png')] bg-repeat bg-cover bg-secondary-800 max-w-[512px] sm:max-w-none mx-auto text-center rounded-lg shadow px-6 pb-6"
+							>
+								<div className="relative flex justify-center mb-[20px] mt-[60px]">
+									<Image
+										src={card?.icon ? card?.icon : "/"}
+										alt=""
+										height={60}
+										width={60}
+										className="group-hover:scale-105 duration-500 h-[60px] w-auto relative z-10"
+									/>
+									<div
+										className={`h-[30px] w-[30px] bg-primary-500 blur-[15px] absolute top-[50%] translate-y-[-45%] opacity-0 group-hover:opacity-100 duration-500`}
+									></div>
+								</div>
+								<p className="text-[24px] font-[700] text-neutral-200 mb-3">{card?.title}</p>
+								<p className="text-[16px] font-[600] text-neutral-400">
+									{card?.description}
+								</p>
+							</div>
+						))}
+
+						{/* // 	);
+							// })} */}
+					</div>
+				</div>
+			</Container>
+		</div>
+	);
+}
+
+export default DemoCall;
