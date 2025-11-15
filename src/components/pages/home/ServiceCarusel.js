@@ -40,7 +40,7 @@ function ServiceCarusel({ data }) {
 				</div>
 			</Container>
 
-			<div className="pl-2.5 md:pl-0">
+			<div className="px-2.5 md:px-0">
 				<Swiper
 					slidesPerView={1.2}
 					spaceBetween={20}
@@ -85,9 +85,9 @@ function ServiceCarusel({ data }) {
 							);
 						})}
 				</Swiper>
-				<Container>
-					<div className="relative mt-[60px]">
-						<div className="custom-controls mySwiper absolute top-0 right-0 left-0 flex justify-between items-center p-4 z-20">
+				<Container carusel={true}>
+					<div className="relative mt-[30px]">
+						<div className="custom-controls mySwiper absolute top-0 right-0 left-0 flex justify-between items-center pt-4 z-20">
 							<button ref={prevRef} className="custom-prev swiper-button-prev "></button>
 							<div ref={paginationRef} className="custom-pagination flex gap-2"></div>
 							<button ref={nextRef} className="custom-next swiper-button-next "></button>

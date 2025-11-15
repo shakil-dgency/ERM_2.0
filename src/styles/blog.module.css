@@ -1,5 +1,7 @@
 .blog_details {
 	font-family: var(--font-open-sans) !important;
+	/* word-break: break-all; */
+	overflow-wrap: anywhere !important;
 }
 
 .blog_details h1 {
@@ -128,6 +130,8 @@
 }
 .blog_details figure {
 	float: none !important;
+	/* min-width: 800px !important; */
+	
 }
 .blog_details table {
 	font-size: 16px !important;

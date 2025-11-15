@@ -12,7 +12,7 @@ function FillButton({ url , small, medium, left_icon, right_icon, text = "click 
 							? "px-[20px] py-[13px] text-[14px] font-[500px]"
 							: medium
 							? "px-[25px] py-[16px] text-[16px] font-[600px]"
-							: "px-[15px] sm:px-[35px] py-[10px] sm:py-[18px] text-[12px] xs:text-[14px] sm:text-[18px] font-[700]"
+							: "px-[15px] sm:px-[35px] py-[14px] sm:py-[18px] text-[12px] xs:text-[14px] sm:text-[18px] font-[700]"
 					}`}
 				>
 					{left_icon && (
@@ -47,7 +47,7 @@ function FillButton({ url , small, medium, left_icon, right_icon, text = "click 
 							? "px-[20px] py-[13px] text-[14px] font-[500px]"
 							: medium
 							? "px-[25px] py-[16px] text-[16px] font-[600px]"
-							: "px-[15px] sm:px-[35px] py-[10px] sm:py-[18px] text-[12px] xs:text-[14px] sm:text-[18px] font-[700]"
+							: "px-[15px] sm:px-[35px] py-[14px] sm:py-[18px] text-[12px] xs:text-[14px] sm:text-[18px] font-[700]"
 					}`}
 				>
 					{left_icon && (

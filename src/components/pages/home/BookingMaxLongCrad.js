@@ -55,7 +55,7 @@ function BookingMaxLongCrad({ data, isStroke = true }) {
 					)}
 					<div className="flex items-center md:flex-none gap-3 mt-5 lg:mt-0">
 						{isStroke && <StrokeButton text="Learn More" url="/bookingmax" right_icon="/icons/Right_Arrow.svg" />}
-						<FillButton text="Watch Video" handleClick={handleOpen} left_icon="/icons/play.svg" />
+						<FillButton text="Watch Video" handleClick={handleOpen} right_icon="/icons/play.svg" />
 					</div>
 				</div>
 			</div>

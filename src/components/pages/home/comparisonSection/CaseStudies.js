@@ -81,9 +81,9 @@ function CaseStudies({ light, data }) {
 						</SwiperSlide>
 					))}
 				</Swiper>
-				<Container>
-					<div className="relative mt-[60px]">
-						<div className="custom-controls mySwiper absolute top-0 right-0 left-0 flex justify-between items-center p-4 z-20">
+				<Container carusel>
+					<div className="relative mt-[30px]">
+						<div className="custom-controls mySwiper absolute top-0 right-0 left-0 flex justify-between items-center pt-4 z-20">
 							<button ref={prevRef} className="custom-prev swiper-button-prev ">
 								
 							</button>

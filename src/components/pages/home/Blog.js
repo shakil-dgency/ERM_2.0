@@ -23,7 +23,7 @@ function Blog({ data }) {
 
 						<div className=" mt-[50px] lg:mt-0 flex justify-center lg:absolute lg:top-[-160px] right-0">
 							<div className="flex justify-center ">
-								<StrokeButton text="More Blogs" right_icon="/icons/Right_Arrow.svg" small={true} />
+								<StrokeButton text="More Blogs" right_icon="/icons/Right_Arrow.svg"  />
 							</div>
 						</div>
 					</div>

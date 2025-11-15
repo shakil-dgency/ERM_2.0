@@ -27,8 +27,8 @@ function LocationSection({ item }) {
 	return (
 		<Container>
 			<div className="max-w-[793px] pb-[30px] md:pb-[50px]">
-				<p className="highlighted_text">Escape rooms</p>
-				<p className="text-[24px] md:text-[36px] text-neutral-950 font-[700]">{item?.country_name}</p>
+				<p className="highlighted_text mb-3">Escape rooms</p>
+				<p className="text-[24px] md:text-[36px] text-neutral-950 font-[700] mb-1">{item?.country_name}</p>
 				<p className="text-[16px] md:text-[18px] text-neutral-700 font-[400]">{item?.description}</p>
 			</div>
 

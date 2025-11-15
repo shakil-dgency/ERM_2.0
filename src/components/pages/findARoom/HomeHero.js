@@ -73,16 +73,16 @@ function HomeHero({ location, cityName, data, image }) {
 			{!location && (
 				<div className="max-w-[1024px] mx-2.5 lg:mx-auto mt-8 bg-secondary-800 px-[14px] py-[16px] shadow-md rounded-md relative z-30 flex flex-row justify-around  -mb-[60px]">
 					{data?.cta.map((item, i) => (
-						<div key={i} className="flex flex-col md:flex-row md:gap-4 items-center justify-center w-full border-r-[1px] border-secondary-500">
+						<div key={i} className={`${i === data?.cta?.length-1 ? "":"border-r-[1px] border-secondary-500"} flex flex-col md:flex-row md:gap-4 items-center justify-center w-full `}>
 							<Image
 								src={item?.icon ? process.env.NEXT_PUBLIC_API_URL + item.icon.url : "/"}
 								height={50}
 								width={50}
 								alt=""
-								className="h-[20px] md:h-[50px] w-auto"
+								className="h-[30px] md:h-[50px] w-auto mb-1.5"
 							/>
 							<div>
-								<p className="text-neutral-50 text-center text-[20px] md:text-[36px] font-[700]">{item?.stat}</p>
+								<p className="text-neutral-50 text-center text-[16px] md:text-[36px] font-[700]">{item?.stat}</p>
 								<p className="text-[14px] md:text-[16px] text-center text-neutral-300">{item?.short_description}</p>
 							</div>
 						</div>

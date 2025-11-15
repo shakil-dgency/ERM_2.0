@@ -23,10 +23,10 @@ function PopupLocationForm({ data, newData }) {
 	}, [toggle]);
 
 	return (
-		<div className="w-full bg-secondary-900 bg-[url('/pages/findRooms/locationFormBg.png')] bg-repeat bg-[length:640px_640px] pt-[140px] pb-[150px] ">
+		<div className="w-full bg-secondary-900 bg-[url('/pages/findRooms/locationFormBg.png')] bg-repeat bg-[length:1040px_1040px] pt-[140px] pb-[150px] ">
 			<div
 				onClick={() => dispatch(setToggle(false))}
-				className="text-[26px] text-white absolute top-28 lg:top-32 right-5 lg:right-10 rounded-full border-[1px] border-white h-[30px] w-[30px] flex justify-center items-center rotate-45 hover:animate-spin hover:scale-110 duration-300 cursor-pointer"
+				className="text-[26px] text-white absolute top-28 lg:top-32 right-2.5 lg:right-10 rounded-full border-[1px] border-white h-[30px] w-[30px] flex justify-center items-center rotate-45 hover:animate-spin hover:scale-110 duration-300 cursor-pointer"
 			>
 				+
 			</div>

@@ -45,6 +45,7 @@ async function page() {
 	const queryHero = qs.stringify(
 		{
 			populate: {
+				image:true,
 				cta:{
 					populate: ["icon"],
 				},
@@ -58,10 +59,12 @@ async function page() {
 
 	const newData = await getData(urlHome, "directory home hero")
 	
+	console.log(newData);
+	
 
 	return (
 		<MainComponent data={data} newData={newData?.data?.search_page} >
-			<HomeHero data={newData?.data} />
+			<HomeHero data={newData?.data} image={newData?.data?.image} />
 			<Locations data={data} />
 		</MainComponent>
 	);

@@ -61,9 +61,9 @@ function CompanyProfileCard({ data }) {
 			{/* Glow/Gradient Backgrounds */}
 			<div
 				style={{ background: data?.company_color_code }}
-				className="glow_background absolute -left-32 top-[-50px] w-[250px] h-[250px] rounded-full blur-[150px]  "
+				className="glow_background absolute -left-32 top-[-50px] w-[250px] h-[250px] rounded-full blur-[130px]  "
 			/>
-			<div style={{ background: data?.company_color_code }} className="glow_background absolute -right-32 bottom-[-50px] w-[250px] h-[250px] rounded-full blur-[150px]  " />
+			<div style={{ background: data?.company_color_code }} className="glow_background absolute -right-32 bottom-[-50px] w-[250px] h-[250px] rounded-full blur-[130px]  " />
 			<div className="lg:flex justify-between gap-10 relative z-10">
 				<div className="lg:flex gap-5 items-center">
 					<Image
@@ -71,7 +71,7 @@ function CompanyProfileCard({ data }) {
 						alt=""
 						height={66}
 						width={92}
-						className="mb-1.5 md:mb-0 h-[60px] sm:h-[72px] lg:h-[66px] w-[75] sm:w-[112px] lg:w-[92px] object-contain"
+						className="mb-2.5 md:mb-0 h-[60px] sm:h-[72px] lg:h-[66px] w-[75] sm:w-[112px] lg:w-[92px] object-contain"
 					/>
 					<div>
 						<div className=" mr-8">

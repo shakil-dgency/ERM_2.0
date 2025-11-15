@@ -21,8 +21,8 @@ function LocationCard({ city }) {
 			/>
 			<div className="bg-secondary-800 flex-1 flex flex-col justify-start px-2.5 xs:px-[15px] pt-2.5 xs:pt-5 pb-4 rounded-b-lg">
 				<p className="text-[16px] xs:text-[20px] md:text-[24px] text-neutral-50 font-[700]">{city?.city_name}</p>
-				<p className="text-[10px] xs:text-[13px] md:text-[16px] text-neutral-300 font-[400]">
-					{city?.companies.length} Companies|{handleGamesCount(city?.companies)} Games
+				<p className="text-[13px] md:text-[16px] text-neutral-300 font-[400] pt-1">
+					{city?.companies.length} Companies | {handleGamesCount(city?.companies)} Games
 				</p>
 			</div>
 		</Link>

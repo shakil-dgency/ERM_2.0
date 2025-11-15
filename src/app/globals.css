@@ -56,10 +56,13 @@
 	--breakpoint-xs: 400px;
 	--breakpoint-3xl: 1600px;
 }
+html,
+body {
+	scroll-behavior: smooth;
+}
 
 body {
 	font-family: var(--font-open-sans);
-	scroll-behavior: smooth;
 }
 
 .react-tel-input .flag-dropdown {
@@ -72,6 +75,21 @@ input:-webkit-autofill {
 	-webkit-box-shadow: 0 0 0 1000px #191e23 inset !important;
 	box-shadow: 0 0 0 1000px #191e23 inset !important;
 	-webkit-text-fill-color: #fff !important;
+}
+
+
+/* -------------- for single Blog---------- */
+/* ---------------------------------------- */
+.table-scroll {
+	width: 100%;
+	overflow-x: auto;
+	-webkit-overflow-scrolling: touch;
+}
+
+/* ensure the inner table doesn't shrink to container */
+.table-scroll table {
+	/* width: max-content; */
+	min-width: 640px; /* pick sensible min width, or omit */
 }
 
 /* --------------Animations------------- */

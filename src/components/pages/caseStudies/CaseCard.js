@@ -18,7 +18,7 @@ function CaseCard({ data }) {
 		>
 			<div className="relative z-20 flex flex-col lg:flex-row items-end gap-[30px] lg:gap-[15px]">
 				<div className="flex-2/3">
-					<p className="text-neutral-50 text-[20px] lg:text-[24px] xl:text-[32px] font-[600] leading-[1.3] pb-[35px]">{data?.headline}</p>
+					<p className="text-neutral-50 text-[18px] lg:text-[24px] xl:text-[32px] font-[600] leading-[1.4] pb-[25px] md:pb-[35px]">{data?.headline}</p>
 					<div
 						className="feedback_cut text-neutral-300 text-[14px] xl:text-[16px] pb-[10px] leading-[1.5] italic"
 						dangerouslySetInnerHTML={{ __html: handleFeedbackMessage(data?.client_feedback?.feedback) }}
