@@ -59,7 +59,7 @@ const rows = [
 
 export default function ComparisonSection({ data }) {
 	return (
-		<div className="bg-white py-[100px] lg:py-[120px] bg-[url('/pages/home/papertexture.png')] bg-[length:240px_240px] bg-repeat">
+		<div className={`${data?.caseStudies ? "py-[100px] lg:py-[140px]" : "pt-[100px] lg:pt-[140px]"}bg-white  bg-[url('/pages/home/papertexture.png')] bg-[length:240px_240px] bg-repeat`}>
 			<Testimonials data={data?.testimonials} />
 			<Banner data={data?.banner} />
 			<div className="pt-[100px] lg:pt-[140px]">
@@ -67,7 +67,7 @@ export default function ComparisonSection({ data }) {
 			</div>
 			<Tools data={data?.tools} />
 			
-			<CaseStudies data={data?.caseStudies} />
+			{data?.caseStudies && <CaseStudies data={data?.caseStudies} />}
 		</div>
 	);
 }

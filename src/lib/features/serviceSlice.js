@@ -5,7 +5,7 @@ export const fetchServiceData = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const res = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/services?populate[0]=hero&populate[1]=hero.hero_text`
+        `${process.env.NEXT_PUBLIC_API_URL}/api/services?populate[0]=nav_icon&populate[1]=hero&populate[2]=hero.hero_text`
       );
 
       if (!res.ok) throw new Error("Failed to fetch service data");

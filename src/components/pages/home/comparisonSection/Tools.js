@@ -10,7 +10,7 @@ function Tools({data}) {
         </div>
         <div className='flex justify-center mt-[50px] lg:mt-[80px]'>
             <Image
-                src={data?.image ? process.env.NEXT_PUBLIC_API_URL + data.image.url: ''}
+                src={data?.image ? process.env.NEXT_PUBLIC_API_URL + data.image.url: '/'}
                 alt="Tools"
                 width={901}
                 height={482}

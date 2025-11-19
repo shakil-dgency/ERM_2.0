@@ -131,7 +131,6 @@
 .blog_details figure {
 	float: none !important;
 	/* min-width: 800px !important; */
-	
 }
 .blog_details table {
 	font-size: 16px !important;
@@ -157,4 +156,16 @@
 		font-size: 16px;
 		line-height: 140%;
 	}
+}
+
+/* for daily digest */
+
+.text_area p {
+	margin-bottom: 1.25em;
+	line-height: 1.8;
+	/* letter-spacing: -0.1px; */
+}
+
+.text_area a {
+	color: #633abd;
 }

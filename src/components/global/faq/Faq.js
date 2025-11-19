@@ -25,7 +25,7 @@ function Faq({ data }) {
 			</div>
 			<Accordion className="flex flex-col " value={{ initialSelectedValue, openAll }}>
 				{data &&
-					data.map((item, i) => {
+					data?.map((item, i) => {
 						return (
 							<AccordianItem value={item?.id} trigger={item?.question} key={item?.id} index={i}>
 								{item?.answer}

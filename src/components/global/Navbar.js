@@ -6,8 +6,9 @@ import Link from "next/link";
 import React, { useRef, useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { HiMenu } from "react-icons/hi";
-import { BiChevronRight } from "react-icons/bi";
+import { BiChevronLeft, BiChevronRight } from "react-icons/bi";
 import { MdKeyboardArrowDown } from "react-icons/md";
+import { FiPlus, FiMinus } from "react-icons/fi";
 import NavCard from "../ui/NavCard";
 // import Button3D from "./animation/Button3D";
 import { useSelector } from "react-redux";
@@ -19,16 +20,18 @@ let mb_count = 0;
 function Navbar({ marketingBanner }) {
 	const router = usePathname();
 	const { service } = useSelector((state) => state.service);
+	const [worksData, setWorksData] = useState(null);
+
 	// console.log(marketingBanner);
 	const [open, setOpen] = useState(false);
 	const [sidebarOpen, setSidebarOpen] = useState(false);
 	const [serviceMenubar, setServiceMenubar] = useState(false);
 
-	const [resourcesOpen, setResourcesOpen] = useState(false);
-	const [mobileOpen, setMobileOpen] = useState(false);
+	const [worksOpen, setWorksOpen] = useState(false);
+	const [worksMobileOpen, setWorksMobileOpen] = useState(false);
 
-	const [quizeState, setQuizeState] = useState(false);
-	const [mobileQuizeState, setMobileQuizeState] = useState(false);
+	const [insightState, setInsightState] = useState(false);
+	const [mobileInsightsState, setMobileInsightsState] = useState(false);
 
 	const [moreState, setMoreState] = useState(false);
 	const [mobileMoreState, setMobileMoreState] = useState(false);
@@ -44,10 +47,10 @@ function Navbar({ marketingBanner }) {
 	const sidebarMainref = useRef();
 	const sidebarServiceref = useRef();
 	const hamburgRef = useRef();
-	const resourceBtnRef = useRef();
+	const worksBtnRef = useRef();
 	const navRef = useRef();
 
-	const quizzesRef = useRef();
+	const insightNavRef = useRef();
 	const moreNavRef = useRef();
 	const contactRef = useRef();
 
@@ -71,10 +74,9 @@ function Navbar({ marketingBanner }) {
 		if (marketingBanner === true) {
 			navbar.style.top = "56px";
 		}
-		setMobileQuizeState(false);
+		setMobileInsightsState(false);
 		setMobileMoreState(false);
 		setMobileContact(false);
-		setMobileOpen(false);
 		setOpen(false);
 	};
 
@@ -86,7 +88,7 @@ function Navbar({ marketingBanner }) {
 
 		document.addEventListener("click", (e) => {
 			if (sidebarMainref.current) {
-				if (!sidebarMainref.current.contains(e.target) && !hamburgRef.current.contains(e.target)) {
+				if (window.innerWidth > 1024 && !sidebarMainref.current.contains(e.target) && !hamburgRef.current.contains(e.target)) {
 					setSidebarOpen(false);
 				}
 				// mobile nav service item active off
@@ -106,14 +108,9 @@ function Navbar({ marketingBanner }) {
 				}
 			}
 
-			if (resourceBtnRef.current) {
-				if (!resourceBtnRef.current.contains(e.target)) {
-					setResourcesOpen(false);
-				}
-			}
-			if (quizzesRef.current) {
-				if (!quizzesRef.current.contains(e.target)) {
-					setQuizeState(false);
+			if (worksBtnRef.current) {
+				if (!worksBtnRef.current.contains(e.target)) {
+					setWorksOpen(false);
 				}
 			}
 			if (moreNavRef.current) {
@@ -124,6 +121,12 @@ function Navbar({ marketingBanner }) {
 			if (contactRef.current) {
 				if (!contactRef.current.contains(e.target)) {
 					setContact(false);
+				}
+			}
+
+			if (insightNavRef.current) {
+				if (!insightNavRef.current.contains(e.target)) {
+					setInsightState(false);
 				}
 			}
 		});
@@ -141,8 +144,8 @@ function Navbar({ marketingBanner }) {
 				navbar.style.top = "-120px";
 				// }
 				setServiceMenubar(false);
-				setResourcesOpen(false);
-				setQuizeState(false);
+				setWorksOpen(false);
+				setInsightState(false);
 				setMoreState(false);
 				setContact(false);
 			} else if (lastScrollTop > scrollTop + 10) {
@@ -160,12 +163,12 @@ function Navbar({ marketingBanner }) {
 	// when the route is changed then have to positioned the navbar
 
 	useEffect(() => {
-		setQuizeState(false);
 		setMoreState(false);
 		setServiceMenubar(false);
-		setResourcesOpen(false);
+		setWorksOpen(false);
 		setSidebarOpen(false);
 		setContact(false);
+		setInsightState(false);
 
 		document.body.classList.remove("overflow-hidden");
 	}, [router]);
@@ -182,8 +185,7 @@ function Navbar({ marketingBanner }) {
 
 	const handleMainSingleMenu = (e) => {
 		setOpen(false);
-		setMobileQuizeState(false);
-		setMobileOpen(false);
+		setMobileInsightsState(false);
 		setMobileMoreState(false);
 	};
 
@@ -191,50 +193,45 @@ function Navbar({ marketingBanner }) {
 
 	const handleSidebarService = (e) => {
 		setOpen(!open);
-		setMobileQuizeState(false);
-		setMobileOpen(false);
+		setMobileInsightsState(false);
 		setMobileMoreState(false);
 		setMobileContact(false);
+		setWorksMobileOpen(false);
 	};
 
-	const handleResourcePopup = () => {
-		setResourcesOpen(!resourcesOpen);
+	const handleWorksPopup = () => {
+		setWorksOpen(!worksOpen);
 	};
 
-	const handleResourcePopupMobile = () => {
-		setMobileOpen(!mobileOpen);
-		setMobileQuizeState(false);
+	const handleWorksPopupMobile = () => {
+		setWorksMobileOpen(!worksMobileOpen);
+		setMobileInsightsState(false);
 		setMobileMoreState(false);
 		setMobileContact(false);
 		setOpen(false);
 	};
-
-	const handleQuizePopup = () => {
-		setQuizeState(!quizeState);
-	};
-
-	const handleQuizePopupMobile = () => {
-		setMobileQuizeState(!mobileQuizeState);
+	const handleInsightsPopupMobile = () => {
+		setMobileInsightsState(!mobileInsightsState);
 		setMobileMoreState(false);
 		setMobileContact(false);
-		setMobileOpen(false);
 		setOpen(false);
+		setWorksMobileOpen(false);
 	};
 
 	const handleMorePopupMobile = () => {
 		setMobileMoreState(!mobileMoreState);
-		setMobileQuizeState(false);
+		setMobileInsightsState(false);
 		setMobileContact(false);
-		setMobileOpen(false);
 		setOpen(false);
+		setWorksMobileOpen(false);
 	};
 
 	const handleContactPopupMobile = () => {
 		setMobileContact(!mobileContact);
-		setMobileQuizeState(false);
+		setMobileInsightsState(false);
 		setMobileMoreState(false);
-		setMobileOpen(false);
 		setOpen(false);
+		setWorksMobileOpen(false);
 	};
 
 	const handleClick = (e) => {
@@ -244,7 +241,23 @@ function Navbar({ marketingBanner }) {
 		// }, 600); // Delay in milliseconds
 	};
 
-	
+	// fatching data for workes collection
+	useEffect(() => {
+		async function fetchWorks() {
+			try {
+				const res = await fetch("https://cms.escaperoommarketer.com/api/works?populate[0]=nav_icon");
+
+				if (!res.ok) throw new Error("Failed to fetch");
+
+				const json = await res.json();
+				setWorksData(json.data);
+			} catch (err) {
+				console.error("Fetch error:", err);
+			}
+		}
+
+		fetchWorks();
+	}, []);
 
 	return (
 		<div id="navbar" className={`z-50 sticky w-full bg-secondary-950 duration-700  ${marketingBanner === true ? "top-14" : "top-0"} `}>
@@ -258,18 +271,20 @@ function Navbar({ marketingBanner }) {
 								height={40}
 								width={170}
 								quality={100}
-								className="logo_img h-[40px] xs:h-auto w-[100px] xs:w-[130px] sm:w-[150px] xl:w-[163px]"
+								className="logo_img h-[43px] xxs:h-[45px] xs:h-auto w-[95px] xxs:w-[120px] xs:w-[130px] sm:w-[150px] xl:w-[163px]"
 							/>
 						</Link>
 
-						<div className="flex items-center gap-[30px]">
-							<div className="nav_elements flex gap-2 xs:gap-3 md:gap-[10px] xl:gap-10 items-center text-neutral-200">
-								<ul className="hidden xl:flex lg:gap-[14px] xl:gap-[25px] font-[600]  ">
+						<div className="flex items-center gap-[15px] xxs:gap-[20px]">
+							<div className="nav_elements flex gap-2 xs:gap-3 md:gap-[10px] xl:gap-8 items-center text-neutral-200">
+								<ul className="hidden xl:flex lg:gap-[14px] xl:gap-[20px] font-[600]  ">
 									<li
 										id="nav2"
 										ref={serviceBtnRef}
 										onClick={handlePopup}
-										className={` group cursor-pointer flex items-center gap-0 xl:gap-1 text-[14px] xl:text-[15px] hover:text-primary-500 duration-300 relative z-20 ${(service?.find((item)=> item.slug === router.slice(1))) ? "text-primary-500":"" }`}
+										className={` group cursor-pointer flex items-center gap-0 xl:gap-1 text-[14px] xl:text-[15px] hover:text-primary-500 duration-300 relative z-20 ${
+											service?.find((item) => item.slug === router.slice(1)) ? "text-primary-500" : ""
+										}`}
 									>
 										Services
 										<MdKeyboardArrowDown className={`arrow_rotate text-xl xl:text-[22px] duration-300 ${serviceMenubar ? "rotate-180" : ""}`} />
@@ -285,22 +300,74 @@ function Navbar({ marketingBanner }) {
 											Testimonials
 										</Link>
 									</li>
-									<li id="nav3" className=" hover:text-primary-500 duration-300 flex items-center text-[14px] xl:text-[15px] relative z-20">
-										<Link href={"/blog"} className={`${router.asPath === "/blog" ? "text-primary-500" : " "}`}>
-											Works
-										</Link>
+									<li
+										id="nav3"
+										ref={worksBtnRef}
+										onClick={handleWorksPopup}
+										className={`${
+											router === "/works" ? "text-primary-500" : " "
+										} cursor-pointer hover:text-primary-500 duration-300 flex items-center text-[14px] xl:text-[15px] relative z-20`}
+									>
+										{/* <Link href="works" className={`${router === "/works" ? "text-primary-500" : " "}`}> */}
+										Works
+										<MdKeyboardArrowDown className={`arrow_rotate text-xl xl:text-[22px] duration-300 ${worksOpen ? "rotate-180" : ""}`} />
+										{/* </Link> */}
 									</li>
-									<li id="nav4" className=" hover:text-primary-500 duration-300 flex items-center text-[14px] xl:text-[15px] relative z-20">
-										<Link href={"/blog"} className={`${router.asPath === "/blog" ? "text-primary-500" : " "}`}>
+									<div ref={insightNavRef} className="relative">
+										<li
+											onClick={() => setInsightState(!insightState)}
+											className={` hover:text-primary-500 duration-300 flex items-center gap-0 xl:gap-1 text-[14px] xl:text-[15px] cursor-pointer relative z-20 ${
+												router === "/case-studies" || router === "/blog" || router === "/find-a-room" || router.asPath === ""
+													? "text-primary-500"
+													: ""
+											}`}
+										>
+											{/* <Link href={"/blog"} className={`${router.asPath === "/blog" ? "text-primary-500" : " "}`}>
 											Insights
-										</Link>
-									</li>
+										</Link> */}
+											Insights <MdKeyboardArrowDown className={`text-xl xl:text-[22px] duration-300 ${insightState ? "rotate-180" : ""}`} />
+										</li>
+										<div
+											className={`serveice_popup bg-secondary-950 space-y-[25px] md:px-8 md:pb-10 pt-[80px] rounded-b-[20px]  absolute top-10 w-[450px] -left-[170px] shadow-[0px_0px_10px_#ff492c30] ${
+												insightState ? "block" : "hidden"
+											}`}
+										>
+											<NavCard
+												slug="case-studies"
+												img="/navbar/insights/CaseStudy.svg"
+												title="Case Study"
+												description="Proof that our marketing builds lasting wins"
+												router={router}
+											/>
+											<NavCard
+												slug="daily-digest"
+												img="/navbar/insights/DailyDigest.svg"
+												title="Daily Digest"
+												description="Daily tips that grow your bookings"
+												router={router}
+											/>
+											<NavCard
+												slug="blog"
+												img="/navbar/insights/Blog.svg"
+												title="Blog"
+												description="Insights and playbooks for escape room growth"
+												router={router}
+											/>
+											<NavCard
+												slug="find-a-room"
+												img="/navbar/insights/EscapeRoomDirectory.svg"
+												title="Escape Room Directory"
+												description="Connecting players to your escape rooms"
+												router={router}
+											/>
+										</div>
+									</div>
 
 									<div ref={moreNavRef} className="relative">
 										<li
 											onClick={() => setMoreState(!moreState)}
 											className={` hover:text-primary-500 duration-300 flex items-center gap-0 xl:gap-1 text-[14px] xl:text-[15px] cursor-pointer relative z-20 ${
-												router.asPath === "/about" || router.asPath === "/team" || router.asPath === "/career" || router.asPath === "/faqs"
+												router === "/about" || router === "/team" || router === "/partner-program" || router.asPath === "/faq"
 													? "text-primary-500"
 													: ""
 											}`}
@@ -312,13 +379,22 @@ function Navbar({ marketingBanner }) {
 												moreState ? "block" : "hidden"
 											}`}
 										>
-											<NavCard slug="about" img="/navbar/about.svg" title="About Us" router={router} />
-											<NavCard slug="team" img="/navbar/team.svg" title="Team" router={router} />
-											<NavCard slug="faq" img="/navbar/faq.svg" title="FAQs" router={router} />
-											<NavCard slug="blog" img="/navbar/blog.svg" title="Blog" router={router} />
-											<NavCard slug="case-studies" img="/navbar/blog.svg" title="Case Studies" router={router} />
-											{/* <NavCard slug="" img="/navbar/testimonial.svg" title="Testimonial" router={router} /> */}
-											<NavCard slug="find-a-room" img="/navbar/testimonial.svg" title="Escape Room Directory" router={router} />
+											<NavCard
+												slug="about"
+												img="/navbar/more/about.svg"
+												title="About Us"
+												description="Our mission: unlocking your growth potential"
+												router={router}
+											/>
+											<NavCard slug="team" img="/navbar/more/team.svg" title="Team" description="Meet the architects of adventure" router={router} />
+											<NavCard slug="faq" img="/navbar/more/faq.svg" title="FAQs" description="Quick answers for curious owners" router={router} />
+											<NavCard
+												slug="partner-program"
+												img="/navbar/more/partnerProgram.svg"
+												title="Partner Program"
+												description="Get rewarded for every referral"
+												router={router}
+											/>
 										</div>
 									</div>
 
@@ -327,7 +403,7 @@ function Navbar({ marketingBanner }) {
 											onClick={() => setContact(!contact)}
 											id="nav7"
 											className={`${
-												router.asPath === "/contact" || router.asPath === "/client-call" || router.asPath === "/demo-call" ? "text-primary-500" : " "
+												router === "/contact" || router === "/client-call" || router === "/demo-call" ? "text-primary-500" : " "
 											} cursor-pointer hover:text-primary-500 duration-300 flex items-center gap-0 xl:gap-1 text-[14px] xl:text-[15px]  relative z-20`}
 										>
 											Contact
@@ -338,16 +414,34 @@ function Navbar({ marketingBanner }) {
 												contact ? "block" : "hidden"
 											}`}
 										>
-											<NavCard slug="" img="/navbar/demo.svg" title="Book a Demo Call" router={router} />
-											<NavCard slug="" img="/navbar/testimonial.svg" title="Exclusive Client Call" router={router} />
-											<NavCard slug="contact" img="/navbar/contact.svg" title="Contact Us" router={router} />
+											<NavCard
+												slug="demo-call"
+												img="/navbar/contact/demo_call.svg"
+												title="Book a Demo Call"
+												description="Prospective clients: see our system in action"
+												router={router}
+											/>
+											<NavCard
+												slug=""
+												img="/navbar/contact/schedule_call.svg"
+												title="Exclusive Client Call"
+												description="Existing clients: connect with your strategist"
+												router={router}
+											/>
+											<NavCard
+												slug="contact"
+												img="/navbar/contact/contact.svg"
+												title="Contact Us"
+												description="Reach out for any reason"
+												router={router}
+											/>
 										</div>
 									</div>
 								</ul>
 							</div>
 							{/* ..........button........... */}
 
-							<div className="text-neutral-50 flex items-center gap-2 xs:gap-3 md:gap-[10px] lg:gap-[30px]">
+							<div className="text-neutral-50 flex items-center gap-2 xxs:gap-[10px] sm:gap-[20px] lg:gap-[30px]">
 								{/* ....login button.......... */}
 								<div className="group relative z-20 hidden xl:flex items-center gap-1.5 cursor-pointer">
 									{/* <Image src={"/navbar/escape_door.svg"} alt="" height={16} width={17} /> */}
@@ -385,7 +479,7 @@ function Navbar({ marketingBanner }) {
 									<Link
 										href={"/free-marketing"}
 										onClick={handleClick}
-										className="button group hover:shadow-[3px_3px_5px_#808082] hover:translate-[2px] duration-300 hidden xl:flex items-center gap-1 md:gap-2.5 font-[700] flex-[2] px-[20px] py-[8px] rounded-[6px] border-[2px] border-primary-800 relative z-20"
+										className="button group hover:shadow-[0px_0px_14px_#ff492c] duration-300 hidden xl:flex items-center gap-1 md:gap-2.5 font-[700] flex-[2] px-[20px] py-[8px] rounded-[6px] border-[2px] border-primary-800 hover:border-transparent relative z-20"
 									>
 										<Image
 											src="/global/lock.svg"
@@ -414,7 +508,7 @@ function Navbar({ marketingBanner }) {
 								{router !== "/free-marketing" && (
 									<Link
 										href={"/free-marketing"}
-										className="group xl:hidden hover:text-primary-500 marketing_plan flex items-center gap-2 xs:gap-2.5 font-[500] flex-[2] px-[5px] py-1 xs:px-[10px] xs:py-[5px] ml-[0] xl:ml-[6px] rounded border-[2px] border-primary-800  text-neutral-50 relative z-20 text-[13px] xs:text-[14px]"
+										className="group xl:hidden hover:text-primary-500 marketing_plan flex items-center gap-2 xs:gap-2.5 font-[500] flex-[2] px-1.5 xxs:px-[10px] py-[2px] xxs:py-1.5 xs:px-[10px] md:py-[10px] ml-[0] xl:ml-[6px] rounded border-[2px] border-primary-800  text-neutral-50 relative z-20 text-[13px] xs:text-[14px]"
 									>
 										<Image
 											src="/global/lock.svg"
@@ -438,8 +532,12 @@ function Navbar({ marketingBanner }) {
 									</Link>
 								)}
 								{/* ------------------------- */}
-								<div ref={hamburgRef} className="xl:hidden cursor-pointer relative z-20">
-									<HiMenu id="hamburg" onClick={handleHamburg} className="text-[28px] xs:text-[34px] md:text-[42px] " />
+								<div ref={hamburgRef} className="xl:hidden cursor-pointer relative z-20 bg-[#35414d81] rounded-[4px]">
+									<HiMenu
+										id="hamburg"
+										onClick={handleHamburg}
+										className="text-[28px] xxs:text-[35px] p-[1px] xxs:p-[2px] xs:text-[34px] md:text-[42px] "
+									/>
 								</div>
 							</div>
 						</div>
@@ -455,26 +553,50 @@ function Navbar({ marketingBanner }) {
 						>
 							<div className=" grid grid-cols-3  gap-5">
 								{service?.map((item, i) => (
-									<NavCard key={i} slug={item.slug} img="/navbar/audit.svg" title={item.service_name} router={router} />
+									<NavCard
+										key={i}
+										slug={item.slug}
+										img={item?.nav_icon ? process.env.NEXT_PUBLIC_API_URL + item?.nav_icon?.url : "/"}
+										title={item.service_name}
+										description={item?.nav_description}
+										router={router}
+									/>
 								))}
-
-								{/* <NavCard slug="google-ads" img="/navbar/ads.svg" title="Google Ads Management" router={router} />
-
-								<NavCard slug="" img="/navbar/ppc.svg" title="PPC Advertising" router={router} />
-
-								<NavCard slug="" img="/navbar/seo.svg" title="Search Engine Optimization (SEO)" router={router} />
-
-								<NavCard slug="" img="/navbar/aeo.svg" title="Answer Engine Optimization (AEO)" router={router} />
-
-								<NavCard slug="" img="/navbar/social.svg" title="Social Media Advertising" router={router} />
-
-								<NavCard slug="" img="/navbar/web.svg" title="Website Design & Development" router={router} />
-
-								<NavCard slug="" img="/navbar/email.svg" title="Email Marketing" router={router} /> */}
+							</div>
+						</div>
+						{/* ............................ */}
+						{/* desktop works popup menu */}
+						<div
+							// ref={serveiceRef}
+							className={`serveice_popup max-w-[1316px] shadow-[0px_0px_10px_#ff492c30] md:px-8 md:pb-10 pt-[55px] rounded-b-[20px]  absolute top-12 left-[50%] translate-x-[-50%] w-full  z-0 bg-secondary-950 ${
+								worksOpen ? "block" : "hidden"
+							} `}
+						>
+							<div className=" flex pb-6">
+								<Link
+									// onClick={backToPreviousPage}
+									href="/works"
+									className="text-neutral-500 hover:text-primary-500 text-center  font-semibold text-[12px] md:text-[14px] flex items-center underline underline-offset-4 "
+								>
+									<BiChevronLeft className="text-xl" /> All Works
+								</Link>
+							</div>
+							<div className=" grid grid-cols-3  gap-5">
+								{worksData?.map((item, i) => (
+									<NavCard
+										key={i}
+										slug={item.slug}
+										img={item?.nav_icon ? process.env.NEXT_PUBLIC_API_URL + item?.nav_icon?.url : "/"}
+										title={item.title}
+										description={item?.nav_description}
+										router={router}
+									/>
+								))}
 							</div>
 						</div>
 					</div>
 
+					{/*............... Mobile view......... */}
 					<div
 						ref={sidebarMainref}
 						id="sidebar"
@@ -484,17 +606,30 @@ function Navbar({ marketingBanner }) {
 					`}
 					>
 						<div className="overflow-y-scroll xl:overflow-y-hidden h-screen xl:h-0 pb-[150px] lg:pb-0">
-							<div className={`pl-3 xs:pl-5 md:pl-14 pr-3 xs:pr-5 relative`}>
-								<div onClick={closeSidebar} className="w-full h-16 xl:h-0">
-									<div className=" rounded-[100%] text-3xl lg:text-[10px] flex justify-center items-center w-10 lg:w-0 h-10 lg:h-0 absolute top-2.5 xs:top-4 right-2.5 xs:right-4">
-										<p className="text-[40px] text-neutral-200 rotate-45">+</p>
+							<div className={`px-2.5 relative`}>
+								<div className="flex justify-between items-center w-full pt-4 xs:pt-[17px] pb-[40px]">
+									<Link href={"/"} className="cursor-pointer relative z-20 sm:hidden flex-none">
+										<Image
+											src="/logo.svg"
+											alt="logo"
+											height={40}
+											width={170}
+											quality={100}
+											className="logo_img h-[43px] xxs:h-[45px] xs:h-auto w-[95px] xxs:w-[120px] xs:w-[130px] sm:w-[150px] xl:w-[163px]"
+										/>
+									</Link>
+									<div onClick={closeSidebar} className="w-full flex justify-end">
+										<div className=" rounded-[100%] border-[1px] border-secondary-500 flex justify-center items-center w-8 lg:w-0 h-8 lg:h-0 ">
+											<FiPlus className="text-primary-500 text-[22px] rotate-45" />
+										</div>
 									</div>
 								</div>
-								<div onClick={closeSidebar} className="text-neutral-50 flex  relative z-20">
+
+								<div onClick={closeSidebar} className="text-neutral-50 fle  relative z-20 w-full">
 									<Link
 										href={"/free-marketing"}
 										// onClick={handleClick}
-										className="button group hover:shadow-[3px_3px_5px_#808082] hover:translate-[2px] duration-300 flex items-center gap-1 md:gap-2.5 font-[700] px-[20px] py-[8px] rounded-[6px] border-[2px] border-primary-800 "
+										className="button group hover:shadow-[3px_3px_5px_#808082] hover:translate-[2px] duration-300 flex items-center justify-center gap-1 md:gap-2.5 font-[700] px-[20px] py-[8px] rounded-[6px] border-[2px] border-primary-800 "
 									>
 										<Image src="/global/lock.svg" height={20} width={18} alt="" className="w-[20px] h-[20px] mb-[1px]  inline-block " />
 
@@ -505,103 +640,187 @@ function Navbar({ marketingBanner }) {
 										</span>
 									</Link>
 								</div>
-								<div className="flex  mt-5">
+								<div className="flex border-b-[1px] border-b-secondary-800 py-[25px]">
 									<div className="group relative z-20 flex items-center gap-1.5 cursor-pointer">
 										<Image src={"/navbar/escape_door.svg"} alt="" height={16} width={17} />
 
 										<p className="text-[16px] font-[600] text-neutral-200 group-hover:text-primary-500 duration-300">Login</p>
 									</div>
 								</div>
-								<ul className="text-neutral-200 font-[600] flex flex-col gap-3 mb-12">
-									<li
-										onClick={handleSidebarService}
-										className={`group cursor-pointer flex items-center gap-2 text-[18px] pt-3 ${open ? "text-primary-500" : ""} ${
-											router.asPath === "/services" ||
-											router.asPath === "/google-ads" ||
-											router.asPath === "/microsoft-ads" ||
-											router.asPath === "/seo" ||
-											router.asPath === "/facebook-ads" ||
-											router.asPath === "/linkedin-ads" ||
-											router.asPath === "/social-media-management" ||
-											router.asPath === "/landing-page-development" ||
-											router.asPath === "/website-development" ||
-											router.asPath === "/email-marketing"
-												? "text-primary-500"
-												: ""
-										} `}
-									>
-										Services <MdKeyboardArrowDown className={`arrow_rotate text-2xl transition-transform duration-300 ${open ? "rotate-180" : ""}`} />
-									</li>
-
-									<div ref={sidebarServiceref} className={`pb-4 space-y-[25px]  ${open ? "block" : "hidden"}`}>
-										<NavCard slug="" img="/navbar/audit.svg" title="Must Have Audit Reports" router={router} />
-
-										<NavCard slug="" img="/navbar/ads.svg" title="Google Ads Management" router={router} />
-
-										<NavCard slug="" img="/navbar/ppc.svg" title="PPC Advertising" router={router} />
-
-										<NavCard slug="" img="/navbar/seo.svg" title="Search Engine Optimization (SEO)" router={router} />
-
-										<NavCard slug="" img="/navbar/aeo.svg" title="Answer Engine Optimization (AEO)" router={router} />
-
-										<NavCard slug="" img="/navbar/social.svg" title="Social Media Advertising" router={router} />
-
-										<NavCard slug="" img="/navbar/web.svg" title="Website Design & Development" router={router} />
-
-										<NavCard slug="" img="/navbar/email.svg" title="Email Marketing" router={router} />
-									</div>
-									<li className="text-[18px] pt-3">
-										<Link
-											href={"/blog"}
-											onClick={handleMainSingleMenu}
-											className={`hover:text-primary-500  ${router.asPath === "/case-studies" ? "text-primary-500" : " "}`}
-										>
-											Case Studies
-										</Link>
-									</li>
-									<li className="text-[18px] pt-3">
-										<Link
-											href={"/blog"}
-											onClick={handleMainSingleMenu}
-											className={`hover:text-primary-500  ${router.asPath === "/works" ? "text-primary-500" : " "}`}
-										>
-											Works
-										</Link>
-									</li>
-
-									<div className="mobile_more">
+								<ul className="text-neutral-200 font-[600] flex flex-col mt-2.5">
+									<div className="border-b-[1px] border-b-secondary-800 py-[25px]">
 										<li
-											onClick={handleMorePopupMobile}
-											className={`text-[18px] pt-3 flex items-center gap-2 cursor-pointer ${
-												router.asPath === "/about" || router.asPath === "/team" || router.asPath === "/career" || router.asPath === "/faqs"
-													? "text-primary-500"
-													: ""
-											} ${mobileMoreState ? "text-primary-500" : ""}`}
+											onClick={handleSidebarService}
+											className={`group cursor-pointer flex items-center justify-between gap-2 text-[18px] ${open ? "text-primary-500" : ""}  `}
 										>
-											More <MdKeyboardArrowDown className={`text-2xl transition-transform duration-300 ${mobileMoreState ? "rotate-180" : ""}`} />
+											Services <span className="text-[22px]">{open ? <FiMinus /> : <FiPlus />}</span>
 										</li>
 
-										<div className={`pt-4 space-y-[25px] text-[16px]  ${mobileMoreState ? "block" : "hidden"}`}>
-											<NavCard slug="/about" img="/navbar/about.svg" title="About Us" router={router} />
-											<NavCard slug="" img="/navbar/team.svg" title="Team" router={router} />
-											<NavCard slug="" img="/navbar/faq.svg" title="FAQs" router={router} />
-											<NavCard slug="/blog" img="/navbar/blog.svg" title="Blog" router={router} />
-											<NavCard slug="" img="/navbar/testimonial.svg" title="Testimonial" router={router} />
+										<div ref={sidebarServiceref} className={`mt-3 space-y-[25px]  ${open ? "block" : "hidden"}`}>
+											{service?.map((item, i) => (
+												<NavCard
+													key={i}
+													slug={item.slug}
+													img={item?.nav_icon ? process.env.NEXT_PUBLIC_API_URL + item?.nav_icon?.url : "/"}
+													title={item.service_name}
+													description={item?.nav_description}
+													router={router}
+												/>
+											))}
 										</div>
 									</div>
-									<div>
+									<li className="text-[18px] border-b-[1px] border-b-secondary-800 py-[25px] ">
+										<Link
+											href={"/bookingmax"}
+											onClick={handleMainSingleMenu}
+											className={`hover:text-primary-500  ${router === "/bookingmax" ? "text-primary-500" : " "}`}
+										>
+											BookingMAX
+										</Link>
+									</li>
+									<li className="text-[18px] border-b-[1px] border-b-secondary-800 py-[25px] ">
+										<Link
+											href={"/"}
+											onClick={handleMainSingleMenu}
+											className={`hover:text-primary-500  ${router === "/testimonials" ? "text-primary-500" : " "}`}
+										>
+											Testimonials
+										</Link>
+									</li>
+
+									<div className="mobile_more border-b-[1px] border-b-secondary-800 py-[25px]">
+										<li
+											onClick={handleWorksPopupMobile}
+											className={`text-[18px]  flex items-center justify-between gap-2 cursor-pointer ${
+												router === "/about" || router === "/team" || router === "/faqs" ? "text-primary-500" : ""
+											} ${worksMobileOpen ? "text-primary-500" : ""}`}
+										>
+											Works <span className="text-[22px]">{worksMobileOpen ? <FiMinus /> : <FiPlus />}</span>
+										</li>
+
+										<div className={`mt-3 space-y-[25px] text-[16px]  ${worksMobileOpen ? "block" : "hidden"}`}>
+											<div className=" flex uppercase">
+												<Link
+													// onClick={backToPreviousPage}
+													href="/works"
+													className="text-neutral-500 hover:text-primary-500 text-center  font-semibold text-[12px] md:text-[14px] flex items-center underline underline-offset-4 "
+												>
+													<BiChevronLeft className="text-xl" /> All Works
+												</Link>
+											</div>
+											{worksData?.map((item, i) => (
+												<NavCard
+													key={i}
+													slug={item.slug}
+													img={item?.nav_icon ? process.env.NEXT_PUBLIC_API_URL + item?.nav_icon?.url : "/"}
+													title={item.title}
+													description={item?.nav_description}
+													router={router}
+												/>
+											))}
+										</div>
+									</div>
+									<div className="mobile_more border-b-[1px] border-b-secondary-800 py-[25px]">
+										<li
+											onClick={handleInsightsPopupMobile}
+											className={`text-[18px]  flex items-center justify-between gap-2 cursor-pointer ${
+												router === "/about" || router === "/team" || router === "/faqs" ? "text-primary-500" : ""
+											} ${mobileInsightsState ? "text-primary-500" : ""}`}
+										>
+											Insights <span className="text-[22px]">{mobileInsightsState ? <FiMinus /> : <FiPlus />}</span>
+										</li>
+
+										<div className={`mt-3 space-y-[25px] text-[16px]  ${mobileInsightsState ? "block" : "hidden"}`}>
+											<NavCard
+												slug="case-studies"
+												img="/navbar/insights/CaseStudy.svg"
+												title="Case Study"
+												description="Proof that our marketing builds lasting wins"
+												router={router}
+											/>
+											<NavCard
+												slug="daily-digest"
+												img="/navbar/insights/DailyDigest.svg"
+												title="Daily Digest"
+												description="Daily tips that grow your bookings"
+												router={router}
+											/>
+											<NavCard
+												slug="blog"
+												img="/navbar/insights/Blog.svg"
+												title="Blog"
+												description="Insights and playbooks for escape room growth"
+												router={router}
+											/>
+											<NavCard
+												slug="find-a-room"
+												img="/navbar/insights/EscapeRoomDirectory.svg"
+												title="Escape Room Directory"
+												description="Connecting players to your escape rooms"
+												router={router}
+											/>
+										</div>
+									</div>
+									<div className="mobile_more border-b-[1px] border-b-secondary-800 py-[25px]">
+										<li
+											onClick={handleMorePopupMobile}
+											className={`text-[18px]  flex items-center justify-between gap-2 cursor-pointer ${
+												router === "/about" || router === "/team" || router === "/career" || router === "/faqs" ? "text-primary-500" : ""
+											} ${mobileMoreState ? "text-primary-500" : ""}`}
+										>
+											More <span className="text-[22px]">{mobileMoreState ? <FiMinus /> : <FiPlus />}</span>
+										</li>
+
+										<div className={`mt-3 space-y-[25px] text-[16px]  ${mobileMoreState ? "block" : "hidden"}`}>
+											<NavCard
+												slug="about"
+												img="/navbar/more/about.svg"
+												title="About Us"
+												description="Our mission: unlocking your growth potential"
+												router={router}
+											/>
+											<NavCard slug="team" img="/navbar/more/team.svg" title="Team" description="Meet the architects of adventure" router={router} />
+											<NavCard slug="faq" img="/navbar/more/faq.svg" title="FAQs" description="Quick answers for curious owners" router={router} />
+											<NavCard
+												slug="partner-program"
+												img="/navbar/more/partnerProgram.svg"
+												title="Partner Program"
+												description="Get rewarded for every referral"
+												router={router}
+											/>
+										</div>
+									</div>
+									<div className="border-b-[1px] border-b-secondary-800 py-[25px]">
 										<li
 											onClick={handleContactPopupMobile}
-											className={`text-[18px] pt-3 flex items-center gap-2 cursor-pointer ${
+											className={`text-[18px] flex items-center justify-between gap-2 cursor-pointer ${
 												router.asPath === "/contact" || router.asPath === "/client-call" || router.asPath === "/demo-call" ? "text-primary-500" : " "
 											}${mobileContact ? "text-primary-500" : ""}`}
 										>
-											Contact <MdKeyboardArrowDown className={`text-2xl transition-transform duration-300 ${mobileContact ? "rotate-180" : ""}`} />
+											Contact <span className="text-[22px]">{mobileContact ? <FiMinus /> : <FiPlus />}</span>
 										</li>
-										<div className={`pt-4 space-y-[25px] text-[16px]  ${mobileContact ? "block" : "hidden"}`}>
-											<NavCard slug="" img="/navbar/demo.svg" title="Book a Demo Call" router={router} />
-											<NavCard slug="" img="/navbar/testimonial.svg" title="Exclusive Client Call" router={router} />
-											<NavCard slug="/contact" img="/navbar/contact.svg" title="Contact Us" router={router} />
+										<div className={`space-y-[25px] text-[16px] mt-3  ${mobileContact ? "block" : "hidden"}`}>
+											<NavCard
+												slug="demo-call"
+												img="/navbar/contact/demo_call.svg"
+												title="Book a Demo Call"
+												description="Prospective clients: see our system in action"
+												router={router}
+											/>
+											<NavCard
+												slug=""
+												img="/navbar/contact/schedule_call.svg"
+												title="Exclusive Client Call"
+												description="Existing clients: connect with your strategist"
+												router={router}
+											/>
+											<NavCard
+												slug="contact"
+												img="/navbar/contact/contact.svg"
+												title="Contact Us"
+												description="Reach out for any reason"
+												router={router}
+											/>
 										</div>
 									</div>
 								</ul>

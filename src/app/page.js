@@ -63,13 +63,13 @@ export default async function Home() {
 	const url = `${process.env.NEXT_PUBLIC_API_URL}/api/home?${query}`;
 
 	const { data } = await getData(url, "Home page");
-	// console.log(data);
 
 	return (
 		<div>
 			<HeroHome data={data?.hero} />
 			<StatsAndClients data={data?.portfolio} />
 			<BookingMax data={data?.bookingmax} serviceData={data?.services} />
+			
 			<ComparisonSection
 				data={{ comparison: data?.comparison, tools: data?.tools, testimonials: data?.video_testimonial, caseStudies: data?.casestudy_section, banner:data?.cta }}
 			/>

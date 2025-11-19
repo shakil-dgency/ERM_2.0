@@ -10,6 +10,8 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import Image from "next/image";
+import LazyLoadingVideo from "@/components/global/LazyLoadingVideo";
+import Html5ZipViewer from "./Html5ZipViewer";
 
 function WorksDisplay({ data }) {
 	const generateBreakpoints = (slidesFromDB) => {
@@ -92,19 +94,35 @@ function WorksDisplay({ data }) {
 						className="mySwiper boundedSwiper"
 						breakpoints={breakpoints}
 					>
-						{data?.images?.map((image, i) => (
-							<SwiperSlide key={i}>
-								<div style={{ aspectRatio: image?.width / image?.height }} className="">
-									<Image
-										src={image ? process.env.NEXT_PUBLIC_API_URL + image?.url : "/"}
-										height={image?.height}
-										width={image?.width}
-										alt=""
-										className="h-full w-full"
-									/>
-								</div>
-							</SwiperSlide>
-						))}
+						{data?.html5_ads?.length === 0 && data?.video_urls?.length === 0
+							? data?.images?.map((image, i) => (
+									<SwiperSlide key={i}>
+										<div style={{ aspectRatio: image?.width / image?.height }} className="">
+											<Image
+												src={image ? process.env.NEXT_PUBLIC_API_URL + image?.url : "/"}
+												height={image?.height}
+												width={image?.width}
+												alt=""
+												className="h-full w-full"
+											/>
+										</div>
+									</SwiperSlide>
+							  ))
+							: data?.html5_ads?.length === 0
+							? data?.video_urls?.map((video, j) => (
+									<SwiperSlide key={j}>
+										<div style={{ aspectRatio: video?.width / video?.height }} className="cursor-pointer">
+											<LazyLoadingVideo video_url={video?.url} controls={true} autoPlay={false} poster={video?.poster?.url} />
+										</div>
+									</SwiperSlide>
+							  ))
+							: data?.html5_ads?.map((file, z) => (
+									<SwiperSlide key={z}>
+										<div >
+											<Html5ZipViewer zipFile={file} />
+										</div>
+									</SwiperSlide>
+							  ))}
 					</Swiper>
 				</div>
 			</Container>

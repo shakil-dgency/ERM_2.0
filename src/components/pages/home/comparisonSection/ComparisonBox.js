@@ -10,78 +10,71 @@ function ComparisonBox({ data }) {
 				<p className="text-center text-[14px] lg:text-lg text-neutral-700 ">{data?.section_header?.description}</p>
 			</div>
 			<Container>
-				<div className="w-full h-full overflow-x-scroll lg:overflow-hidden">
-					<div className="h-full w-[800px] md:w-[1024px] lg:w-full grid grid-cols-8 md:grid-cols-11 gap-0 pt-[20px] pb-[50px]">
-						{/* Table Header */}
-						<div className=""></div>
-						<div className=""></div>
-						{/* <div className="relative rounded-t-[10px] bg-[#0a0a0b] text-white text-center font-bold text-lg py-6">
-					<span className="text-neutral-50">Escape Room Marketer</span> <span className="text-xs text-white/70">(ERM)</span>
-					
-				 </div> */}
-						<div className="text-center font-bold text-[12px] lg:text-lg py-6  text-[#161a1e] col-start-4 md:col-start-6 col-end-7 md:col-end-9">
-							{data?.column_name_2}
-						</div>
-						<div className="text-center font-bold text-[12px] lg:text-lg py-6  text-[#161a1e] -ml-[50px] md:-ml-0 col-start-7 md:col-start-9 col-end-9 md:col-span-full">
-							{data?.column_name_3}
-						</div>
-
-						{/* Rows */}
-
-						{data?.comparison_table.map((item, i) => (
-							<React.Fragment key={i} >
-								{/* Label */}
-								<div
-									className={`${i === 0 ? "rounded-tl-[20px]" : "border-t border-secondary-700"} ${
-										i === data.comparison_table.length - 1 ? "rounded-bl-[20px]" : ""
-									} col-start-1 col-end-2 md:col-end-3 flex items-center bg-secondary-800 px-1.5 lg:px-10 py-6 text-neutral-100 font-medium text-[12px] lg:text-base `}
+				<div className="overflow-x-auto overflow-y-hidden">
+					<div className="grid grid-cols-4 pt-[10px] pb-[44px] text-[13px] lg:text-[16px] min-w-[900px]">
+						{/* Column: Label */}
+						<div className="grid " style={{ gridTemplateRows: `repeat(${data?.comparison_table?.length + 1}, 1fr)` }}>
+							<div></div>
+							{data?.comparison_table?.map((item, i) => (
+								<p
+									key={i}
+									className={`${
+										i === 0 ? "rounded-tl-[20px]" : i === data?.comparison_table?.length - 1 ? "rounded-bl-[20px]" : ""
+									} text-neutral-100 flex items-center justify-start pl-6 pr-[70px] py-[25px] border-b border-secondary-700 bg-secondary-800`}
 								>
 									{item.label}
-								</div>
+								</p>
+							))}
+						</div>
 
-								{/* ERM (Center, Highlighted) */}
-								<div
-									className={`relative col-start-2 md:col-start-3 col-end-[4] md:col-end-6 bg-[url('/pages/home/bookingMaxBg.png')] bg-repeat bg-[length:240px_240px] overflow-hidden bg-[#0a0a0b] px-1.5 lg:px-6 py-6 text-white text-[12px] lg:text-base text-center flex items-center font-normal  ${
-										i == 0 ? "-mt-[70px] md:-mt-[80px] pt-[90px] rounded-t-[10px]" : ""
-									} ${i === data.comparison_table.length - 1 ? "-mb-[40px] rounded-b-[10px]" : ""} `}
+						{/* Column: ERM */}
+						<div
+							className="grid bg-secondary-800 -ml-[60px] mr-[40px] -mb-[35px] rounded-[10px] relative z-10 overflow-hidden shadow-[0px_0px_10px_#ff492c] bg-[url('/pages/home/bookingMaxBg.png')] bg-repeat bg-[length:240px_240px]"
+							style={{ gridTemplateRows: `repeat(${data?.comparison_table?.length + 1}, 1fr) 0.5fr ` }}
+						>
+							<div className="flex items-center justify-center text-neutral-50 font-[700] sm:font-[600] relative z-20">{data?.column_name_1}</div>
+							{data?.comparison_table?.map((item, i) => (
+								<p
+									key={i}
+									className={`${
+										data?.comparison_table?.length - 1 === i ? "" : ""
+									} text-neutral-50 relative z-20 flex items-center justify-center text-center px-3 py-[25px]`}
 								>
-									<span className="relative z-20">{item.erm}</span>
+									{item.erm}
+								</p>
+							))}
 
-									{i === 0 && (
-										<span className="text-neutral-50 font-bold text-[12px] lg:text-lg absolute z-20 w-full left-[50%] translate-x-[-50%] top-[25px] ">
-											{data?.column_name_1}
-										</span>
-									)}
+							<div className={` absolute left-[-50px] top-[-60px] z-10  w-[260px] h-[260px] rounded-full blur-[150px] bg-primary-500`} />
+							<div className={` absolute right-[-50px] bottom-[-80px] z-10  w-[260px] h-[260px] rounded-full blur-[150px] bg-primary-500`} />
+						</div>
 
-									{/* <div className={`${i=== rows.length -1 ?"absolute left-0 w-full h-[40px] top-full bg-[#0a0a0b] rounded-b-[10px]":"hidden"}`}></div> */}
-									{(i === 0 || i === 1) && (
-										<div
-											className={`${
-												i == 0 ? "-left-10 top-4 " : "-left-10 -top-[150px] md:-top-[170px]"
-											} absolute z-10  w-[160px] h-[160px] rounded-full blur-[80px] bg-primary-500`}
-										/>
-									)}
-								</div>
-
-								{/* Agency */}
-								<div
-									className={`bg-secondary-800  ${
-										i === 0 ? "" : "border-t border-secondary-700"
-									} col-start-4 md:col-start-6 col-end-7 md:col-end-9 flex items-center justify-center text-center pl-10 pr-[60px] md:pr-10 lg:px-10 py-6 text-neutral-100 text-[12px] lg:text-base font-normal`}
+						{/* Column: Agencies */}
+						<div className="grid -ml-[40px] mr-[20px]" style={{ gridTemplateRows: `repeat(${data?.comparison_table?.length + 1}, 1fr)` }}>
+							<div className="flex items-center justify-center font-[700] sm:font-[600] text-[#161a1e]">{data?.column_name_2}</div>
+							{data?.comparison_table?.map((item, i) => (
+								<p
+									key={i}
+									className="text-neutral-200 flex items-center justify-center text-center px-[18px] py-[25px] border-b border-secondary-700 bg-secondary-800"
 								>
 									{item.agencies}
-								</div>
+								</p>
+							))}
+						</div>
 
-								{/* DIY */}
-								<div
-									className={`bg-secondary-800  ${i === 0 ? "rounded-tr-[20px] " : "border-t border-secondary-700 "} ${
-										i === data.comparison_table.length - 1 ? "rounded-br-[20px]" : ""
-									} -ml-[50px] md:-ml-0 col-start-7 md:col-start-9 col-end-9 md:col-span-full flex items-center justify-center text-center px-10 lg:px-10 py-6 text-neutral-100 text-[12px] lg:text-base font-normal`}
+						{/* Column: Freelancers */}
+						<div className="grid -ml-[20px]" style={{ gridTemplateRows: `repeat(${data?.comparison_table?.length + 1}, 1fr)` }}>
+							<div className=" flex items-center justify-center font-[700] sm:font-[600] text-[#161a1e]">{data?.column_name_3}</div>
+							{data?.comparison_table?.map((item, i) => (
+								<p
+									key={i}
+									className={`${
+										i === 0 ? "rounded-tr-[20px]" : i === data?.comparison_table?.length - 1 ? "rounded-br-[20px]" : ""
+									} text-neutral-200 flex items-center justify-center text-center pl-3 pr-6 py-[25px] border-b border-secondary-700 bg-secondary-800`}
 								>
 									{item.freelancers}
-								</div>
-							</React.Fragment>
-						))}
+								</p>
+							))}
+						</div>
 					</div>
 				</div>
 			</Container>

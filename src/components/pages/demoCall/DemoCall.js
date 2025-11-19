@@ -72,22 +72,22 @@ function DemoCall({ data }) {
 					</div>
 				</div>
 
-				<div className={`pt-[160px] max-w-[1240px] mx-auto`}>
+				<div className={`pt-[100px] lg:pt-[140px] max-w-[1240px] mx-auto`}>
 					<p className="text-[20px] sm:text-[26px] lg:text-[36px] text-center font-[700] text-neutral-50 mb-[50px]">
 						What You'll Get with Our Live Demo
 					</p>
-					<div className=" text-[#222] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+					<div className=" text-[#222] grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-3 gap-4">
 						{/* {contactData &&
 							contactData.data?.attributes.lists.map((data) => {
 								return ( */}
 						{data?.advices?.cards?.map((card, i) => (
 							<div
 								key={i}
-								className="group bg-[url('/pages/demoCall/demo_card_bg.png')] bg-repeat bg-cover bg-secondary-800 max-w-[512px] sm:max-w-none mx-auto text-center rounded-lg shadow px-6 pb-6"
+								className="group bg-[url('/pages/demoCall/demo_card_bg.png')] bg-repeat bg-cover bg-secondary-800 max-w-[512px] mx-auto text-center rounded-lg shadow px-6 pb-[60px]"
 							>
 								<div className="relative flex justify-center mb-[20px] mt-[60px]">
 									<Image
-										src={card?.icon ? card?.icon : "/"}
+										src={card?.icon ?process.env.NEXT_PUBLIC_API_URL + card?.icon.url : "/"}
 										alt=""
 										height={60}
 										width={60}
@@ -97,7 +97,7 @@ function DemoCall({ data }) {
 										className={`h-[30px] w-[30px] bg-primary-500 blur-[15px] absolute top-[50%] translate-y-[-45%] opacity-0 group-hover:opacity-100 duration-500`}
 									></div>
 								</div>
-								<p className="text-[24px] font-[700] text-neutral-200 mb-3">{card?.title}</p>
+								<p className="text-[20px] sm:text-[24px] font-[700] text-neutral-200 mb-3">{card?.title}</p>
 								<p className="text-[16px] font-[600] text-neutral-400">
 									{card?.description}
 								</p>

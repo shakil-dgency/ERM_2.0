@@ -13,7 +13,7 @@ function CaseCard({ data }) {
 	};
 	return (
 		<div
-			className="relative w-full max-w-full mx-auto h-[600px] lg:h-[450px] xl:h-[inherit] xl:aspect-[1316/700] flex flex-col justify-end px-[30px] lg:px-[50px] py-[40px] lg:py-[50px]  rounded-[0.9rem] bg-cover bg-center overflow-hidden"
+			className="relative w-full max-w-full mx-auto h-[600px] lg:h-[450px] xl:h-[inherit] xl:aspect-[1316/700] flex flex-col justify-end px-[20px] lg:px-[50px] py-[40px] lg:py-[50px]  rounded-[0.9rem] bg-cover bg-center overflow-hidden"
 			
 		>
 			<div className="relative z-20 flex flex-col lg:flex-row items-end gap-[30px] lg:gap-[15px]">

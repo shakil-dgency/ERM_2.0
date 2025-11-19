@@ -53,6 +53,7 @@
 	--color-neutral-950: #0a0a0b;
 
 	/* ✅ Custom Breakpoints */
+	--breakpoint-xxs: 360px;
 	--breakpoint-xs: 400px;
 	--breakpoint-3xl: 1600px;
 }
@@ -77,6 +78,10 @@ input:-webkit-autofill {
 	-webkit-text-fill-color: #fff !important;
 }
 
+/* ...........daily digest infinite scroll package class disable......... */
+.infinite-scroll-component {
+	overflow: inherit !important;
+}
 
 /* -------------- for single Blog---------- */
 /* ---------------------------------------- */
@@ -109,6 +114,20 @@ input:-webkit-autofill {
 	animation: scroll 15s linear infinite;
 }
 
+.like_anim {
+	animation: like 0.5s ease-out;
+}
+@keyframes like {
+	0% {
+		transform: scale(1) rotate(0);
+	}
+	90% {
+		transform: scale(1.3) rotate(-20deg);
+	}
+	100% {
+		transform: scale(1.1) rotate(0);
+	}
+}
 /* ----------------------------------- */
 /* ----------------------------------- */
 

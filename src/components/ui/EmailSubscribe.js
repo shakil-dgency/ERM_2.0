@@ -71,7 +71,8 @@ function EmailSubscribe() {
 	return (
 		<div>
 			<form action="" className="   ">
-				<div className="relative max-w-[330px] sm:max-w-[450px] mx-auto ">
+				<div className="relative max-w-[330px] sm:max-w-[550px] mx-auto ">
+					<p className="mb-3 text-[16px] md:text-[20px] font-[600] text-neutral-400 text-center">Subscribe for Weekly Insights</p>
 					<div className="flex">
 						<input
 							type="email"
@@ -84,7 +85,7 @@ function EmailSubscribe() {
 							SUBSCRIBE
 						</button>
 					</div>
-					<p className="pt-2 text-[15px] text-[#CDCDCD] text-center pl-1 ">Get weekly insights straight to your inbox</p>
+					<p className="text-[14px] text-neutral-400 text-center pt-4">Get growth strategies, booking trends, and creative ideas straight to your inbox.</p>
 					{/* {error.message && (
 						<p className={`${error?.statusCode === null ?"bg-[#ffcdd2] before:border-[#ffcdd2]":"bg-[#d1ffd1] before:border-[#d1ffd1]"} py-1.5 px-5 text-[15px] text-[#101010] absolute top-[80%] shadow rounded flex items-center gap-2 before:content-[''] before:absolute before:left-[15%] before:bottom-[100%]  before:border-[10px] before:border-solid  before:border-r-[#0000] before:border-b-[#0000] before:border-l-[#0000] before:rotate-180 `}>
 							{error?.statusCode === null ?<RiErrorWarningFill className="text-xl text-[#ef5350] font-bold " />:
