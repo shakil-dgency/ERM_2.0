@@ -29,6 +29,7 @@ async function page() {
 					populate: {
 						case_studies: {
 							populate: {
+								main_image: true,
 								client_feedback: {
 									fields: ["name", "designation", "feedback"],
 								},

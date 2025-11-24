@@ -11,6 +11,7 @@ import "swiper/css/navigation";
 import { Pagination, Navigation } from "swiper/modules";
 import Container from "@/components/ui/Container";
 import CaseCard from "../../caseStudies/CaseCard";
+import VideoPopUp from "@/components/global/VideoPopUp";
 
 function CaseStudies({ light, data }) {
 	const prevRef = useRef(null);
@@ -19,8 +20,15 @@ function CaseStudies({ light, data }) {
 
 	const [swiperReady, setSwiperReady] = useState(false);
 
+	const [open, setOpen] = useState(false);
+	const [popupVideoURL, setPopupVideoURL] = useState(null);
+
+	const handleOpenPopup = (url) => {
+		setPopupVideoURL(url);
+		setOpen(true);
+	};
+
 	useEffect(() => {
-		
 		setSwiperReady(true);
 	}, []);
 	return (
@@ -77,24 +85,22 @@ function CaseStudies({ light, data }) {
 				>
 					{data?.case_studies.map((item, i) => (
 						<SwiperSlide key={i}>
-							<CaseCard data={item} />
+							<CaseCard data={item} onOpenPopup={handleOpenPopup} />
 						</SwiperSlide>
 					))}
 				</Swiper>
+
 				<Container carusel>
 					<div className="relative mt-[30px]">
 						<div className="custom-controls mySwiper absolute top-0 right-0 left-0 flex justify-between items-center pt-4 z-20">
-							<button ref={prevRef} className="custom-prev swiper-button-prev ">
-								
-							</button>
+							<button ref={prevRef} className="custom-prev swiper-button-prev "></button>
 							<div ref={paginationRef} className="custom-pagination flex gap-2"></div>
-							<button ref={nextRef} className="custom-next swiper-button-next ">
-								
-							</button>
+							<button ref={nextRef} className="custom-next swiper-button-next "></button>
 						</div>
 					</div>
 				</Container>
 			</div>
+			<VideoPopUp video_url={popupVideoURL} open={open} setOpen={setOpen} />
 		</div>
 	);
 }

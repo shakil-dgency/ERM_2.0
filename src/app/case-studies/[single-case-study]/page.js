@@ -81,7 +81,7 @@ async function page({ params }) {
 						</div>
 						<div className="col-start-2 col-end-5 max-w-[900px] ml-auto">
 							<CaseStudyBody data={newData?.case_body} />
-							<Testimonial data={newData?.client_feedback} top_color={newData?.testimonial_glow_top} bottom_color={newData?.testimonial_glow_bottom} />
+							<Testimonial data={newData?.client_feedback}  />
 						</div>
 					</div>
 				</div>

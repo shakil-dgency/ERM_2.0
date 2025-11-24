@@ -296,7 +296,7 @@ function Navbar({ marketingBanner }) {
 										</Link>
 									</li>
 									<li id="nav1" className=" hover:text-primary-500 duration-300 flex items-center text-[14px] xl:text-[15px] relative z-20">
-										<Link href={""} className={`${router.asPath === "/blog" ? "text-primary-500" : " "}`}>
+										<Link href={"/testimonials"} className={`${router.asPath === "/blog" ? "text-primary-500" : " "}`}>
 											Testimonials
 										</Link>
 									</li>

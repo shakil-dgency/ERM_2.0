@@ -1,6 +1,7 @@
 import FrequentlyAsk from "@/components/global/faq/FrequentlyAsk";
 import Mission from "@/components/pages/about/Mission";
 import OurPartner from "@/components/pages/partnerProgram/OurPartner";
+import PartnerContact from "@/components/pages/partnerProgram/PartnerContact";
 import PartnerHero from "@/components/pages/partnerProgram/PartnerHero";
 import StepsToStart from "@/components/pages/partnerProgram/StepsToStart";
 import ToolsAlreadyUse from "@/components/pages/partnerProgram/ToolsAlreadyUse";
@@ -15,13 +16,13 @@ function page() {
 			<div className="bg-tertiary-500 py-[100px] lg:py-[140px]">
 				<Container>
 					<Mission />
-					<OurPartner/>
+					<OurPartner />
 					<ToolsAlreadyUse />
-					
 				</Container>
 			</div>
 
-            <FrequentlyAsk />
+			<FrequentlyAsk />
+			<PartnerContact />
 		</div>
 	);
 }

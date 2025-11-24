@@ -32,6 +32,7 @@ export default async function Home() {
 					populate: {
 						case_studies: {
 							populate: {
+								main_image: true,
 								client_feedback: {
 									fields: ["name", "designation", "feedback"],
 								},
@@ -63,6 +64,9 @@ export default async function Home() {
 	const url = `${process.env.NEXT_PUBLIC_API_URL}/api/home?${query}`;
 
 	const { data } = await getData(url, "Home page");
+
+	console.log(data);
+	
 
 	return (
 		<div>

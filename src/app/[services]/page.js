@@ -21,28 +21,28 @@ async function page({ params }) {
 
 	return (
 		<div>
-			<Hero data={data?.data.hero} video={true} />
+			<Hero data={data?.data?.hero} video={true} />
 			<div className="bg-tertiary-500 py-[100px] lg:py-[140px]">
-				<Features data={data?.data.key_components} />
-				<Testimonials data={data?.data.video_testimonial} />
+				<Features data={data?.data?.key_components} />
+				<Testimonials data={data?.data?.video_testimonial} />
 				<Banner data={data?.data.cta} />
 			</div>
 
 			<div className="bg-tertiary-500 pb-[100px] md:pb-[140px]">
 				<Container>
 					<div className="pb-[100px] md:pb-[140px]">
-						<ComparisonBox data={data?.data.comparison} />
+						<ComparisonBox data={data?.data?.comparison} />
 					</div>
-					<Mission data={data?.data.mission_vision_1} rotate={true} />
+					<Mission data={data?.data?.mission_vision_1} rotate={true} />
 					<div className="mt-[80px] md:mt-[120px]">
-						<Mission data={data?.data.mission_vision_2} />
+						<Mission data={data?.data?.mission_vision_2} />
 					</div>
 				</Container>
 			</div>
 			<div className="bg-secondary-900 py-[100px] lg:py-[140px]">
-				<ServiceCarusel data={data?.data.service_section} />
+				<ServiceCarusel data={data?.data?.service_section} />
 				<div>
-					<FrequentlyAsk data={data?.data.faq} />
+					<FrequentlyAsk data={data?.data?.faq} />
 				</div>
 			</div>
 		</div>

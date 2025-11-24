@@ -92,7 +92,7 @@ function AccordianItem({ children, value, trigger, index, ...props }) {
 				className="relative flex justify-between items-center gap-1 border-t-[1px] border-t-[#191D23] pb-[30px] lg:pb-[50px] pt-[25px] lg:pt-[45px] text-[20px] lg:text-[32px] font-[500] text-[#fff] cursor-pointer"
 			>
 				<span className="relative z-10 mt-1">{trigger}</span>
-				<div className={`transition-transform flex-none border-[1px] border-secondary-600 p-2 sm:p-2.5 rounded-full`}>
+				<div className={`transition-transform flex-none border-[1px] border-secondary-600 hover:border-primary-500 p-2 sm:p-2.5 rounded-full`}>
 					{open ? (
 						<Image
 							src="/global/lock_open.svg"

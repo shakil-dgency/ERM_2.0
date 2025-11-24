@@ -91,10 +91,28 @@ input:-webkit-autofill {
 	-webkit-overflow-scrolling: touch;
 }
 
-/* ensure the inner table doesn't shrink to container */
 .table-scroll table {
 	/* width: max-content; */
 	min-width: 640px; /* pick sensible min width, or omit */
+}
+
+/* -------------- Partner Program Contact form---------- */
+/* ---------------------------------------- */
+
+.popup {
+	opacity: 0;
+	top: -200%;
+	left: 50%;
+	transform: translateX(-50%) scale(0.2);
+	transition: opacity 300ms ease-in-out, top 1000ms ease-in-out, transform 1000ms ease-in-out;
+}
+
+.activee {
+	opacity: 1;
+	top: 50%;
+	left: 50%;
+	transform: translateX(-50%) translateY(-50%) scale(1);
+	transition: transform 300ms cubic-bezier(0.18, 0.89, 0.43, 1.19);
 }
 
 /* --------------Animations------------- */

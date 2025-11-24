@@ -83,7 +83,7 @@ function Testimonials({ data }) {
 							},
 						}}
 					>
-						{data?.testimonial_card.map((item, index) => (
+						{data?.testimonial_card?.map((item, index) => (
 							<SwiperSlide key={index}>
 								<div onClick={() => handlePlayPause(index)} className="group cursor-pointer relative w-full max-w-full mx-auto aspect-[378/500] rounded-[10px] overflow-hidden ">
 									<video ref={(el) => (videoRefs.current[index] = el)} loop muted playsInline className=" w-full h-full object-cover rounded-lg">

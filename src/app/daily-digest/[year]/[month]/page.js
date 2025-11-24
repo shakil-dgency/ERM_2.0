@@ -3,6 +3,8 @@ import MonthlyPost from "@/components/NewsFeed/MonthlyPost";
 import { getData } from "@/services/helper";
 import React from "react";
 
+export const revalidate = 60;
+
 export default async function page() {
 	const url = `${process.env.NEXT_PUBLIC_API_URL}/api/news-feeds?populate=*`;
 
