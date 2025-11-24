@@ -3,7 +3,6 @@ import VideoPopUp from "@/components/global/VideoPopUp";
 import StrokeButton from "@/components/ui/buttons/StrokeButton";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useState } from "react";
 const image = "/pages/caseStudies/casestudy.png";
 
 function CaseCard({ data, onOpenPopup }) {
