@@ -25,7 +25,7 @@ async function page({ params }) {
 			<div className="bg-tertiary-500 py-[100px] lg:py-[140px]">
 				<Features data={data?.data?.key_components} />
 				<Testimonials data={data?.data?.video_testimonial} />
-				<Banner data={data?.data.cta} />
+				<Banner data={data?.data?.cta} />
 			</div>
 
 			<div className="bg-tertiary-500 pb-[100px] md:pb-[140px]">

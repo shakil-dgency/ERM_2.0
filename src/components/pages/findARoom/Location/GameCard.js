@@ -3,6 +3,7 @@ import Image from "next/image";
 import React from "react";
 
 function GameCard({ data }) {
+	
 	return (
 		<div className="group rounded-[10px] bg-secondary-900 overflow-hidden h-full pb-7">
 			<div className="relative overflow-hidden">
@@ -11,6 +12,7 @@ function GameCard({ data }) {
 					height={300}
 					width={392}
 					alt=""
+					unoptimized
 					className="h-[300px] w-full object-cover object-center group-hover:scale-105 duration-500"
 				/>
 				<div className="w-full h-[100px] absolute bottom-0 bg-gradient-to-b to-secondary-900 from-transparent"></div>

@@ -13,10 +13,11 @@ function LocationCard({ city }) {
 	return (
 		<Link href={`/find-a-room/${city?.slug}`} className=" h-full w-full flex flex-col rounded-lg ">
 			<Image
-				src={`${city ? process.env.NEXT_PUBLIC_API_URL + city?.city_image?.url : ""}`}
+				src={`${city ? process.env.NEXT_PUBLIC_API_URL + city?.city_image?.url : "/pages/findRooms/miami.png"}`}
 				height={300}
 				width={392}
 				alt="miami"
+				unoptimized
 				className=" h-[200px] sm:h-[300px] w-full object-cover rounded-t-lg"
 			/>
 			<div className="bg-secondary-800 flex-1 flex flex-col justify-start px-2.5 xs:px-[15px] pt-2.5 xs:pt-5 pb-4 rounded-b-lg">

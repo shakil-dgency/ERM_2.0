@@ -37,7 +37,6 @@ async function page() {
 
 	const { data } = await getData(url, "directory home");
 
-	console.log(data);
 	
 
 	// fetch heroData
@@ -58,8 +57,6 @@ async function page() {
 	const urlHome = `${process.env.NEXT_PUBLIC_API_URL}/api/directory-home?${queryHero}`;
 
 	const newData = await getData(urlHome, "directory home hero")
-	
-	console.log(newData);
 	
 
 	return (

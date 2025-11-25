@@ -67,7 +67,6 @@ async function page({ params }) {
 
 	const newData = await getData(urlHome, "directory home hero");
 
-	console.log(newData);
 
 	return (
 		<MainComponent data={response?.data} newData={newData?.data?.search_page}>

@@ -10,7 +10,7 @@ import { BiChevronLeft } from "react-icons/bi";
 import InfiniteScroll from "react-infinite-scroll-component";
 // import Spinner from "../Spinner";
 import { usePathname } from "next/navigation";
-import FadeInUpSection from "../FadeInUpSection";
+import FadeInUpSection from "../ui/FadeInUpSection";
 // import EmailSubscribe from "../EmailSubscribe";
 
 
