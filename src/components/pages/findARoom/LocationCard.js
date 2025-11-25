@@ -17,7 +17,6 @@ function LocationCard({ city }) {
 				height={300}
 				width={392}
 				alt="miami"
-				unoptimized
 				className=" h-[200px] sm:h-[300px] w-full object-cover rounded-t-lg"
 			/>
 			<div className="bg-secondary-800 flex-1 flex flex-col justify-start px-2.5 xs:px-[15px] pt-2.5 xs:pt-5 pb-4 rounded-b-lg">
