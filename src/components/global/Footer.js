@@ -94,7 +94,7 @@ function Footer() {
 
 								{worksData?.slice(0, 7).map((item, i) => (
 									<li className="" key={i}>
-										<Link href={`${item?.slug}`} className="text-[16px] cursor-pointer text-[#9a9a9a] font-[400] hover:text-[#ff492c]">
+										<Link href={`/works/${item?.slug}`} className="text-[16px] cursor-pointer text-[#9a9a9a] font-[400] hover:text-[#ff492c]">
 											{item?.title}
 										</Link>
 									</li>

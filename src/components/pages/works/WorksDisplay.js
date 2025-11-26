@@ -34,7 +34,6 @@ function WorksDisplay({ data }) {
 
 			// Ensure it never goes below 1
 			slidesPerView = Math.max(slidesPerView, minSlides);
-			console.log(slidesPerView);
 			
 
 			breakpoints[bp] = {

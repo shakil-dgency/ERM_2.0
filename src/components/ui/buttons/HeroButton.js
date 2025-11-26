@@ -26,7 +26,7 @@ function HeroButton({text}) {
 				{/* <span className="inline-block md:hidden">FREE</span> */}
 				<span>
 					{/* <span className="inline-block md:hidden xl:inline-block">UNLOCK </span> */}
-					<span> {text}</span>
+					<span> {text ? text : "UNLOCK MARKETING PLAN"}</span>
 				</span>
 			</Link>
 		</div>

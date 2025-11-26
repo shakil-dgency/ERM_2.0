@@ -1,4 +1,5 @@
 import React from "react";
+import HeroButton from "./buttons/HeroButton";
 
 function HeroText({data}) {
 	return (
@@ -7,10 +8,8 @@ function HeroText({data}) {
 				{data?.eyebrow_headline}
 			</p>
 			<h1 className="text-neutral-50 text-[clamp(40px,10vw,90px)] font-[700] leading-[1.2] text-center">{data?.headline}</h1>
-			<p className="text-[14px] sm:text-[24px] text-neutral-300 text-center mt-3">{data?.description}</p>
-			<button className="bg-red-600 hover:bg-red-700 text-white font-semibold mt-[55px] px-6 py-3 rounded flex items-center justify-center gap-2 mx-auto">
-				<span>🔒</span> {data?.button_text ? data?.button_text :"UNLOCK MARKETING PLAN"}
-			</button>
+			<p className="text-[14px] sm:text-[24px] text-neutral-300 text-center mb-[50px] mt-3">{data?.description}</p>
+			<HeroButton text={data?.button_text} />
 		</div>
 	);
 }

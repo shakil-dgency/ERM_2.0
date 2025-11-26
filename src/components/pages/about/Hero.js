@@ -29,10 +29,10 @@ function Hero({ data, video = false, work }) {
 					<div className=" flex -mt-[70px] mb-[70px]">
 						<Link
 							// onClick={backToPreviousPage}
-							href="/find-a-room"
+							href="/works"
 							className="group text-neutral-500 hover:text-primary-500 text-center  font-semibold text-[12px] md:text-[14px] flex items-center underline underline-offset-4 "
 						>
-							<MdOutlineArrowDropDown className="text-xl rotate-90 group-hover:translate-x-[-2px] duration-300" /> BACK TO ALL LOCATION
+							<MdOutlineArrowDropDown className="text-xl rotate-90 group-hover:translate-x-[-2px] duration-300" /> BACK TO ALL WORK
 						</Link>
 					</div>
 				</Container>

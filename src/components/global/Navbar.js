@@ -626,11 +626,11 @@ function Navbar({ marketingBanner }) {
 									</div>
 								</div>
 
-								<div onClick={closeSidebar} className="text-neutral-50 fle  relative z-20 w-full">
+								<div onClick={closeSidebar} className="text-neutral-50 fle  relative z-20 w-full pb-[25px]">
 									<Link
 										href={"/free-marketing"}
 										// onClick={handleClick}
-										className="button group hover:shadow-[3px_3px_5px_#808082] hover:translate-[2px] duration-300 flex items-center justify-center gap-1 md:gap-2.5 font-[700] px-[20px] py-[8px] rounded-[6px] border-[2px] border-primary-800 "
+										className="button group hover:shadow-[3px_3px_5px_#808082] hover:translate-[2px] duration-300 flex items-center justify-center gap-1 md:gap-2.5 font-[700] px-[20px] py-[8px] rounded-[6px] bg-primary-600 "
 									>
 										<Image src="/global/lock.svg" height={20} width={18} alt="" className="w-[20px] h-[20px] mb-[1px]  inline-block " />
 
@@ -641,14 +641,14 @@ function Navbar({ marketingBanner }) {
 										</span>
 									</Link>
 								</div>
-								<div className="flex border-b-[1px] border-b-secondary-800 py-[25px]">
+								<div className="flex border-b-[1px] border-t-[1px] border-secondary-800  py-[25px]">
 									<Link href={"https://crm.escaperoommarketer.com/authentication/login"} target="__blank" className="group relative z-20 flex items-center gap-1.5 cursor-pointer">
 										<Image src={"/navbar/escape_door.svg"} alt="" height={16} width={17} />
 
 										<p className="text-[16px] font-[600] text-neutral-200 group-hover:text-primary-500 duration-300">Login</p>
 									</Link>
 								</div>
-								<ul className="text-neutral-200 font-[600] flex flex-col mt-2.5">
+								<ul className="text-neutral-200 font-[600] flex flex-col">
 									<div className="border-b-[1px] border-b-secondary-800 py-[25px]">
 										<li
 											onClick={handleSidebarService}

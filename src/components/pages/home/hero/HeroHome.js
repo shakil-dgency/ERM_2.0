@@ -17,20 +17,22 @@ function HeroHome({ data }) {
 			</div>
 			{/* Content */}
 			<div className="relative z-20 h-full py-[150px] sm:py-0 px-2.5 sm:px-4 text-center">
-				<div className="max-w-[1240px] mx-auto h-full flex items-center justify-center">
+				<div className="max-w-[1240px] mx-auto grid grid-cols-1 items-center h-full ">
 					<div className="">
-						<p className="highlighted_text mb-3">{data?.Eyebrow_headline}</p>
-						<h1 className=" text-[clamp(20px,9vw,34px)] xs:text-[36px] sm:text-[54px] md:text-[64px] xl:text-[96px] font-extrabold text-neutral-50 leading-tight  ">
-							{data?.title_first_line}
-							<br />
-							<span className="relative inline-block h-[1.4em] sm:h-[1.4em] w-full ">
-								<AnimatedText sentences={data?.title_second_line} />
-							</span>
-						</h1>
-						<p className="max-w-[880px] mx-auto text-base md:text-[20px] text-neutral-300 sm:-mt-2.5 mb-[50px] sm:mb-[60px]">{data?.description}</p>
+						<div>
+							<p className="highlighted_text mb-3">{data?.Eyebrow_headline}</p>
+							<h1 className=" text-[clamp(20px,9vw,34px)] xs:text-[36px] sm:text-[54px] md:text-[64px] xl:text-[90px] font-extrabold text-neutral-50 leading-tight  ">
+								{data?.title_first_line}
+								<br />
+								<span className="relative inline-block h-[1.4em] sm:h-[1.4em] w-full ">
+									<AnimatedText sentences={data?.title_second_line} />
+								</span>
+							</h1>
+							<p className="max-w-[880px] mx-auto text-base md:text-[20px] text-neutral-300 sm:-mt-2.5 mb-[50px] sm:mb-[60px]">{data?.description}</p>
 
-						<div className="flex justify-center mb-[50px] sm:mb-0">
-							<HeroButton text={data?.button_text ? data?.button_text : "UNLOCK MARKETING PLAN"} />
+							<div className="flex justify-center mb-[50px] sm:mb-0">
+								<HeroButton text={data?.button_text ? data?.button_text : "UNLOCK MARKETING PLAN"} />
+							</div>
 						</div>
 					</div>
 				</div>
