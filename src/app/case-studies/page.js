@@ -1,6 +1,4 @@
 import Hero from "@/components/pages/about/Hero";
-import CaseCard from "@/components/pages/caseStudies/CaseCard";
-import Container from "@/components/ui/Container";
 import React from "react";
 import qs from "qs";
 import { getData } from "@/services/helper";
@@ -14,9 +12,9 @@ async function page() {
 		{
 			populate: {
 				main_image: true,
-				client_feedback:{
-					fields:["designation","name"]
-				}
+				client_feedback: {
+					fields: ["designation", "name"],
+				},
 			},
 			pagination: {
 				page: 1,
@@ -34,10 +32,29 @@ async function page() {
 		return notFound();
 	}
 
-	console.log(data, meta);
+	const caasequery = qs.stringify(
+		{
+			populate: {
+				hero: {
+					populate: {
+						background_image: true,
+						hero_text: true,
+					},
+				},
+			},
+		},
+		{ encodeValuesOnly: true }
+	);
+
+	const newUrl = `${process.env.NEXT_PUBLIC_API_URL}/api/all-case-study?${caasequery}`;
+	const { data: newData } = await getData(newUrl, "case home page");
+
+	console.log(newData);
+	
+
 	return (
 		<div>
-			<Hero />
+			<Hero data={newData?.hero} />
 			<CaseBody initialData={data} initialMeta={meta} />
 		</div>
 	);

@@ -36,7 +36,7 @@ function BlogBody({ data }) {
 				return (
 					<div key={i} className="">
 						<div
-							className={`${styles.blog_details} ${
+							className={`${styles.blog_details} ${styles.global_text_color} ${
 								i === 0 ? "pt-[80px] first-blog" : ""
 							}  max-w-[900px] mx-auto px-2.5 text-[16px] lg:text-[20px] text-neutral-950`}
 							dangerouslySetInnerHTML={{ __html: body?.blog_description }}

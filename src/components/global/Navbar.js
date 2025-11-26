@@ -8,6 +8,7 @@ import { usePathname } from "next/navigation";
 import { HiMenu } from "react-icons/hi";
 import { BiChevronLeft, BiChevronRight } from "react-icons/bi";
 import { MdKeyboardArrowDown } from "react-icons/md";
+import { MdOutlineArrowDropDown } from "react-icons/md";
 import { FiPlus, FiMinus } from "react-icons/fi";
 import NavCard from "../ui/NavCard";
 // import Button3D from "./animation/Button3D";
@@ -245,7 +246,7 @@ function Navbar({ marketingBanner }) {
 	useEffect(() => {
 		async function fetchWorks() {
 			try {
-				const res = await fetch("https://cms.escaperoommarketer.com/api/works?populate[0]=nav_icon");
+				const res = await fetch("https://cms.escaperoommarketer.com/api/works?populate[0]=nav_icon&sort=work_id:asc");
 
 				if (!res.ok) throw new Error("Failed to fetch");
 
@@ -287,7 +288,7 @@ function Navbar({ marketingBanner }) {
 										}`}
 									>
 										Services
-										<MdKeyboardArrowDown className={`arrow_rotate text-xl xl:text-[22px] duration-300 ${serviceMenubar ? "rotate-180" : ""}`} />
+										<MdOutlineArrowDropDown className={`arrow_rotate text-xl xl:text-[22px] duration-300 ${serviceMenubar ? "rotate-180" : ""}`} />
 									</li>
 
 									<li id="nav6" className=" hover:text-primary-500 duration-300 flex items-center text-[14px] xl:text-[15px] relative z-20">
@@ -310,14 +311,14 @@ function Navbar({ marketingBanner }) {
 									>
 										{/* <Link href="works" className={`${router === "/works" ? "text-primary-500" : " "}`}> */}
 										Works
-										<MdKeyboardArrowDown className={`arrow_rotate text-xl xl:text-[22px] duration-300 ${worksOpen ? "rotate-180" : ""}`} />
+										<MdOutlineArrowDropDown className={`arrow_rotate text-xl xl:text-[22px] duration-300 ${worksOpen ? "rotate-180" : ""}`} />
 										{/* </Link> */}
 									</li>
 									<div ref={insightNavRef} className="relative">
 										<li
 											onClick={() => setInsightState(!insightState)}
 											className={` hover:text-primary-500 duration-300 flex items-center gap-0 xl:gap-1 text-[14px] xl:text-[15px] cursor-pointer relative z-20 ${
-												router === "/case-studies" || router === "/blog" || router === "/find-a-room" || router.asPath === ""
+												router === "/case-studies" || router === "/daily-digest" || router === "/blog" || router === "/find-a-room" 
 													? "text-primary-500"
 													: ""
 											}`}
@@ -325,7 +326,7 @@ function Navbar({ marketingBanner }) {
 											{/* <Link href={"/blog"} className={`${router.asPath === "/blog" ? "text-primary-500" : " "}`}>
 											Insights
 										</Link> */}
-											Insights <MdKeyboardArrowDown className={`text-xl xl:text-[22px] duration-300 ${insightState ? "rotate-180" : ""}`} />
+											Insights <MdOutlineArrowDropDown className={`text-xl xl:text-[22px] duration-300 ${insightState ? "rotate-180" : ""}`} />
 										</li>
 										<div
 											className={`serveice_popup bg-secondary-950 space-y-[25px] md:px-8 md:pb-10 pt-[80px] rounded-b-[20px]  absolute top-10 w-[450px] -left-[170px] shadow-[0px_0px_10px_#ff492c30] ${
@@ -367,12 +368,12 @@ function Navbar({ marketingBanner }) {
 										<li
 											onClick={() => setMoreState(!moreState)}
 											className={` hover:text-primary-500 duration-300 flex items-center gap-0 xl:gap-1 text-[14px] xl:text-[15px] cursor-pointer relative z-20 ${
-												router === "/about" || router === "/team" || router === "/partner-program" || router.asPath === "/faq"
+												router === "/about" || router === "/team" || router === "/partner-program" || router === "/faq"
 													? "text-primary-500"
 													: ""
 											}`}
 										>
-											More <MdKeyboardArrowDown className={`text-xl xl:text-[22px] duration-300 ${moreState ? "rotate-180" : ""}`} />
+											More <MdOutlineArrowDropDown className={`text-xl xl:text-[22px] duration-300 ${moreState ? "rotate-180" : ""}`} />
 										</li>
 										<div
 											className={`serveice_popup bg-secondary-950 space-y-[25px] md:px-8 md:pb-10 pt-[80px] rounded-b-[20px]  absolute top-10 w-[450px] -left-[170px] shadow-[0px_0px_10px_#ff492c30] ${
@@ -407,7 +408,7 @@ function Navbar({ marketingBanner }) {
 											} cursor-pointer hover:text-primary-500 duration-300 flex items-center gap-0 xl:gap-1 text-[14px] xl:text-[15px]  relative z-20`}
 										>
 											Contact
-											<MdKeyboardArrowDown className={`text-xl xl:text-[22px] duration-300 ${contact ? "rotate-180" : ""}`} />
+											<MdOutlineArrowDropDown className={`text-xl xl:text-[22px] duration-300 ${contact ? "rotate-180" : ""}`} />
 										</li>
 										<div
 											className={`serveice_popup absolute bg-secondary-950 space-y-[25px] md:px-8 md:pb-10 pt-[80px] rounded-b-[20px] w-[450px] -left-[170px] top-10 shadow-[0px_0px_10px_#ff492c30] ${
@@ -443,7 +444,7 @@ function Navbar({ marketingBanner }) {
 
 							<div className="text-neutral-50 flex items-center gap-2 xxs:gap-[10px] sm:gap-[20px] lg:gap-[30px]">
 								{/* ....login button.......... */}
-								<div className="group relative z-20 hidden xl:flex items-center gap-1.5 cursor-pointer">
+								<Link href={"https://crm.escaperoommarketer.com/authentication/login"} target="__blank" className="group relative z-20 hidden xl:flex items-center gap-1.5 cursor-pointer">
 									{/* <Image src={"/navbar/escape_door.svg"} alt="" height={16} width={17} /> */}
 									<svg
 										xmlns="http://www.w3.org/2000/svg"
@@ -472,7 +473,7 @@ function Navbar({ marketingBanner }) {
 										/>
 									</svg>
 									<p className="text-[16px] font-[600] text-neutral-200 group-hover:text-primary-500 duration-300">Login</p>
-								</div>
+								</Link>
 
 								{/* -----------desktop view nav marketing plan button--------- */}
 								{router !== "/free-marketing" && (
@@ -576,16 +577,16 @@ function Navbar({ marketingBanner }) {
 								<Link
 									// onClick={backToPreviousPage}
 									href="/works"
-									className="text-neutral-500 hover:text-primary-500 text-center  font-semibold text-[12px] md:text-[14px] flex items-center underline underline-offset-4 "
+									className="group text-neutral-500 hover:text-primary-500 text-center  font-semibold text-[12px] md:text-[14px] flex items-center underline underline-offset-4 "
 								>
-									<BiChevronLeft className="text-xl" /> All Works
+									<MdOutlineArrowDropDown className="text-xl rotate-90 group-hover:translate-x-[-2px] duration-300" /> All Works
 								</Link>
 							</div>
 							<div className=" grid grid-cols-3  gap-5">
 								{worksData?.map((item, i) => (
 									<NavCard
 										key={i}
-										slug={item.slug}
+										slug={`works/${item.slug}`}
 										img={item?.nav_icon ? process.env.NEXT_PUBLIC_API_URL + item?.nav_icon?.url : "/"}
 										title={item.title}
 										description={item?.nav_description}
@@ -641,11 +642,11 @@ function Navbar({ marketingBanner }) {
 									</Link>
 								</div>
 								<div className="flex border-b-[1px] border-b-secondary-800 py-[25px]">
-									<div className="group relative z-20 flex items-center gap-1.5 cursor-pointer">
+									<Link href={"https://crm.escaperoommarketer.com/authentication/login"} target="__blank" className="group relative z-20 flex items-center gap-1.5 cursor-pointer">
 										<Image src={"/navbar/escape_door.svg"} alt="" height={16} width={17} />
 
 										<p className="text-[16px] font-[600] text-neutral-200 group-hover:text-primary-500 duration-300">Login</p>
-									</div>
+									</Link>
 								</div>
 								<ul className="text-neutral-200 font-[600] flex flex-col mt-2.5">
 									<div className="border-b-[1px] border-b-secondary-800 py-[25px]">
@@ -705,13 +706,13 @@ function Navbar({ marketingBanner }) {
 													href="/works"
 													className="text-neutral-500 hover:text-primary-500 text-center  font-semibold text-[12px] md:text-[14px] flex items-center underline underline-offset-4 "
 												>
-													<BiChevronLeft className="text-xl" /> All Works
+													<MdOutlineArrowDropDown className="text-xl rotate-90" /> All Works
 												</Link>
 											</div>
 											{worksData?.map((item, i) => (
 												<NavCard
 													key={i}
-													slug={item.slug}
+													slug={`works/${item.slug}`}
 													img={item?.nav_icon ? process.env.NEXT_PUBLIC_API_URL + item?.nav_icon?.url : "/"}
 													title={item.title}
 													description={item?.nav_description}
@@ -724,7 +725,7 @@ function Navbar({ marketingBanner }) {
 										<li
 											onClick={handleInsightsPopupMobile}
 											className={`text-[18px]  flex items-center justify-between gap-2 cursor-pointer ${
-												router === "/about" || router === "/team" || router === "/faqs" ? "text-primary-500" : ""
+												router === "/case-studies" || router === "/daily-digest" || router === "/blog" || router === "/find-a-room"  ? "text-primary-500" : ""
 											} ${mobileInsightsState ? "text-primary-500" : ""}`}
 										>
 											Insights <span className="text-[22px]">{mobileInsightsState ? <FiMinus /> : <FiPlus />}</span>
@@ -765,7 +766,7 @@ function Navbar({ marketingBanner }) {
 										<li
 											onClick={handleMorePopupMobile}
 											className={`text-[18px]  flex items-center justify-between gap-2 cursor-pointer ${
-												router === "/about" || router === "/team" || router === "/career" || router === "/faqs" ? "text-primary-500" : ""
+												router === "/about" || router === "/team" || router === "/partner-program" || router === "/faq" ? "text-primary-500" : ""
 											} ${mobileMoreState ? "text-primary-500" : ""}`}
 										>
 											More <span className="text-[22px]">{mobileMoreState ? <FiMinus /> : <FiPlus />}</span>

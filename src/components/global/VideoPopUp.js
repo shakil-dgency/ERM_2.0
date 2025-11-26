@@ -1,6 +1,7 @@
-"use client"
+"use client";
 import React, { useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { LuPlus } from "react-icons/lu";
 
 function VideoPopUp({ video_url, open, setOpen }) {
 	const popupVideoRef = useRef(null);
@@ -14,15 +15,19 @@ function VideoPopUp({ video_url, open, setOpen }) {
 			}, 600);
 		}
 		if (open) {
-			// document.body.style.overflow = "hidden";
+			document.body.classList.add("overflow-hidden");
+			document.body.classList.add("lg:mr-[12.8px]");
 			return () => {
-				document.body.style.overflow = "";
+				document.body.classList.remove("overflow-hidden");
+				document.body.classList.remove("lg:mr-[12.8px]");
 			};
 		}
 	}, [open]);
 
 	const handleClose = () => {
 		setOpen(false);
+		document.body.classList.remove("overflow-hidden");
+		document.body.classList.remove("lg:mr-[12.8px]");
 		// exitFullscreen();
 		if (popupVideoRef.current) {
 			popupVideoRef.current.pause();
@@ -46,9 +51,9 @@ function VideoPopUp({ video_url, open, setOpen }) {
 						{/* Close Button */}
 						<button
 							onClick={handleClose}
-							className="absolute cursor-pointer top-4 right-4 md:top-6 md:right-6 rounded-full bg-secondary-600 hover:bg-secondary-700 backdrop-blur px-3 py-2 text-white text-sm md:text-base z-50"
+							className="group absolute cursor-pointer top-4 right-4 md:top-6 md:right-6 rounded-full bg-[#ff482c57] hover:bg-transparent hover:border-primary-400 border-transparent border-[1px] duration-500 backdrop-blur-[20px] p-2 z-50"
 						>
-							✕ <span className="hidden md:inline-block">Close</span>
+							<LuPlus className="group-hover:text-primary-500 rotate-45 text-white text-[22px] group-hover:scale-150 duration-300 ease-in " />
 						</button>
 
 						{/* Video container with zoom animation */}

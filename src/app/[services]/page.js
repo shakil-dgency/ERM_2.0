@@ -9,6 +9,7 @@ import Features from "@/components/pages/services/Features";
 import Container from "@/components/ui/Container";
 import { getData } from "@/services/helper";
 import React from "react";
+import { notFound } from "next/navigation";
 
 export const revalidate = 60;
 
@@ -18,6 +19,10 @@ async function page({ params }) {
 
 	const data = await getData(url, "Service Page");
 	// console.log(data);
+
+	if(!data?.data){
+		notFound()
+	}
 
 	return (
 		<div>

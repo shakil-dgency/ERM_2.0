@@ -34,6 +34,8 @@ function WorksDisplay({ data }) {
 
 			// Ensure it never goes below 1
 			slidesPerView = Math.max(slidesPerView, minSlides);
+			console.log(slidesPerView);
+			
 
 			breakpoints[bp] = {
 				slidesPerView,
@@ -46,13 +48,14 @@ function WorksDisplay({ data }) {
 
 	const slidesFromDB = data?.image_view; // dynamic value from API or CMS
 	const breakpoints = generateBreakpoints(slidesFromDB);
+	
 
 	return (
-		<div className=" pt-[140px]">
+		<div className={`${data?.image_view <= data?.images?.length ? "":""} pt-[40px] md:pt-[90px]`}>
 			<Container>
 				<div className="max-w-[1096px] mb-10">
 					<h2 className="text-neutral-50">{data?.title}</h2>
-					<p className="text-[20px] text-neutral-300">{data?.description}</p>
+					<p className="text-[16px] sm:text-[18px] text-neutral-300 mt-3 md:mt-4">{data?.description}</p>
 				</div>
 				<div>
 					{/* <Swiper
@@ -104,6 +107,7 @@ function WorksDisplay({ data }) {
 												width={image?.width}
 												alt=""
 												className="h-full w-full"
+												quality={90}
 											/>
 										</div>
 									</SwiperSlide>

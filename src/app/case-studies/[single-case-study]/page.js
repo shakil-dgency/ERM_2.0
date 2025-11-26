@@ -21,7 +21,6 @@ async function page({ params }) {
 
 	const newData = data && data[0];
 
-	console.log(newData);
 
 	if (!newData) {
 		// This will trigger Next.js 404 page

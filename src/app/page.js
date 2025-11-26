@@ -9,6 +9,7 @@ import Image from "next/image";
 import qs from "qs";
 
 // export const dynamic = "force-dynamic"; // This page is dynamic and should not be cached
+export const revalidate = 60;
 
 export default async function Home() {
 	const query = qs.stringify(

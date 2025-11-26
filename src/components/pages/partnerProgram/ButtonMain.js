@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { useDispatch } from "react-redux";
 import { setToggle } from "@/lib/features/toggleSlice";
 
-function ButtonMain() {
+function ButtonMain({text}) {
     const dispatch = useDispatch();
 	const pathname = usePathname();
 
@@ -20,7 +20,7 @@ function ButtonMain() {
 			onClick={handleLocation}
 			className="bg-red-600 hover:bg-red-700 uppercase text-white text-[14px] xs:text-[16px] font-semibold px-[30px] xs:px-[35px] py-[12px] xs:py-[15px] rounded flex items-center justify-center gap-2 mx-auto"
 		>
-			Apply for Partner Program
+			{text? text:"Apply for Partner Program"}
 		</button>
 	);
 }

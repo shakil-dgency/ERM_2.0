@@ -2,7 +2,7 @@
 "use client";
 import BlogCard from "@/components/global/BlogCard";
 import Container from "@/components/ui/Container";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import qs from "qs";
 
 function BlogHome({ initialData, initialMeta }) {
@@ -35,17 +35,34 @@ function BlogHome({ initialData, initialMeta }) {
 		setMeta(json.meta);
 		setLoading(false);
 	}
+
+	// console.log(blogs);
+
+	const allBlogquery = qs.stringify(
+			{
+				populate: { main_image: true },
+				pagination: {
+					page: 1,
+					pageSize: 100,
+				},
+			},
+			{ encodeValuesOnly: true }
+		);
+
+	useEffect(() => {
+		async function loadAllBlog() {
+			const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/blogs?${allBlogquery}`);
+			const json = await res.json();
+
+			console.log("All blog:",json);
+			
+		}
+
+		loadAllBlog()
+	}, []);
+
 	return (
 		<div>
-			<div className="hero bg-secondary-900">
-				<div className="pt-[150px] lg:pt-[220px] pb-[100px] lg:pb-[140px] px-2.5 flex flex-col items-center justify-center">
-					<p className="highlighted_text">Let's Connect</p>
-					<h1 className="text-neutral-50 text-[24px] sm:text-[54px] font-[700] text-center">Marketing Updates and Insights</h1>
-					<p className="text-[14px] sm:text-[16px] text-neutral-300 text-center">
-						Get more first-timers, repeat players, and corporate groups—without lifting a finger.
-					</p>
-				</div>
-			</div>
 			<div className="pt-[60px] pb-[150px] bg-[url('/pages/home/papertexture.png')] bg-repeat">
 				<Container>
 					<h2 className="text-[40px] font-[700] text-neutral-950">Latest Blogs</h2>
@@ -64,7 +81,10 @@ function BlogHome({ initialData, initialMeta }) {
 					</div>
 					<div className="flex justify-center mt-[50px]">
 						{meta.pagination.page < meta.pagination.pageCount && (
-							<button onClick={loadMore} className="cursor-pointer flex items-center gap-2 border-[1px] border-primary-500 text-[#161A1E] text-[16px] font-[700] py-2 px-4 rounded">
+							<button
+								onClick={loadMore}
+								className="cursor-pointer flex items-center gap-2 border-[1px] border-primary-500 text-[#161A1E] text-[16px] font-[700] py-2 px-4 rounded"
+							>
 								<span>{loading ? "Loading..." : "Load More"}</span>{" "}
 								<span className="pt-[2px]">
 									<svg xmlns="http://www.w3.org/2000/svg" width="11" height="8" viewBox="0 0 11 8" fill="none">

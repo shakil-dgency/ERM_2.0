@@ -29,11 +29,11 @@ function PartnerContact() {
 	const handleClose = () => {
 		document.body.classList.remove("overflow-hidden");
 		document.body.classList.remove("lg:mr-[12.8px]");
-		document.body.classList.remove("lg:bg-[#5a5a5aa9]");
+		
 		dispatch(setToggle(false));
 		setName("");
-        setEmail("");
-        setPhone("")
+		setEmail("");
+		setPhone("");
 	};
 
 	let contactObj = {};
@@ -141,18 +141,30 @@ function PartnerContact() {
 		// const isValid = await phoneSchema.validate({ phone });
 	};
 
-    useEffect(()=>{
-        if(window.innerWidth >640){
-            setIsphoneView(false)
-        }else{
-            setIsphoneView(true)
-        }
-    },[])
+	useEffect(() => {
+		if (toggle) {
+			document.body.classList.add("overflow-hidden");
+			document.body.classList.add("lg:mr-[12.8px]");
+			return () => {
+				document.body.classList.remove("overflow-hidden");
+				document.body.classList.remove("lg:mr-[12.8px]");
+			};
+		}
 
+		if (window.innerWidth > 640) {
+			setIsphoneView(false);
+		} else {
+			setIsphoneView(true);
+		}
+	}, [toggle]);
 
 	return (
 		<div className="overflow-y-auto">
-			<div className={`${toggle ? "activee" : "popup"} w-[300px] xxs:w-[360px] xs:w-[400px] sm:w-[600px] md:w-[750px] xl:w-[1096px]  fixed top-[50%]  z-[999] `}>
+			<div
+				className={`${
+					toggle ? "activee" : "popup"
+				} w-[300px] xxs:w-[360px] xs:w-[400px] sm:w-[600px] md:w-[750px] xl:w-[1096px]  fixed top-[50%]  z-[999] `}
+			>
 				<div className="rounded-lg bg-secondary-900 pb-6 pt-10 sm:py-[45px]">
 					{/* <Image src="/others/partner-contact.svg" height={100} width={400} alt="" className="w-full" /> */}
 					<div
@@ -165,7 +177,9 @@ function PartnerContact() {
 					</div>
 
 					<div className="px-2.5 md:px-5 xl:px-[70px] relative z-20 ">
-						<p className="text-[18px] sm:text-[24px] lg:text-[36px] text-neutral-200 text-center font-[800] leading-tight mb-3 sm:mb-6 lg:mb-[55px]">Apply for Partner Program</p>
+						<p className="text-[18px] sm:text-[24px] lg:text-[36px] text-neutral-200 text-center font-[800] leading-tight mb-3 sm:mb-6 lg:mb-[55px]">
+							Apply for Partner Program
+						</p>
 
 						<form action="">
 							<div className=" flex flex-col sm:flex-row gap-[6px] sm:gap-[10px] md:gap-[50px] w-full">
@@ -219,7 +233,7 @@ function PartnerContact() {
 										onKeyDown={handleKeyDown}
 										inputStyle={{
 											width: "100%",
-											height: isPhoneView ? "":"50px",
+											height: isPhoneView ? "" : "50px",
 											backgroundColor: "rgba(53,65,77,0.20)",
 											border: "1px solid rgba(84,101,119,0.40)",
 											color: "#fff",
@@ -228,7 +242,6 @@ function PartnerContact() {
 										inputProps={{
 											required: true,
 										}}
-                                    
 										type="number"
 										className="input-phone-number text-base mt-1"
 									/>

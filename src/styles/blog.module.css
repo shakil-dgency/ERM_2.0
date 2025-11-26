@@ -24,7 +24,6 @@
 	margin-right: 0;
 	font-weight: 700;
 	line-height: 140%;
-	color: #0a0a0b !important;
 }
 .blog_details h3 {
 	display: block;
@@ -35,7 +34,6 @@
 	margin-right: 0;
 	font-weight: 700;
 	line-height: 140%;
-	color: #0a0a0b !important;
 }
 .blog_details h4 {
 	display: block;
@@ -70,14 +68,12 @@
 	margin-bottom: 1.25em;
 	line-height: 1.8;
 	letter-spacing: -0.1px;
-	color: #353535 !important;
 }
 
 .blog_details ul {
 	list-style: disc;
 	padding-left: 1.5em;
 	margin-bottom: 1.5em;
-	color: #353535 !important;
 }
 
 .blog_details ol {
@@ -85,7 +81,6 @@
 	list-style-position: outside;
 	padding-left: 1.7em;
 	margin-bottom: 2.5em;
-	color: #353535 !important;
 }
 
 .blog_details li {
@@ -168,4 +163,16 @@
 
 .text_area a {
 	color: #633abd;
+}
+
+/* font color */
+
+.global_text_color {
+	color: #353535;
+}
+.global_text_color h2 {
+	color: #0a0a0b !important;
+}
+.global_text_color h3 {
+	color: #0a0a0b !important;
 }

@@ -10,6 +10,7 @@ import { setToggle } from "@/lib/features/toggleSlice";
 import Container from "@/components/ui/Container";
 import Link from "next/link";
 import { BiChevronLeft } from "react-icons/bi";
+import { MdOutlineArrowDropDown } from "react-icons/md";
 
 function HomeHero({ location, cityName, data, image }) {
 	const dispatch = useDispatch();
@@ -42,9 +43,9 @@ function HomeHero({ location, cityName, data, image }) {
 								<Link
 									// onClick={backToPreviousPage}
 									href="/find-a-room"
-									className="text-neutral-500 hover:text-primary-500 text-center  font-semibold text-[12px] md:text-[14px] flex items-center underline underline-offset-4 "
+									className="group text-neutral-500 hover:text-primary-500 text-center  font-semibold text-[12px] md:text-[14px] flex items-center underline underline-offset-4 "
 								>
-									<BiChevronLeft className="text-xl" /> BACK TO ALL LOCATION
+									<MdOutlineArrowDropDown className="text-xl rotate-90 group-hover:translate-x-[-2px] duration-300" /> BACK TO ALL LOCATION
 								</Link>
 							</div>
 						)}

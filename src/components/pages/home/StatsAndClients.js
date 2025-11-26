@@ -36,7 +36,7 @@ function StatsAndClients({ data, about }) {
 							</div>
 						)}
 						<div className="mt-[100px] lg:mt-[136px]">
-							<p className="text-[24px] sm:text-[36px] font-[700] text-neutral-50 mb-[50px]">Trusted by Escape Room Globally</p>
+							<p className="text-[24px] sm:text-[36px] font-[700] text-neutral-50 mb-[50px]">Trusted by Escape Room Companies Globally</p>
 							<div className="relative ">
 								<AnimatedLogoGrid logos={data?.logos} speed={0.08} />
 								<div className="w-full h-[50px] bg-gradient-to-t from-secondary-900 to-transparent absolute -bottom-0 left-0"></div>

@@ -8,14 +8,18 @@ import { useState } from "react";
 function BookingMaxLongCrad({ data, isStroke = true }) {
 	const [open, setOpen] = useState(false);
 
-	const handleOpen = () => setOpen(true);
+	const handleOpen = () => {
+		setOpen(true)
+		
+		
+	};
 
 	return (
 		<div className="relative max-w-full mx-auto aspect-[300/400] xs:aspect-[398/295]  md:aspect-[1584/700] rounded-[0.9rem] bg-[rgba(22,26,30,0.90)] overflow-hidden ">
 			{/* Video or Image Placeholder (can replace with a <video> or <img>) */}
 
 			<div className="absolute inset-0 ">
-				<LazyLoadingVideo video_url={data?.video_url} border_radious={true} />
+				<LazyLoadingVideo video_url={data?.intro_video_url} border_radious={true} />
 			</div>
 			<div className="absolute inset-0 h-full w-full z-10 bg-gradient-to-t from-[#000] to-transparent rounded-[0.9rem]"></div>
 
