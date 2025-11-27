@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import Tools from "../home/comparisonSection/Tools";
 import styles from "@/styles/blog.module.css";
+import StrokeButton from "@/components/ui/buttons/StrokeButton";
 
 function Letter({ data }) {
 	// console.log(data?.letter_body.length);
@@ -29,7 +30,7 @@ function Letter({ data }) {
 				<div className="relative">
 					<div style={{ maxHeight: `${inView}px` }} className=" overflow-hidden">
 						<div
-							className={`${styles.blog_details} letter_text text-[18px] lg:text-[22px] overflow-hidden`}
+							className={`${styles.blog_details} letter_text text-[18px] lg:text-[22px] 2xl:text-[24px] overflow-hidden`}
 							dangerouslySetInnerHTML={{ __html: data?.letter_body ? data.letter_body : "" }}
 						/>
 					</div>
@@ -45,22 +46,12 @@ function Letter({ data }) {
 
 				{/* Read more button */}
 				{boxHeight > inView ? (
-					<div className="flex justify-center mt-4">
-						<button
-							onClick={handleView}
-							className="text-[18px] px-[35px] py-[20px] border border-primary-600 rounded-[5px] text-neutral-950 font-[700] leading-[1]"
-						>
-							Read More
-						</button>
+					<div className="flex justify-center mt-4 ">
+						<StrokeButton text="Read More" handleClick={handleView} text_light={false} />
 					</div>
 				) : boxHeight > 999 && (
 					<div className="flex justify-center mt-4">
-						<button
-							onClick={handleReduceView}
-							className="text-[18px] px-[35px] py-[20px] border border-primary-600 rounded-[5px] text-neutral-950 font-[700] leading-[1]"
-						>
-							Read Less
-						</button>
+						<StrokeButton text="Read Less" handleClick={handleReduceView} text_light={false} />
 					</div>
 				)}
 			</div>

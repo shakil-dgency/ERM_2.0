@@ -60,7 +60,7 @@ function VideoSection({ data }) {
 									onClick={() => handleKeyData(item)}
 									className={`${
 										item?.tags === state?.tag ? "border-primary-500 text-neutral-50" : "border-neutral-500 hover:text-neutral-200 text-neutral-500"
-									} relative z-20 cursor-pointer flex justify-center items-center  py-[10px] 2xl:py-[25px]  font-[600]  rounded-[6px] md:rounded-[10px] border-[2px] `}
+									} relative z-20 cursor-pointer flex justify-center items-center  py-[10px] lg:py-[25px] 2xl:text-[18px]  font-[600]  rounded-[6px] md:rounded-[10px] border-[2px] `}
 								>
 									{item?.tags}
 								</span>

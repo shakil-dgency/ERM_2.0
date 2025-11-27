@@ -234,15 +234,19 @@ h2 {
 
 .swiper-button-prev:after,
 .swiper-button-next:after {
-	font-size: 15px !important;
-	font-weight: 1000;
+	font-size: 17px !important;
+	font-weight: 700 !important;
 	color: var(--color-neutral-50);
 }
 
 .swiper-pagination-bullets,
 .swiper-pagination-bullets.swiper-pagination-horizontal {
-	width: inherit !important;
+	width: 120px !important;
 	left: 0px !important;
+	
+}
+ .swiper-pagination-bullets-dynamic {
+	transform: translateX(0) !important;
 }
 
 .swiper-pagination-bullet {
@@ -254,7 +258,7 @@ h2 {
 
 .swiper-pagination-bullet-active {
 	opacity: 1 !important;
-	width: 33px !important;
+	width: 25px !important;
 	border-radius: 50px !important;
 	background: var(--color-primary-600) !important;
 }

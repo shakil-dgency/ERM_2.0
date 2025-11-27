@@ -2,12 +2,12 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
-function StrokeButton({ url , small, medium, left_icon, right_icon, text = "click here", handleClick }) {
+function StrokeButton({ url , small, medium, left_icon, right_icon, text = "click here", handleClick,text_light=true }) {
 	return (
 		<div className="">
 			{ !url ? (
 				<div onClick={handleClick}
-					className={`group cursor-pointer flex justify-center items-center gap-1 border-[1px] border-primary-600 hover:border-primary-700 rounded-[6px] text-neutral-50 hover:bg-primary-800 duration-300 mt-[2px] leading-[100%]  ${
+					className={`group ${text_light ? "text-neutral-50":" text-neutral-900 hover:text-neutral-50"} cursor-pointer flex justify-center items-center gap-1 border-[1px] border-primary-600 hover:border-primary-700 rounded-[6px] hover:bg-primary-800 duration-300 mt-[2px] leading-[100%]  ${
 						small
 							? "px-[15px] lg:px-[20px] py-[13px] text-[14px] font-[500px]"
 							: medium

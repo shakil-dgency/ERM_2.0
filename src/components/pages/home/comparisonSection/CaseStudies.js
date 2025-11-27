@@ -42,17 +42,19 @@ function CaseStudies({ light, data }) {
 			<div className=" max-w-[1024px] lg:max-w-[inherit] mx-auto px-2.5 lg:px-0 ">
 				<Swiper
 					slidesPerView={1}
-					spaceBetween={30}
-					centeredSlides={false}
-					modules={[Navigation, Pagination]}
+					spaceBetween={20}
+					speed={1000}
+					loop={true}
+					initialSlide={3}
+					centeredSlides={true}
 					navigation={{
 						prevEl: prevRef.current,
 						nextEl: nextRef.current,
 					}}
-					speed={1000}
 					pagination={{
 						el: paginationRef.current,
 						clickable: true,
+						dynamicBullets: true,
 					}}
 					onSwiper={(swiper) => {
 						// assign refs after first render
@@ -64,7 +66,8 @@ function CaseStudies({ light, data }) {
 						swiper.pagination.init();
 						swiper.pagination.update();
 					}}
-					className=""
+					modules={[Pagination, Navigation]}
+					className="mySwiper fullscreen_swiper"
 					breakpoints={{
 						552: {
 							slidesPerView: 1.5,
@@ -79,7 +82,7 @@ function CaseStudies({ light, data }) {
 							// >= 768px
 							slidesPerView: 1.4,
 							spaceBetween: 30,
-							centeredSlides: true,
+							// centeredSlides: true,
 						},
 					}}
 				>
@@ -94,7 +97,7 @@ function CaseStudies({ light, data }) {
 					<div className="relative mt-[30px]">
 						<div className="custom-controls mySwiper absolute top-0 right-0 left-0 flex justify-between items-center pt-4 z-20">
 							<button ref={prevRef} className="custom-prev swiper-button-prev "></button>
-							<div ref={paginationRef} className="custom-pagination flex gap-2"></div>
+							<div ref={paginationRef} className="custom-pagination "></div>
 							<button ref={nextRef} className="custom-next swiper-button-next "></button>
 						</div>
 					</div>

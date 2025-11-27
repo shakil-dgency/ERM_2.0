@@ -115,7 +115,7 @@ function WorksDisplay({ data }) {
 							? data?.video_urls?.map((video, j) => (
 									<SwiperSlide key={j}>
 										<div style={{ aspectRatio: video?.width / video?.height }} className="cursor-pointer">
-											<LazyLoadingVideo video_url={video?.url} controls={true} autoPlay={false} poster={video?.poster?.url} />
+											<LazyLoadingVideo video_url={video?.url} muted={false} controls={true} autoPlay={false} poster={video?.poster?.url} />
 										</div>
 									</SwiperSlide>
 							  ))

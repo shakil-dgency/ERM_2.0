@@ -15,7 +15,7 @@ async function page({ params }) {
 
 	return (
 		<div>
-			<Hero data={data?.hero} work={true} />
+			<Hero data={data?.hero} work={true} lightShadow={true} />
 			<div className="pb-[140px] pt-[60px] bg-secondary-900">
 				{data?.portfolio_section?.map((item, i) => (
 					<WorksDisplay key={i} data={item} />

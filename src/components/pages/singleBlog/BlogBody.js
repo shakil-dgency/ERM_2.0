@@ -2,6 +2,7 @@
 import React, { useEffect } from "react";
 import Banner from "./Banner";
 import styles from "@/styles/blog.module.css";
+import { setSafeLinkTargets } from "@/services/helper";
 
 function BlogBody({ data }) {
 	useEffect(() => {
@@ -28,6 +29,8 @@ function BlogBody({ data }) {
 			el.parentNode.insertBefore(wrapper, el);
 			wrapper.appendChild(el);
 		});
+
+		setSafeLinkTargets()
 	}, [data]);
 
 	return (
@@ -38,7 +41,7 @@ function BlogBody({ data }) {
 						<div
 							className={`${styles.blog_details} ${styles.global_text_color} ${
 								i === 0 ? "pt-[80px] first-blog" : ""
-							}  max-w-[900px] mx-auto px-2.5 text-[16px] lg:text-[20px] text-neutral-950`}
+							} blog_body max-w-[900px] mx-auto px-2.5 text-[16px] lg:text-[20px] text-neutral-950`}
 							dangerouslySetInnerHTML={{ __html: body?.blog_description }}
 						/>
 

@@ -1,19 +1,26 @@
-"use client"
+"use client";
+import FillButton from "@/components/ui/buttons/FillButton";
 import Image from "next/image";
 import React from "react";
 
 function Testimonial({ data, onOpenPopup }) {
 	const handleOpen = () => onOpenPopup(data?.video_link);
 	return (
-		<div className="mt-[50px]">
+		<div className="mt-[50px] ">
 			{data?.title && <h2 className="!text-[20px] lg:!text-[36px]">{data?.title}</h2>}
 			{data?.description && <p className="text-[20px] mt-4 mb-[100px] text-neutral-800">{data?.description}</p>}
 
-			<div className=" bg-secondary-950 bg-[url('/pages/home/bookingMaxBg.png')] bg-repeat bg-[length:240px_240px] rounded-[20px] relative">
+			<div className=" bg-secondary-950 hover:shadow-[0px_0px_10px_#ff492c50] duration-300 bg-[url('/pages/home/bookingMaxBg.png')] bg-repeat bg-[length:240px_240px] rounded-[20px] relative">
 				<div className="overflow-hidden relative py-[90px] px-[45px] rounded-[20px]">
 					{/* Glow Backgrounds */}
-					<div style={{background:data?.testimonial_glow_top}} className="glow_backgroun absolute -left-40 top-[-50px] w-[300px] h-[300px] rounded-full blur-[200px] " />
-					<div style={{background:data?.testimonial_glow_bottom}} className="glow_backgroun absolute -right-40 bottom-[-50px] w-[300px] h-[300px] rounded-full blur-[200px]" />
+					<div
+						style={{ background: data?.testimonial_glow_top }}
+						className="glow_backgroun absolute -left-40 top-[-50px] w-[300px] h-[300px] rounded-full blur-[200px] "
+					/>
+					<div
+						style={{ background: data?.testimonial_glow_bottom }}
+						className="glow_backgroun absolute -right-40 bottom-[-50px] w-[300px] h-[300px] rounded-full blur-[200px]"
+					/>
 					<div className="flex items-center gap-5 mb-[35px] relative z-10">
 						<Image
 							src={`${data?.image ? process.env.NEXT_PUBLIC_API_URL + data?.image.url : "/"}`}
@@ -43,13 +50,18 @@ function Testimonial({ data, onOpenPopup }) {
 					</div>
 
 					{data?.video_link && (
-						<button onClick={handleOpen} className="cursor-pointer px-[35px] py-[15px] mt-2.5 bg-primary-600 rounded-[6px] text-neutral-50 text-[18px] font-[700]">
-							<Image src="/pages/caseStudies/play_btn.svg" alt="Play Button" width={20} height={20} className="inline-block mr-2.5" />
-							<span>Watch Video</span>
-						</button>
+						<div className="flex">
+							<FillButton text="Watch Video" handleClick={handleOpen} left_icon={"/pages/caseStudies/play_btn.svg"} />
+						</div>
 					)}
 				</div>
-				<Image src="/pages/caseStudies/icon.svg" alt="Client Feedback" width={110} height={95} className="absolute bottom-[-47px] right-6 rotate-180" />
+				<Image
+					src="/pages/caseStudies/icon.svg"
+					alt="Client Feedback"
+					width={110}
+					height={95}
+					className="absolute bottom-[-47px] right-6 rotate-180"
+				/>
 				<Image src="/pages/caseStudies/icon.svg" alt="Client Feedback" width={110} height={95} className="absolute top-[-47px] left-6 " />
 			</div>
 		</div>

@@ -1,6 +1,5 @@
 /* eslint-disable react/no-unescaped-entities */
 "use client";
-
 import Image from "next/image";
 import Link from "next/link";
 import React, { useRef, useState, useEffect } from "react";
@@ -256,6 +255,7 @@ function Navbar({ marketingBanner }) {
 				console.error("Fetch error:", err);
 			}
 		}
+		
 
 		fetchWorks();
 	}, []);
@@ -265,7 +265,7 @@ function Navbar({ marketingBanner }) {
 			<div className="relative pt-4">
 				<div ref={navRef} className=" max-w-[1584px] mx-auto px-2.5 ">
 					<div className="flex justify-between items-center  relative ">
-						<Link href={"/"} className="cursor-pointer relative z-20">
+						<Link href={"/"} className="cursor-pointer relative z-20 ">
 							<Image
 								src="/logo.svg"
 								alt="logo"
@@ -306,7 +306,7 @@ function Navbar({ marketingBanner }) {
 										ref={worksBtnRef}
 										onClick={handleWorksPopup}
 										className={`${
-											router === "/works" ? "text-primary-500" : " "
+											worksData?.find((item) => item.slug === router.split("/").pop()) ? "text-primary-500" : ""
 										} cursor-pointer hover:text-primary-500 duration-300 flex items-center text-[14px] xl:text-[15px] relative z-20`}
 									>
 										{/* <Link href="works" className={`${router === "/works" ? "text-primary-500" : " "}`}> */}
@@ -318,7 +318,7 @@ function Navbar({ marketingBanner }) {
 										<li
 											onClick={() => setInsightState(!insightState)}
 											className={` hover:text-primary-500 duration-300 flex items-center gap-0 xl:gap-1 text-[14px] xl:text-[15px] cursor-pointer relative z-20 ${
-												router === "/case-studies" || router === "/daily-digest" || router === "/blog" || router === "/find-a-room" 
+												router === "/case-studies" || router === "/daily-digest" || router === "/blog" || router === "/find-a-room"
 													? "text-primary-500"
 													: ""
 											}`}
@@ -368,9 +368,7 @@ function Navbar({ marketingBanner }) {
 										<li
 											onClick={() => setMoreState(!moreState)}
 											className={` hover:text-primary-500 duration-300 flex items-center gap-0 xl:gap-1 text-[14px] xl:text-[15px] cursor-pointer relative z-20 ${
-												router === "/about" || router === "/team" || router === "/partner-program" || router === "/faq"
-													? "text-primary-500"
-													: ""
+												router === "/about" || router === "/team" || router === "/partner-program" || router === "/faq" ? "text-primary-500" : ""
 											}`}
 										>
 											More <MdOutlineArrowDropDown className={`text-xl xl:text-[22px] duration-300 ${moreState ? "rotate-180" : ""}`} />
@@ -423,7 +421,7 @@ function Navbar({ marketingBanner }) {
 												router={router}
 											/>
 											<NavCard
-												slug=""
+												slug="client-call"
 												img="/navbar/contact/schedule_call.svg"
 												title="Exclusive Client Call"
 												description="Existing clients: connect with your strategist"
@@ -444,7 +442,11 @@ function Navbar({ marketingBanner }) {
 
 							<div className="text-neutral-50 flex items-center gap-2 xxs:gap-[10px] sm:gap-[20px] lg:gap-[30px]">
 								{/* ....login button.......... */}
-								<Link href={"https://crm.escaperoommarketer.com/authentication/login"} target="__blank" className="group relative z-20 hidden xl:flex items-center gap-1.5 cursor-pointer">
+								<Link
+									href={"https://crm.escaperoommarketer.com/authentication/login"}
+									target="__blank"
+									className="group relative z-20 hidden xl:flex items-center gap-1.5 cursor-pointer"
+								>
 									{/* <Image src={"/navbar/escape_door.svg"} alt="" height={16} width={17} /> */}
 									<svg
 										xmlns="http://www.w3.org/2000/svg"
@@ -642,7 +644,11 @@ function Navbar({ marketingBanner }) {
 									</Link>
 								</div>
 								<div className="flex border-b-[1px] border-t-[1px] border-secondary-800  py-[25px]">
-									<Link href={"https://crm.escaperoommarketer.com/authentication/login"} target="__blank" className="group relative z-20 flex items-center gap-1.5 cursor-pointer">
+									<Link
+										href={"https://crm.escaperoommarketer.com/authentication/login"}
+										target="__blank"
+										className="group relative z-20 flex items-center gap-1.5 cursor-pointer"
+									>
 										<Image src={"/navbar/escape_door.svg"} alt="" height={16} width={17} />
 
 										<p className="text-[16px] font-[600] text-neutral-200 group-hover:text-primary-500 duration-300">Login</p>
@@ -725,7 +731,9 @@ function Navbar({ marketingBanner }) {
 										<li
 											onClick={handleInsightsPopupMobile}
 											className={`text-[18px]  flex items-center justify-between gap-2 cursor-pointer ${
-												router === "/case-studies" || router === "/daily-digest" || router === "/blog" || router === "/find-a-room"  ? "text-primary-500" : ""
+												router === "/case-studies" || router === "/daily-digest" || router === "/blog" || router === "/find-a-room"
+													? "text-primary-500"
+													: ""
 											} ${mobileInsightsState ? "text-primary-500" : ""}`}
 										>
 											Insights <span className="text-[22px]">{mobileInsightsState ? <FiMinus /> : <FiPlus />}</span>

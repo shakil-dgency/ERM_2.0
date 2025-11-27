@@ -41,7 +41,7 @@ export default function AnimatedText({ sentences = [] }) {
   };
 
   return (
-    <div className="relative inline-block h-full w-full  overflow-hidden text-primary">
+    <span className="relative inline-block h-full w-full  overflow-hidden text-primary">
       <AnimatePresence mode="popLayout" >
         <motion.span
           key={index}
@@ -54,6 +54,6 @@ export default function AnimatedText({ sentences = [] }) {
           {sentences[index]?.title}
         </motion.span>
       </AnimatePresence>
-    </div>
+    </span>
   );
 }

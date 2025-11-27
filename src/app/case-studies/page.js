@@ -13,7 +13,7 @@ async function page() {
 			populate: {
 				main_image: true,
 				client_feedback: {
-					fields: ["designation", "name"],
+					fields: ["name", "designation", "feedback"],
 				},
 			},
 			pagination: {
@@ -26,7 +26,7 @@ async function page() {
 
 	const url = `${process.env.NEXT_PUBLIC_API_URL}/api/case-studies?${query}`;
 
-	const { data, meta } = await getData(url, "contact page");
+	const { data, meta } = await getData(url, "case study page");
 
 	if (!data) {
 		return notFound();
@@ -50,7 +50,6 @@ async function page() {
 	const { data: newData } = await getData(newUrl, "case home page");
 
 	console.log(newData);
-	
 
 	return (
 		<div>

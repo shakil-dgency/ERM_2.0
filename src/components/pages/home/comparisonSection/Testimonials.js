@@ -59,8 +59,12 @@ function Testimonials({ data }) {
 						spaceBetween={20}
 						pagination={{
 							clickable: true,
+							dynamicBullets:true
 						}}
 						speed={1000}
+						loop={true}
+						// initialSlide={3}
+						// centeredSlides={true}
 						navigation={true}
 						modules={[Pagination, Navigation]}
 						className="mySwiper videoTestimonials boundedSwiper"

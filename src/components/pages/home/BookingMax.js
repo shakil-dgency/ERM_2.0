@@ -1,4 +1,3 @@
-
 import Container from "@/components/ui/Container";
 import ServiceCard from "@/components/global/ServiceCard";
 import LazyLoadingVideo from "@/components/global/LazyLoadingVideo";
@@ -10,15 +9,11 @@ import FillButton from "@/components/ui/buttons/FillButton";
 import BookingMaxLongCrad from "./BookingMaxLongCrad";
 
 export default function BookingMax({ data, serviceData }) {
-
-
 	// Split by the apostrophe
 	const [before, highlightedWithQuotes] = data ? data?.headline.split("'") : [];
 
 	// Remove extra quotes if any
 	const highlighted = highlightedWithQuotes?.replace(/'/g, "");
-
-
 
 	return (
 		<section className=" min-h-screen overflow-x-hidden bg-[url('/pages/home/bookingMaxBg.png')] bg-repeat bg-[length:240px_240px] pb-[100px] lg:pb-[140px] ">
@@ -44,19 +39,16 @@ export default function BookingMax({ data, serviceData }) {
 					<div className="relative z-10 grid grid-cols-1 lg:grid-cols-3 gap-6 mt-6 md:mt-[80px] ">
 						{/* Card 1 */}
 						{data?.other_card?.map((card, index) => (
-							<div
-								key={index}
-								className="relative overflow-hidden rounded-[0.9rem] bg-[rgba(22,26,30,0.90)] px-5 md:px-[32px] pb-[45px]  flex flex-col justify-end h-[525px] lg:h-[695px]"
-							>
+							<div key={index} className="group relative rounded-2xl px-5 md:px-[32px] pb-[45px]  flex flex-col justify-end h-[525px] lg:h-[695px]">
 								<span className="highlighted_text mb-1 absolute z-20 top-[30px] md:top-[48px]">{card?.tag}</span>
 								<div className="relative z-20">
 									<h3 className="text-neutral-50 font-[600] text-[20px] md:text-[24px] mb-[10px]">{card?.title}</h3>
 									<p className="text-[14px] md:text-[16px] text-neutral-300 leading-[1.4]">{card?.short_description}</p>
 								</div>
-								<div className="absolute inset-0 z-10">
+								<div className="absolute inset-0 z-0 ">
 									<LazyLoadingVideo video_url={card?.video_url} />
-									<div className="absolute inset-0 z-10 bg-gradient-to-t from-[#000000] to-[#00000050]"></div>
 								</div>
+								<div className="absolute shadow-[0px_0px_10px_#ff492c50] top-0 left-0 h-[100.2%] w-full z-10 bg-gradient-to-t from-[#000000] to-[#00000049] group-hover:to-transparent duration-500 rounded-2xl "></div>
 							</div>
 						))}
 					</div>

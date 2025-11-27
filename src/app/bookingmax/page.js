@@ -10,6 +10,8 @@ import BookingMaxVideo from "@/components/pages/bookingMax/BookingMaxVideo";
 import Testimonials from "@/components/pages/home/comparisonSection/Testimonials";
 import Banner from "@/components/global/Banner";
 
+export const revalidate = 60;
+
 async function page() {
 	const query = qs.stringify(
 		{

@@ -21,7 +21,7 @@ function CaseBody({ initialData, initialMeta }) {
 				populate: {
 					main_image: true,
 					client_feedback: {
-						fields: ["designation", "name"],
+						fields: ["name", "designation", "feedback"],
 					},
 				},
 				pagination: {
@@ -34,7 +34,6 @@ function CaseBody({ initialData, initialMeta }) {
 
 		const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/case-studies?${query}`);
 		const json = await res.json();
-		
 
 		setCaseStudy((prev) => [...prev, ...json.data]);
 		setMeta(json.meta);
@@ -44,7 +43,7 @@ function CaseBody({ initialData, initialMeta }) {
 	return (
 		<div className="pt-[100px] pb-[150px] bg-secondary-900">
 			<Container>
-				<div className="space-y-[50px] xl:mx-[90px]">
+				<div className="flex flex-col gap-y-[50px] xl:mx-[90px]">
 					{caseStudy?.map((item, i) => (
 						<CaseCard key={i} data={item} />
 					))}

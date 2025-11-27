@@ -83,7 +83,7 @@ function WorkHomeBody({ initialData, initialMeta }) {
 						{meta.pagination.page < meta.pagination.pageCount && (
 							<button
 								onClick={loadMore}
-								className="cursor-pointer flex items-center gap-2 border-[1px] border-primary-500 text-neutral-50 text-[16px] font-[700] py-2 px-4 rounded"
+								className="cursor-pointer flex items-center gap-2 border-[1px] border-primary-600 hover:border-primary-700 rounded-[6px] hover:bg-primary-800 duration-300 text-neutral-50 text-[16px] font-[700] px-[35px] py-[18px] "
 							>
 								<span>{loading ? "Loading..." : "Load More"}</span>{" "}
 								<span className="pt-[2px]">

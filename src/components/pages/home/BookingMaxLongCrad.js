@@ -15,18 +15,18 @@ function BookingMaxLongCrad({ data, isStroke = true }) {
 	};
 
 	return (
-		<div className="relative max-w-full mx-auto aspect-[300/400] xs:aspect-[398/295]  md:aspect-[1584/700] rounded-[0.9rem] bg-[rgba(22,26,30,0.90)] overflow-hidden ">
+		<div className="relative max-w-full  rounded-2xl mx-auto aspect-[300/400] xs:aspect-[398/295]  md:aspect-[1584/700] bg-[rgba(22,26,30,0.90)]  ">
 			{/* Video or Image Placeholder (can replace with a <video> or <img>) */}
 
 			<div className="absolute inset-0 ">
 				<LazyLoadingVideo video_url={data?.intro_video_url} border_radious={true} />
 			</div>
-			<div className="absolute inset-0 h-full w-full z-10 bg-gradient-to-t from-[#000] to-transparent rounded-[0.9rem]"></div>
+			<div className="absolute shadow-[0px_0px_10px_#ff492c60] h-[100.5%] w-full z-10 bg-gradient-to-t from-[#000] to-transparent rounded-2xl "></div>
 
 			<div className="flex items-end h-full pb-[30px] md:pb-[50px] px-5 md:px-[32px] relative z-20">
 				<div className={`lg:flex gap-6 items-end w-full ${data?.title ? "justify-between " : "justify-end"}`}>
 					{data?.title && (
-						<div>
+						<div className="max-w-[700px]">
 							<span className="block text-[20px] sm:text-[24px] text-neutral-50 font-[600] mb-2">{data?.title}</span>
 							<span className="block text-[14px] sm:text-[18px] text-neutral-300">{data?.short_description}</span>
 						</div>

@@ -8,14 +8,17 @@ const image = "/pages/caseStudies/casestudy.png";
 function CaseCard({ data, onOpenPopup }) {
 	const handleOpen = () => onOpenPopup(data?.video_url);
 
+	console.log(data);
+	
+
 	const handleFeedbackMessage = (message) => {
 		const text = message?.replace(/<[^>]*>/g, "").trim();
 
 		return message ? text.slice(0, 130) + "..." : "";
 	};
 	return (
-		<div>
-			<div style={{backgroundImage: `url(${data?.video_url ? "" :process.env.NEXT_PUBLIC_API_URL + data?.main_image?.url})`}} className="relative bg-no-repeat bg-cover w-full max-w-full mx-auto h-[600px] lg:h-[450px] xl:h-[inherit] xl:aspect-[1316/700] flex flex-col justify-end px-[20px] lg:px-[50px] py-[40px] lg:py-[50px]  rounded-[0.9rem] bg-center overflow-hidden">
+		<div className="m-2.5">
+			<div style={{backgroundImage: `url(${data?.video_url ? "" :process.env.NEXT_PUBLIC_API_URL + data?.main_image?.url})`}} className="relative shadow-[0px_0px_10px_#ff492c40] bg-no-repeat bg-cover w-full max-w-full mx-auto h-[600px] lg:h-[450px] xl:h-[inherit] xl:aspect-[1316/700] flex flex-col justify-end px-[20px] lg:px-[50px] py-[40px] lg:py-[50px]  rounded-[0.9rem] bg-center overflow-hidden">
 				<div className="relative z-20 flex flex-col lg:flex-row items-end gap-[30px] lg:gap-[15px]">
 					<div className="flex-2/3">
 						<Link href={`/case-studies/${data?.slug}`} className="text-neutral-50 text-[18px] lg:text-[24px] xl:text-[32px] font-[600] leading-[1.4] ">

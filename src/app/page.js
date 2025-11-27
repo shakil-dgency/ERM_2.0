@@ -1,3 +1,4 @@
+
 import FrequentlyAsk from "@/components/global/faq/FrequentlyAsk";
 import Blog from "@/components/pages/home/Blog";
 import BookingMax from "@/components/pages/home/BookingMax";
@@ -6,6 +7,7 @@ import HeroHome from "@/components/pages/home/hero/HeroHome";
 import StatsAndClients from "@/components/pages/home/StatsAndClients";
 import { getData } from "@/services/helper";
 import Image from "next/image";
+import { notFound } from "next/navigation";
 import qs from "qs";
 
 // export const dynamic = "force-dynamic"; // This page is dynamic and should not be cached
@@ -27,7 +29,7 @@ export default async function Home() {
 				services: true,
 				video_testimonial: { populate: ["testimonial_card"] },
 				cta: { populate: ["background_image"] },
-				comparison: { populate: ["section_header","comparison_table"] },
+				comparison: { populate: ["section_header", "comparison_table"] },
 				tools: { populate: ["image"] },
 				casestudy_section: {
 					populate: {
@@ -66,20 +68,31 @@ export default async function Home() {
 
 	const { data } = await getData(url, "Home page");
 
-	console.log(data);
-	
+	if (!data) {
+		notFound();
+	}
 
-	return (
-		<div>
-			<HeroHome data={data?.hero} />
-			<StatsAndClients data={data?.portfolio} />
-			<BookingMax data={data?.bookingmax} serviceData={data?.services} />
-			
-			<ComparisonSection
-				data={{ comparison: data?.comparison, tools: data?.tools, testimonials: data?.video_testimonial, caseStudies: data?.casestudy_section, banner:data?.cta }}
-			/>
-			<Blog data={data?.blog_section} />
-			<FrequentlyAsk data={data?.faq} />
-		</div>
-	);
+	try {
+		return (
+			<div>
+				<HeroHome data={data?.hero} />
+				<StatsAndClients data={data?.portfolio} />
+				<BookingMax data={data?.bookingmax} serviceData={data?.services} />
+
+				<ComparisonSection
+					data={{
+						comparison: data?.comparison,
+						tools: data?.tools,
+						testimonials: data?.video_testimonial,
+						caseStudies: data?.casestudy_section,
+						banner: data?.cta,
+					}}
+				/>
+				<Blog data={data?.blog_section} />
+				<FrequentlyAsk data={data?.faq} />
+			</div>
+		);
+	} catch (error) {
+		notFound()
+	}
 }

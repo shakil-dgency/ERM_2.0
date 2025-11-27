@@ -7,7 +7,7 @@ function ServiceCard({ data }) {
 	return (
 		<Link
 			href={`${data?.slug}`}
-			className="service_card w-full max-w-full mx-auto h-[450px] md:h-[inherit] md:aspect-[1316/900] lg:aspect-[1316/700] rounded-[10px] lg:rounded-[0.9rem] overflow-hidden relative flex flex-col justify-end px-4 md:px-[30px] xl:px-[60px] py-6 xl:py-[50px] "
+			className="service_card drop-shadow-[0px_0px_10px_#ff492c] w-full max-w-full mx-auto h-[450px] md:h-[inherit] md:aspect-[1316/900] lg:aspect-[1316/700] rounded-[10px] lg:rounded-[0.9rem] overflow-hidden relative flex flex-col justify-end px-4 md:px-[30px] xl:px-[60px] py-6 xl:py-[50px] "
 			style={
 				{
 					// backgroundImage: `linear-gradient(180deg, rgba(13,17,22,0) 0%, rgba(13,17,22,0.90) 60%, #0D1116 100%), url('/pages/home/marketing.png')`,
@@ -15,8 +15,8 @@ function ServiceCard({ data }) {
 			}
 		>
 			<div className="relative z-20">
-				<p className="text-neutral-50 text-[20px] xl:text-[32px] font-[500] leading-[1.3] pb-[10px]">{data?.hero.hero_text?.headline}</p>
-				<p className="text-neutral-300 text-[14px] xl:text-[20px] pb-[25px] leading-[1.3] max-w-[900px]">{data?.hero.hero_text?.description}</p>
+				<p className="text-neutral-50 text-[20px] xl:text-[32px] font-[500] leading-[1.3] pb-[10px]">{data?.hero?.hero_text?.headline}</p>
+				<p className="text-neutral-300 text-[14px] xl:text-[20px] pb-[25px] leading-[1.3] max-w-[900px]">{data?.hero?.hero_text?.description}</p>
 				<p className="group cursor-pointer text-primary-600 text-[16px] font-[500] flex items-center gap-[5px]">
 					Learn More
 					<svg

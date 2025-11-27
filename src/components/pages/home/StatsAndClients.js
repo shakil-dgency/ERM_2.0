@@ -15,14 +15,14 @@ function StatsAndClients({ data, about }) {
 				</div>
 				<div className={`${about ? "" : "grid grid-cols-1 lg:grid-cols-3 gap-6"}`}>
 					<div className="lg:col-start-1 lg:col-end-4 2xl:col-end-3">
-						<div className={`${about ? "max-w-[1300px] mx-auto" : ""} grid xs:grid-cols-2 xs:justify-items-start gap-y-[40px] xs:gap-y-[100px]`}>
+						<div className={`${about ? "max-w-[1300px] mx-auto" : ""} grid sm:grid-cols-2 sm:justify-items-start gap-y-[40px] sm:gap-y-[100px]`}>
 							{data?.statistics.map((stat, i) => (
-								<div className="" key={i}>
-									<div className="relative">
+								<div className="group" key={i}>
+									<div className="relative mb-2 sm:mb-0">
 										<p className="text-[48px] sm:text-[74px] lg:text-[96px] font-[500] text-neutral-50">{stat?.title}</p>
 										{/* <div className="w-full sm:h-[20px] lg:h-[70px] bg-gradient-to-t from-secondary-900 from-40% to-transparent to-100% absolute -left-2 bottom-3 z-10"></div> */}
 									</div>
-									<span className="text-[12px] sm:text-[14px] lg:text-[16px] px-[25px] py-2.5 text-neutral-400 rounded-[10px] bg-secondary-800">
+									<span className="text-[12px] sm:text-[14px] lg:text-[16px] px-[25px] py-2.5 text-neutral-400 group-hover:text-neutral-100 duration-300 rounded-[10px] bg-secondary-800">
 										{stat?.short_description}
 									</span>
 								</div>
