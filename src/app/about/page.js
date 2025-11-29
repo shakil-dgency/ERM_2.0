@@ -5,9 +5,14 @@ import StatsAndClients from "@/components/pages/home/StatsAndClients";
 import Container from "@/components/ui/Container";
 import React from "react";
 import qs from "qs";
-import { getData } from "@/services/helper";
+import { buildMetadataFromSeo, getData } from "@/services/helper";
 import { notFound } from "next/navigation";
 import ToolsCard from "@/components/pages/home/ToolsCard";
+import StructureData from "@/components/global/StructureData";
+
+export async function generateMetadata() {
+	return buildMetadataFromSeo("/api/about-us");
+}
 
 async function page() {
 	const query = qs.stringify(
@@ -23,6 +28,9 @@ async function page() {
 					},
 				},
 				mission_vision_2: { populate: ["image"] },
+				seo: {
+					fields: ["structuredData"],
+				},
 			},
 		},
 		{ encodeValuesOnly: true }
@@ -30,44 +38,51 @@ async function page() {
 
 	const url = `${process.env.NEXT_PUBLIC_API_URL}/api/about-us?${query}`;
 
-	const { data } = await getData(url, "About page",{
-		next:{ revalidate: 60}
+	const { data } = await getData(url, "About page", {
+		next: { revalidate: 60 },
 	});
 
 	if (!data) {
 		return notFound();
 	}
 
-	console.log(data);
+	const seo = data?.seo;
+
 	return (
-		<div>
-			<Hero data={data?.hero} />
-			<div className="">
-				<div className="bg-tertiary-500 py-[100px] lg:py-[140px]">
-					<Container>
-						<Mission data={data?.mission_vision_1} />
-					</Container>
-				</div>
-				<div className="bg-secondary-900 pt-[140px]">
-					<Container>
-						<div className="grid md:grid-cols-3 gap-6 mt-[60px]">
-							{/* <div className="md:-mt-[60px] w-full h-[350px] rounded-[10px] bg-[rgba(27,33,39,0.40)] backdrop-blur-[25px]"></div>
+		<>
+			{seo &&
+				seo.structuredData?.map((item, i) => {
+					return <StructureData data={item} key={i} />;
+				})}
+			<div>
+				<Hero data={data?.hero} />
+				<div className="">
+					<div className="bg-tertiary-500 py-[100px] lg:py-[140px]">
+						<Container>
+							<Mission data={data?.mission_vision_1} />
+						</Container>
+					</div>
+					<div className="bg-secondary-900 pt-[140px]">
+						<Container>
+							<div className="grid md:grid-cols-3 gap-6 mt-[60px]">
+								{/* <div className="md:-mt-[60px] w-full h-[350px] rounded-[10px] bg-[rgba(27,33,39,0.40)] backdrop-blur-[25px]"></div>
 							<div className=" w-full h-[350px] rounded-[10px] bg-[rgba(27,33,39,0.40)] backdrop-blur-[25px]"></div>
 							<div className="md:-mt-[60px] w-full h-[350px] rounded-[10px] bg-[rgba(27,33,39,0.40)] backdrop-blur-[25px]"></div> */}
-							{data?.portfolio.cards.map((card,i)=>(
-								<ToolsCard key={i} data={card} isAbout={true} index={i}  />
-							))}
-						</div>
-					</Container>
-					<StatsAndClients about={true} data={data?.portfolio} />
-				</div>
-				<div className="bg-tertiary-500 py-[100px] lg:py-[140px]">
-					<Container>
-						<Mission data={data?.mission_vision_2} />
-					</Container>
+								{data?.portfolio.cards.map((card, i) => (
+									<ToolsCard key={i} data={card} isAbout={true} index={i} />
+								))}
+							</div>
+						</Container>
+						<StatsAndClients about={true} data={data?.portfolio} />
+					</div>
+					<div className="bg-tertiary-500 py-[100px] lg:py-[140px]">
+						<Container>
+							<Mission data={data?.mission_vision_2} />
+						</Container>
+					</div>
 				</div>
 			</div>
-		</div>
+		</>
 	);
 }
 

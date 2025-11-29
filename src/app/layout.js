@@ -11,13 +11,9 @@ const openSans = Open_Sans({
   variable: "--font-open-sans",
   subsets: ["latin"],
   display: "swap",
-//   weight: ["400", "500", "600", "700"], 
 });
 
-// const geistMono = Geist_Mono({
-// 	variable: "--font-geist-mono",
-// 	subsets: ["latin"],
-// });
+
 
 export const metadata = {
 	title: "Create Next App",

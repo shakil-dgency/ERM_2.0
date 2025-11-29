@@ -85,7 +85,6 @@ function NewsFeedCard({ feedData, singleNews, previousData, nextData, randomFeed
 		setNoData(foundData?.length);
 	}, [feedData, search]);
 
-	console.log(sortedData);
 	
 
 	// setNextData(sortedData && sortedData);

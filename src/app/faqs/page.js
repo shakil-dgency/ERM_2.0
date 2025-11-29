@@ -2,10 +2,15 @@ import Hero from "@/components/pages/about/Hero";
 import FaqBody from "@/components/pages/others/FaqBody";
 import React from "react";
 import qs from "qs";
-import { getData } from "@/services/helper";
+import { buildMetadataFromSeo, getData } from "@/services/helper";
 import { notFound } from "next/navigation";
+import StructureData from "@/components/global/StructureData";
 
 export const revalidate = 60;
+
+export async function generateMetadata() {
+	return buildMetadataFromSeo("/api/faq");
+}
 
 async function page() {
 	const query = qs.stringify(
@@ -17,12 +22,14 @@ async function page() {
 						hero_text: true,
 					},
 				},
-                faq_section:{
-                    populate:{
-                        faq : true,
-                    },
-                },
-
+				faq_section: {
+					populate: {
+						faq: true,
+					},
+				},
+				seo: {
+					fields: ["structuredData"],
+				},
 			},
 		},
 		{ encodeValuesOnly: true }
@@ -35,12 +42,19 @@ async function page() {
 	if (!data) {
 		return notFound();
 	}
-	console.log(data);
+	const seo = data?.seo;
+	
 	return (
-		<div>
-			<Hero data={data?.hero} lightShadow={true} />
-			<FaqBody data={data?.faq_section} />
-		</div>
+		<>
+			{seo &&
+				seo.structuredData?.map((item, i) => {
+					return <StructureData data={item} key={i} />;
+				})}
+			<div>
+				<Hero data={data?.hero} lightShadow={true} />
+				<FaqBody data={data?.faq_section} />
+			</div>
+		</>
 	);
 }
 

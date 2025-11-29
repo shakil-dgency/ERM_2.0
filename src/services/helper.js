@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import qs from "qs";
 
 export const getData = async (apiURL, caller, options = {}) => {
 	try {
@@ -41,3 +42,70 @@ export const setSafeLinkTargets = (selector = ".blog_body a") => {
 		}
 	});
 };
+
+export async function buildMetadataFromSeo(apiURL, options = {}) {
+	const newquery = qs.stringify(
+		{
+			populate: {
+				seo: {
+					populate: {
+						metaImage: true,
+					},
+				},
+			},
+		},
+		{ encodeValuesOnly: true }
+	);
+
+	const url = `${process.env.NEXT_PUBLIC_API_URL}${apiURL}?${newquery}`;
+
+	const { data: seoData } = await getData(url, "Home page SEO", {
+		next: { revalidate: 60 },
+	});
+
+	const seo = seoData?.seo;
+
+	if (!seo) {
+		return {
+			title: "Escape Room Marketer",
+			description: "We help escape rooms get more bookings with smart marketing.",
+		};
+	}
+
+	const title = seo.metaTitle;
+	const description = seo.metaDescription;
+
+	const keywords = seo.keywords; // e.g. "escape room marketing, escape room seo"
+	const robots = seo.metaRobots || "index,follow";
+	const canonical = seo.canonicalURL;
+
+	const rawImageUrl = seo.metaImage?.url;
+	const imageUrl =rawImageUrl ? `${process.env.NEXT_PUBLIC_API_URL}${rawImageUrl}` : "/default-og-image.png";
+
+	console.log("meta:", seo);
+
+	return {
+		title,
+		description,
+		keywords: keywords ? keywords.split(",").map((k) => k.trim()) : undefined,
+		robots,
+		openGraph: {
+			title,
+			description,
+			url: canonical,
+			images: [
+				{
+					url: imageUrl,
+				},
+			],
+		},
+		twitter: {
+			card: "summary_large_image",
+			images: [imageUrl],
+		},
+		alternates: {
+			canonical: canonical || undefined,
+		},
+		viewport: "width=device-width, initial-scale=1",
+	};
+}

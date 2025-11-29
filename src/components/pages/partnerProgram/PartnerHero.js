@@ -6,21 +6,19 @@ function PartnerHero({ data, stat }) {
 	return (
 		<div
 			style={{
-				background: `linear-gradient(0deg, rgba(8, 11, 15, 0.80) 0%, rgba(8, 11, 15, 0.80) 100%), url(${
+				backgroundImage: `linear-gradient(0deg, rgba(8, 11, 15, 0.80) 0%, rgba(8, 11, 15, 0.80) 100%), url(${
 					data?.background_image ? process.env.NEXT_PUBLIC_API_URL + data?.background_image?.url : "/"
-				}) lightgray no-repeat`,
-				backgroundSize: "cover",
-				backgroundPosition: "center",
-				width: "100%",
+				}) `,
+				
 			}}
-			className=" bg-secondary-950 "
+			className="  bg-secondary-900 bg-cover bg-no-repeat bg-center"
 		>
 			<div className=" text-center ">
-				<div className="px-2.5 pt-14 md:pt-20 pb-20 md:pb-28">
+				<div className="max-w-[1060px] mx-auto px-2.5 pt-14 md:pt-20 pb-20 md:pb-28">
 					<div className="pt-10 md:pt-20 pb-[35px] md:pb-[60px] ">
 						<p className="highlighted_text">{data?.hero_text?.eyebrow_headline}</p>
-						<h1 className="text-[24px] md:text-[54px] font-[700] text-[#fff_!important] max-w-[1127px] mx-auto">{data?.hero_text?.headline}</h1>
-						<p className="text-[16px] text-neutral-300 max-w-[840px] mx-auto pt-2.5">{data?.hero_text?.description}</p>
+						<h1 className="text-neutral-50 text-[clamp(40px,10vw,90px)] font-[700] leading-[1.2] text-center">{data?.hero_text?.headline}</h1>
+						<p className="text-[14px] sm:text-[24px] text-neutral-300 text-center  mt-3">{data?.hero_text?.description}</p>
 					</div>
 
 					<ButtonMain text={data?.button_text} />

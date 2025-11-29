@@ -1,8 +1,9 @@
 import NewsFeedCard from "@/components/NewsFeed/NewsFeedCard";
-import { getData } from "@/services/helper";
+import {  getData } from "@/services/helper";
 import React from "react";
 
 export const revalidate = 60;
+
 
 async function page() {
 	const url = `${process.env.NEXT_PUBLIC_API_URL}/api/news-feeds?populate=*`;

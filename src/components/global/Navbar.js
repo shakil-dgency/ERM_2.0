@@ -387,7 +387,7 @@ function Navbar({ marketingBanner }) {
 												router={router}
 											/>
 											<NavCard slug="team" img="/navbar/more/team.svg" title="Team" description="Meet the architects of adventure" router={router} />
-											<NavCard slug="faq" img="/navbar/more/faq.svg" title="FAQs" description="Quick answers for curious owners" router={router} />
+											<NavCard slug="faqs" img="/navbar/more/faq.svg" title="FAQs" description="Quick answers for curious owners" router={router} />
 											<NavCard
 												slug="partner-program"
 												img="/navbar/more/partnerProgram.svg"
@@ -790,7 +790,7 @@ function Navbar({ marketingBanner }) {
 												router={router}
 											/>
 											<NavCard slug="team" img="/navbar/more/team.svg" title="Team" description="Meet the architects of adventure" router={router} />
-											<NavCard slug="faq" img="/navbar/more/faq.svg" title="FAQs" description="Quick answers for curious owners" router={router} />
+											<NavCard slug="faqs" img="/navbar/more/faq.svg" title="FAQs" description="Quick answers for curious owners" router={router} />
 											<NavCard
 												slug="partner-program"
 												img="/navbar/more/partnerProgram.svg"

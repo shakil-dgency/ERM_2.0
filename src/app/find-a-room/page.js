@@ -4,9 +4,14 @@ import MainComponent from "@/components/pages/findARoom/MainComponent";
 import Container from "@/components/ui/Container";
 import React from "react";
 import qs from "qs";
-import { getData } from "@/services/helper";
+import { buildMetadataFromSeo, getData } from "@/services/helper";
+import StructureData from "@/components/global/StructureData";
 
 export const revalidate = 60;
+
+export async function generateMetadata() {
+	return buildMetadataFromSeo("/api/directory-home");
+}
 
 async function page() {
 	const query = qs.stringify(
@@ -37,18 +42,19 @@ async function page() {
 
 	const { data } = await getData(url, "directory home");
 
-	
-
 	// fetch heroData
 
 	const queryHero = qs.stringify(
 		{
 			populate: {
-				image:true,
-				cta:{
+				image: true,
+				cta: {
 					populate: ["icon"],
 				},
 				search_page: true,
+				seo: {
+					fields: ["structuredData"],
+				},
 			},
 		},
 		{ encodeValuesOnly: true }
@@ -56,14 +62,21 @@ async function page() {
 
 	const urlHome = `${process.env.NEXT_PUBLIC_API_URL}/api/directory-home?${queryHero}`;
 
-	const newData = await getData(urlHome, "directory home hero")
-	
+	const newData = await getData(urlHome, "directory home hero");
+
+	const seo = newData?.data?.seo;
 
 	return (
-		<MainComponent data={data} newData={newData?.data?.search_page} >
-			<HomeHero data={newData?.data} image={newData?.data?.image} />
-			<Locations data={data} />
-		</MainComponent>
+		<>
+			{seo &&
+				seo.structuredData?.map((item, i) => {
+					return <StructureData data={item} key={i} />;
+				})}
+			<MainComponent data={data} newData={newData?.data?.search_page}>
+				<HomeHero data={newData?.data} image={newData?.data?.image} />
+				<Locations data={data} />
+			</MainComponent>
+		</>
 	);
 }
 

@@ -1,23 +1,31 @@
 import React from "react";
 import qs from "qs";
-import { getData } from "@/services/helper";
+import { buildMetadataFromSeo, getData } from "@/services/helper";
 import { notFound } from "next/navigation";
 import ClientCall from "@/components/pages/clientCall/ClientCall";
+import StructureData from "@/components/global/StructureData";
 
 export const revalidate = 60;
+
+export async function generateMetadata() {
+	return buildMetadataFromSeo("/api/client-call");
+}
 
 async function page() {
 	const query = qs.stringify(
 		{
 			populate: {
-				advices:{
-					populate:{
-							cards:{
-								populate:{
-									icon:true
-								}
-							}
-					}
+				advices: {
+					populate: {
+						cards: {
+							populate: {
+								icon: true,
+							},
+						},
+					},
+				},
+				seo: {
+					fields: ["structuredData"],
 				},
 			},
 		},
@@ -32,10 +40,18 @@ async function page() {
 		return notFound();
 	}
 
+	const seo = data?.seo;
+
 	return (
-		<div>
-			<ClientCall data={data} />
-		</div>
+		<>
+			{seo &&
+				seo.structuredData?.map((item, i) => {
+					return <StructureData data={item} key={i} />;
+				})}
+			<div>
+				<ClientCall data={data} />
+			</div>
+		</>
 	);
 }
 

@@ -1,17 +1,21 @@
-
 import FrequentlyAsk from "@/components/global/faq/FrequentlyAsk";
+import StructureData from "@/components/global/StructureData";
 import Blog from "@/components/pages/home/Blog";
 import BookingMax from "@/components/pages/home/BookingMax";
 import ComparisonSection from "@/components/pages/home/comparisonSection/ComparisonSection";
 import HeroHome from "@/components/pages/home/hero/HeroHome";
 import StatsAndClients from "@/components/pages/home/StatsAndClients";
-import { getData } from "@/services/helper";
+import { buildMetadataFromSeo, getData } from "@/services/helper";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import qs from "qs";
 
-// export const dynamic = "force-dynamic"; // This page is dynamic and should not be cached
-// export const revalidate = 60;
+export const revalidate = 60;
+
+export async function generateMetadata() {
+	
+	return buildMetadataFromSeo("/api/home")
+}
 
 export default async function Home() {
 	const query = qs.stringify(
@@ -59,6 +63,9 @@ export default async function Home() {
 						question_answer: true,
 					},
 				},
+				seo: {
+					fields: ["structuredData"],
+				},
 			},
 		},
 		{ encodeValuesOnly: true }
@@ -66,38 +73,43 @@ export default async function Home() {
 
 	const url = `${process.env.NEXT_PUBLIC_API_URL}/api/home?${query}`;
 
-	const { data } = await getData(url, "Home page",{
-		next:{ revalidate: 60}
-	});
+	const { data } = await getData(url, "Home page");
 
 	if (!data) {
 		notFound();
 	}
 
-	console.log(data);
-	
+	const seo = data?.seo;
 
 	try {
 		return (
-			<div>
-				<HeroHome data={data?.hero} />
-				<StatsAndClients data={data?.portfolio} />
-				<BookingMax data={data?.bookingmax} serviceData={data?.services} />
+			<>
+				{seo &&
+					seo.structuredData?.map((item, i) => {
+						return <StructureData data={item} key={i} />;
+					})}
 
-				<ComparisonSection
-					data={{
-						comparison: data?.comparison,
-						tools: data?.tools,
-						testimonials: data?.video_testimonial,
-						caseStudies: data?.casestudy_section,
-						banner: data?.cta,
-					}}
-				/>
-				<Blog data={data?.blog_section} />
-				<FrequentlyAsk data={data?.faq} />
-			</div>
+				<div>
+					<HeroHome data={data?.hero} />
+					<StatsAndClients data={data?.portfolio} />
+					<BookingMax data={data?.bookingmax} serviceData={data?.services} />
+
+					<ComparisonSection
+						data={{
+							comparison: data?.comparison,
+							tools: data?.tools,
+							testimonials: data?.video_testimonial,
+							caseStudies: data?.casestudy_section,
+							banner: data?.cta,
+						}}
+					/>
+					<Blog data={data?.blog_section} />
+					<FrequentlyAsk data={data?.faq} />
+				</div>
+			</>
 		);
 	} catch (error) {
-		notFound()
+		notFound();
+		console.log(error);
 	}
 }

@@ -8,7 +8,7 @@ const image = "/pages/caseStudies/casestudy.png";
 function CaseCard({ data, onOpenPopup }) {
 	const handleOpen = () => onOpenPopup(data?.video_url);
 
-	console.log(data);
+
 	
 
 	const handleFeedbackMessage = (message) => {

@@ -1,9 +1,14 @@
 import FreeMarketing from "@/components/pages/freeMarketing/FreeMarketing";
 import React from "react";
 import qs from "qs";
-import { getData } from "@/services/helper";
+import { buildMetadataFromSeo, getData } from "@/services/helper";
+import StructureData from "@/components/global/StructureData";
 
 export const revalidate = 60;
+
+export async function generateMetadata() {
+	return buildMetadataFromSeo("/api/free-marketing-plan");
+}
 
 async function page() {
 	const query = qs.stringify(
@@ -11,6 +16,9 @@ async function page() {
 			populate: {
 				service_card: { populate: ["elements"] },
 				goal_card: { populate: ["elements"] },
+				seo: {
+					fields: ["structuredData"],
+				},
 			},
 		},
 		{ encodeValuesOnly: true }
@@ -23,11 +31,19 @@ async function page() {
 	if (!data) {
 		return notFound();
 	}
-	
+
+	const seo = data?.seo;
+
 	return (
-		<div>
-			<FreeMarketing data={data} />
-		</div>
+		<>
+			{seo &&
+				seo.structuredData?.map((item, i) => {
+					return <StructureData data={item} key={i} />;
+				})}
+			<div>
+				<FreeMarketing data={data} />
+			</div>
+		</>
 	);
 }
 

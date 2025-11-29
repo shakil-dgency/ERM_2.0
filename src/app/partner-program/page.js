@@ -8,9 +8,14 @@ import ToolsAlreadyUse from "@/components/pages/partnerProgram/ToolsAlreadyUse";
 import Container from "@/components/ui/Container";
 import React from "react";
 import qs from "qs";
-import { getData } from "@/services/helper";
+import { buildMetadataFromSeo, getData } from "@/services/helper";
+import StructureData from "@/components/global/StructureData";
 
 export const revalidate = 60;
+
+export async function generateMetadata() {
+	return buildMetadataFromSeo("/api/partner-program");
+}
 
 async function page() {
 	const query = qs.stringify(
@@ -35,9 +40,9 @@ async function page() {
 				},
 				tools: {
 					populate: {
-						cards :{
-							populate:{
-								icon:true,
+						cards: {
+							populate: {
+								icon: true,
 							},
 						},
 					},
@@ -46,6 +51,9 @@ async function page() {
 					populate: {
 						question_answer: true,
 					},
+				},
+				seo: {
+					fields: ["structuredData"],
 				},
 			},
 		},
@@ -56,23 +64,28 @@ async function page() {
 
 	const { data } = await getData(url, "partner program page");
 
-	console.log(data);
-
+	const seo = data?.seo;
 	return (
-		<div>
-			<PartnerHero data={data?.hero} stat={data?.statistics} />
-			<StepsToStart data={data?.steps} />
-			<div className="bg-tertiary-500 py-[100px] lg:py-[140px]">
-				<Container>
-					<Mission data={data?.mission_vision} />
-					<OurPartner data={data?.eligibility_criteria} />
-					<ToolsAlreadyUse data={data?.tools} />
-				</Container>
-			</div>
+		<>
+			{seo &&
+				seo.structuredData?.map((item, i) => {
+					return <StructureData data={item} key={i} />;
+				})}
+			<div>
+				<PartnerHero data={data?.hero} stat={data?.statistics} />
+				<StepsToStart data={data?.steps} />
+				<div className="bg-tertiary-500 py-[100px] lg:py-[140px]">
+					<Container>
+						<Mission data={data?.mission_vision} />
+						<OurPartner data={data?.eligibility_criteria} />
+						<ToolsAlreadyUse data={data?.tools} />
+					</Container>
+				</div>
 
-			<FrequentlyAsk data={data?.faq} />
-			<PartnerContact />
-		</div>
+				<FrequentlyAsk data={data?.faq} />
+				<PartnerContact />
+			</div>
+		</>
 	);
 }
 
