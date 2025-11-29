@@ -50,7 +50,7 @@ export default async function Home() {
 							populate: {
 								main_image: true,
 							},
-							fields: ["headline", "slug", "updated_date", "Eyebrow_headline"],
+							fields: ["headline", "slug", "updated_date", "tag"],
 						},
 					},
 				},
@@ -67,12 +67,15 @@ export default async function Home() {
 	const url = `${process.env.NEXT_PUBLIC_API_URL}/api/home?${query}`;
 
 	const { data } = await getData(url, "Home page",{
-		next: { revalidate: 60 },
+		next:{ revalidate: 60}
 	});
 
 	if (!data) {
 		notFound();
 	}
+
+	console.log(data);
+	
 
 	try {
 		return (

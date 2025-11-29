@@ -24,7 +24,7 @@ export const getData = async (apiURL, caller, options = {}) => {
 
 		return data;
 	} catch (error) {
-		return notFound()
+		return notFound();
 	}
 };
 

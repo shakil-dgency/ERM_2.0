@@ -41,7 +41,7 @@ function Hero({ data, video = false, work, lightShadow }) {
 					</div>
 				)}
 
-				<HeroText data={data?.hero_text} />
+				<HeroText data={data?.hero_text} btnText={data?.button_text} />
 			</div>
 			<div className="absolute inset-0 z-10 bg-[#000000d4] h-full"></div>
 		</div>
