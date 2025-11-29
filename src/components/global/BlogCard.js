@@ -43,7 +43,7 @@ function BlogCard({ data }) {
 
 			{/* Tag */}
 			<button className="absolute cursor-pointer z-10 top-5 lg:top-[35px] right-5 lg:right-[45px] border border-primary-800 rounded-[4px] bg-[rgba(32,41,49,0.60)] text-[12px] lg:text-[16px] font-[600] text-neutral-50 py-1.5 sm:py-2.5 px-3 sm:px-5">
-				{data?.Eyebrow_headline}
+				{data?.tag}
 			</button>
 		</div>
 	);

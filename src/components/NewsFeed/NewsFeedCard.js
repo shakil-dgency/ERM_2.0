@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 
 import SingleCard from "./SingleCard";
-// import SearchComponent from "./SearchComponent";
+import SearchComponent from "./SearchComponent";
 import Link from "next/link";
 // import NavBar from "../NavBar";
 import { BiChevronLeft } from "react-icons/bi";
@@ -78,8 +78,8 @@ function NewsFeedCard({ feedData, singleNews, previousData, nextData, randomFeed
 		const foundData = sortedData?.filter((item) => {
 			return search.toLowerCase() === ""
 				? item
-				: item.attributes.feed_title.toLowerCase().includes(search.toLowerCase()) ||
-						item.attributes.feed_description.toLowerCase().includes(search.toLowerCase());
+				: item.feed_title.toLowerCase().includes(search.toLowerCase()) ||
+						item.feed_description.toLowerCase().includes(search.toLowerCase());
 		});
 
 		setNoData(foundData?.length);
@@ -120,6 +120,7 @@ function NewsFeedCard({ feedData, singleNews, previousData, nextData, randomFeed
 						</div>
 					)}
 					{/* <EmailSubscribe component="newsfeed" singleNews={singleNews} /> */}
+					<SearchComponent search={search} setSearch={setSearch} />
 				</div>
 				{noData !== 0 ? (
 					<InfiniteScroll

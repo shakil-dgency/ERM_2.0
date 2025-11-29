@@ -84,7 +84,7 @@ const list = useMemo(() => [...items, ...items], [items]);
               height={logoHeight - 16}
               style={{ objectFit: "contain", maxHeight: "100%", width: "auto" }}
               placeholder="empty"
-              priority={false}
+              priority={true}
             />
           </div>
         ))}

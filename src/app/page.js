@@ -11,7 +11,7 @@ import { notFound } from "next/navigation";
 import qs from "qs";
 
 // export const dynamic = "force-dynamic"; // This page is dynamic and should not be cached
-export const revalidate = 60;
+// export const revalidate = 60;
 
 export default async function Home() {
 	const query = qs.stringify(
@@ -66,7 +66,9 @@ export default async function Home() {
 
 	const url = `${process.env.NEXT_PUBLIC_API_URL}/api/home?${query}`;
 
-	const { data } = await getData(url, "Home page");
+	const { data } = await getData(url, "Home page",{
+		next: { revalidate: 60 },
+	});
 
 	if (!data) {
 		notFound();

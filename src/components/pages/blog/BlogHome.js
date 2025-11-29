@@ -5,10 +5,11 @@ import Container from "@/components/ui/Container";
 import React, { useEffect, useState } from "react";
 import qs from "qs";
 
-function BlogHome({ initialData, initialMeta }) {
+function BlogHome({ initialData, initialMeta, BLOG_TAGS}) {
 	const [blogs, setBlogs] = useState(initialData);
 	const [meta, setMeta] = useState(initialMeta);
 	const [loading, setLoading] = useState(false);
+	const [tag, setTag] = useState(null);
 
 	async function loadMore() {
 		if (meta.pagination.page >= meta.pagination.pageCount) return;
@@ -39,27 +40,63 @@ function BlogHome({ initialData, initialMeta }) {
 	// console.log(blogs);
 
 	const allBlogquery = qs.stringify(
-			{
-				populate: { main_image: true },
-				pagination: {
-					page: 1,
-					pageSize: 100,
-				},
+		{
+			populate: { main_image: true },
+			pagination: {
+				page: 1,
+				pageSize: 100,
 			},
-			{ encodeValuesOnly: true }
-		);
+		},
+		{ encodeValuesOnly: true }
+	);
 
 	useEffect(() => {
 		async function loadAllBlog() {
 			const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/blogs?${allBlogquery}`);
 			const json = await res.json();
 
-			console.log("All blog:",json);
-			
+			console.log("All blog:", json);
 		}
 
-		loadAllBlog()
+		loadAllBlog();
 	}, []);
+
+	// tab onclick filtered data
+
+	useEffect(() => {
+		async function loadFilteredBlogs() {
+			if (!tag) {
+				setBlogs(initialData);
+				setMeta(initialMeta);
+				return;
+			}
+			const allBlogquery = qs.stringify(
+				{
+					filters: {
+						tag: {
+							$eq: tag, // or $eq, $startsWith, etc.
+						},
+					},
+					populate: {
+						main_image: true,
+					},
+					pagination: false, // ← no pagination
+				},
+				{ encodeValuesOnly: true }
+			);
+
+			const filteredRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/blogs?${allBlogquery}`);
+			const filteredJson = await filteredRes.json();
+
+			setBlogs(filteredJson.data);
+			setMeta(null)
+			
+		}
+		loadFilteredBlogs();
+	}, [tag]);
+
+	
+	
 
 	return (
 		<div>
@@ -70,8 +107,11 @@ function BlogHome({ initialData, initialMeta }) {
 						className="overflow-x-scroll lg:overflow-hidden flex gap-10 lg:gap-[70px] mt-[30px] mb-[50px] lg:mb-[100px] border-b-[1px] border-primary-500 pb-[10px]"
 						style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
 					>
-						{[...Array(6)].map((_, index) => (
-							<span key={index}>Marketing</span>
+						<span onClick={() => setTag(null)} className={`${ tag === null ? "underline decoration-primary-500 underline-offset-[14px] decoration-[3px]" : "" } cursor-pointer duration-300`}>All Blogs</span>
+						{BLOG_TAGS?.map((item, index) => (
+							<span onClick={() => setTag(item)} key={index} className={`${ item === tag ? "underline decoration-primary-500 underline-offset-[14px] decoration-[3px]" : "" } cursor-pointer duration-300`}>
+								{item}
+							</span>
 						))}
 					</div>
 					<div className="grid grid-cols-1 sm:grid-cols-2 gap-[30px]">
@@ -79,7 +119,7 @@ function BlogHome({ initialData, initialMeta }) {
 							<BlogCard key={index} data={blog} />
 						))}
 					</div>
-					<div className="flex justify-center mt-[50px]">
+					{meta &&<div className="flex justify-center mt-[50px]">
 						{meta.pagination.page < meta.pagination.pageCount && (
 							<button
 								onClick={loadMore}
@@ -96,7 +136,7 @@ function BlogHome({ initialData, initialMeta }) {
 								</span>
 							</button>
 						)}
-					</div>
+					</div>}
 				</Container>
 			</div>
 		</div>

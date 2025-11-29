@@ -23,13 +23,11 @@ async function page() {
 
 	const url = `${process.env.NEXT_PUBLIC_API_URL}/api/blogs?${query}`;
 
-	const { data, meta } = await getData(url, "contact page");
+	const { data, meta, tag_options } = await getData(url, "contact page");
 
 	if (!data) {
 		return notFound();
 	}
-
-	// console.log(data, meta);
 
 	const blogquery = qs.stringify(
 		{
@@ -48,12 +46,12 @@ async function page() {
 	const newUrl = `${process.env.NEXT_PUBLIC_API_URL}/api/all-blog?${blogquery}`;
 	const { data: newData } = await getData(newUrl, "blog home page");
 
-	console.log(newData);
+
 
 	return (
 		<div>
 			<Hero data={newData?.hero} />
-			<BlogHome initialData={data} initialMeta={meta} />
+			<BlogHome initialData={data} initialMeta={meta} BLOG_TAGS={tag_options} />
 		</div>
 	);
 }

@@ -272,6 +272,7 @@ function Navbar({ marketingBanner }) {
 								height={40}
 								width={170}
 								quality={100}
+								priority={true}
 								className="logo_img h-[43px] xxs:h-[45px] xs:h-auto w-[95px] xxs:w-[120px] xs:w-[130px] sm:w-[150px] xl:w-[163px]"
 							/>
 						</Link>

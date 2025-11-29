@@ -62,7 +62,7 @@ function SearchComponent({ search, setSearch, screen, setWantToSearch, toggle, w
 							onChange={(e) => {
 								setSearch(e.target.value);
 							}}
-							className={`w-full  font-[400] outline-none rounded-none px-2 py-[1px] ml-6 md:ml-0 border-b-[1px] border-b-[#aeaeae] bg-transparent duration-500 ${
+							className={`w-full  font-[400] outline-none rounded-none px-2 py-[1px] ml-6 md:ml-0 border-b-[1px] border-b-[#aeaeae] text-neutral-50 bg-transparent duration-500 ${
 								wantToSearch ? "translate-x-0" : " translate-x-[150%] sm:translate-x-0"
 							}  `}
 							placeholder="Search..."

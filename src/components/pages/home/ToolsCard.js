@@ -39,6 +39,7 @@ export default function ToolsCard({ data, isAbout, index }) {
 						height={138}
 						alt="Stats Image"
 						className=" object-contain h-[138px] w-[120px] "
+						priority={true}
 					/>
 					<div>
 						<p className="text-[20px] sm:text-[24px] lg:text-[20px] 2xl:text-[24px] font-[700] text-neutral-100">{data?.headline}</p>
@@ -58,6 +59,7 @@ export default function ToolsCard({ data, isAbout, index }) {
 										height={60}
 										alt={logo?.alternativeText || "Logo"}
 										className="h-[20px] w-auto object-contain"
+										priority={true}
 									/>
 									<p className="text-[10px] font-[400] text-neutral-100 whitespace-nowrap">{logo?.alternativeText}</p>
 								</div>

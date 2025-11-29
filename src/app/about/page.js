@@ -30,7 +30,9 @@ async function page() {
 
 	const url = `${process.env.NEXT_PUBLIC_API_URL}/api/about-us?${query}`;
 
-	const { data } = await getData(url, "About page");
+	const { data } = await getData(url, "About page",{
+		next:{ revalidate: 60}
+	});
 
 	if (!data) {
 		return notFound();
