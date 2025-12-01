@@ -47,7 +47,7 @@ function Testimonials({ data }) {
 	};
 
 	return (
-		<div className=" pb-[100px] lg:pb-[120px]">
+		<div className=" pb-[80px] lg:pb-[120px]">
 			<div className="max-w-[980px] mx-auto  flex flex-col items-center px-2.5 ">
 				<h2 className="text-center text-neutral-950">{data?.headline}</h2>
 				<p className="text-neutral-700 text-center text-[14px] lg:text-[18px] font-[400] mt-4">{data?.description}</p>

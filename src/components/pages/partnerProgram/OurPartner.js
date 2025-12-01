@@ -4,7 +4,7 @@ import ButtonMain from "./ButtonMain";
 const PartnerCard = ({ index, item }) => {
 	return (
 		<div
-			className={` max-w-[512px] px-2.5 sm:px-5 lg:px-7 py-5 sm:py-7 lg:py-[34px] rounded-[10px] bg-[radial-gradient(137.98%_137.98%_at_100%_2.3%,_rgba(151,177,203,0.60)_0%,_rgba(13,17,22,0.95)_42.58%,_#0D1116_100%)]`}
+			className={` max-w-[512px] px-2.5 sm:px-5 lg:px-7 py-5 sm:py-7 lg:py-[34px] rounded-[10px] bg-[radial-gradient(137.98%_137.98%_at_100%_2.3%,_rgba(44,54,64,0.80)_0%,_rgba(13,17,22,0.95)_42.58%,_#0D1116_100%)]`}
 		>
 			<p className="text-neutral-200 text-[20px] sm:text-[24px] font-[600] mb-2.5">{item?.title}</p>
 			<p className="text-neutral-400 text-[14px] sm:text-[16px] font-[400]">

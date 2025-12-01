@@ -36,7 +36,7 @@ function Footer() {
 	console.log(locationData);
 
 	return (
-		<div className="bg-secondary-900 relative shadow-[0px_-40px_80px_#ff492c30] bg-[url('/footer/footer_bg.png')] bg-no-repeat bg-[length:100%_100%] ">
+		<div className="bg-secondary-900 relative shadow-[0px_-40px_80px_#ff492c30] bg-[url('/footer/footer_bg.png')] bg-no-repeat bg-cover md:bg-[length:100%_100%] ">
 			<div className="max-w-[1584px] mx-auto px-2.5 ">
 				<div className="flex justify-center pt-24 md:pt-28">
 					<Image src="/logo.svg" alt="logo" height={100} width={200} className="" />
@@ -103,7 +103,7 @@ function Footer() {
 									<Link
 										// onClick={backToPreviousPage}
 										href="/works"
-										className="text-neutral-500 hover:text-primary-500 text-center  font-semibold text-[12px] md:text-[14px] flex items-center underline underline-offset-4 "
+										className="text-neutral-500 hover:text-primary-500 text-center  font-semibold text-[14px] md:text-[14px] flex items-center underline underline-offset-4 "
 									>
 										All Works
 									</Link>
@@ -127,6 +127,7 @@ function Footer() {
 										About
 									</Link>
 								</li>
+
 								<li className="">
 									<Link href={"/partner-program"} className="text-[16px] cursor-pointer text-[#9a9a9a] font-[400] hover:text-[#ff492c]">
 										Partner Program
@@ -166,14 +167,20 @@ function Footer() {
 								</li>
 
 								<li className="">
+									<Link href={"/demo-call"} className="text-[16px] cursor-pointer text-[#9a9a9a] font-[400] hover:text-[#ff492c]">
+										Book a Demo
+									</Link>{" "}
+								</li>
+
+								<li className="">
 									<Link href={"/client-call"} className="text-[16px] cursor-pointer text-[#9a9a9a] font-[400] hover:text-[#ff492c]">
 										Exclusive Client Call
 									</Link>{" "}
 								</li>
-								<li className="">
-									<Link href={"/demo-call"} className="text-[16px] cursor-pointer text-[#9a9a9a] font-[400] hover:text-[#ff492c]">
-										Book a Demo
-									</Link>{" "}
+								<li className="flex ">
+									<Link href={"/contact"} className="text-[16px] cursor-pointer text-[#9a9a9a] font-[400] hover:text-[#ff492c]">
+										Contact Us
+									</Link>
 								</li>
 							</ul>
 							<div className="conversion pt-[30px]">
@@ -205,36 +212,29 @@ function Footer() {
 					<div className="social_media">
 						<p className="font-semibold text-base md:text-lg  text-center pt-9 md:pt-0 pb-2 text-[#d9d9d9]">CURRENTLY ACCEPTING FOLLOWERS</p>
 						<div className="flex justify-center gap-3 pb-6 md:pb-0">
-							<div className="cursor-pointer relative ">
-								<Image
-									src="/footer/Linkedin.svg"
-									alt=""
-									height={40}
-									width={40}
-									className="h-[34px] w-auto "
-								/>
-							</div>
-							<div className="cursor-pointer relative ">
+							<Link href={"https://www.facebook.com/EscapeRoomMarketer/"} target="_blank" className="cursor-pointer relative ">
 								<Image src="/footer/facebook.svg" alt="" height={40} width={40} className="h-[34px] w-auto" />
-							</div>
-							<div className="cursor-pointer relative ">
-								<Image
-									src="/footer/Instagram.svg"
-									alt=""
-									height={40}
-									width={40}
-									className="h-[34px] w-auto"
-								/>
-							</div>
-							<div className="cursor-pointer relative ">
+							</Link>
+							<Link href={"https://www.instagram.com/escaperoommktg/"} target="_blank" className="cursor-pointer relative ">
+								<Image src="/footer/Instagram.svg" alt="" height={40} width={40} className="h-[34px] w-auto" />
+							</Link>
+							<Link href={"https://www.linkedin.com/company/escaperoommarketer/"} target="_blank" className="cursor-pointer relative ">
+								<Image src="/footer/Linkedin.svg" alt="" height={40} width={40} className="h-[34px] w-auto " />
+							</Link>
+
+							<Link href={"https://www.youtube.com/@escaperoommarketer3422"} target="_blank" className="cursor-pointer relative ">
 								<Image src="/footer/Youtube.svg" alt="" height={40} width={40} className="h-[34px] w-auto" />
-							</div>
-							<div className="cursor-pointer relative ">
+							</Link>
+							<Link href={"https://www.pinterest.com/EscapeRoomMktg/"} target="_blank" className="cursor-pointer relative ">
 								<Image src="/footer/pinterest.svg" alt="" height={40} width={40} className="h-[34px] w-auto" />
-							</div>
-							<div className="cursor-pointer relative ">
+							</Link>
+							<Link href={"https://www.behance.net/escaperoommarketer"} target="_blank" className="cursor-pointer relative ">
+								<Image src="/footer/behence.svg" alt="" height={40} width={40} className="h-[34px] w-auto" />
+							</Link>
+
+							<Link href={"https://dribbble.com/escape-room-marketer"} target="_blank" className="cursor-pointer relative ">
 								<Image src="/footer/Drible.svg" alt="" height={40} width={40} className="h-[34px] w-auto" />
-							</div>
+							</Link>
 						</div>
 					</div>
 				</div>

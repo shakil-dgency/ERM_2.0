@@ -22,9 +22,7 @@ export default function ToolsCard({ data, isAbout, index }) {
 					boxShadow: data?.card_bg_hex_color ? hover? `1px 2px 10px ${data.card_bg_hex_color}60` : "" : "none",
 					transition: "0.6s",
 				}}
-				className={`${
-					isAbout && index % 2 == 0 ? "md:-mt-[60px]" : ""
-				} group overflow-hidden relative h-full w-full 2xl:max-w-[536px] px-2.5 sm:px-[30px] lg:px-5 2xl:px-[30px] py-[35px] 2xl:py-[45px] rounded-[10px]   bg-[rgba(27,33,39,0.4)] backdrop-blur-[25px] `}
+				className={` group overflow-hidden relative h-full w-full 2xl:max-w-[536px] px-2.5 sm:px-[30px] lg:px-5 2xl:px-[30px] py-[35px] 2xl:py-[45px] rounded-[10px]   bg-[rgba(27,33,39,0.4)] backdrop-blur-[25px] `}
 			>
 				{/* <div class="absolute bottom-0 left-0 w-full h-[2px] bg-gradient-to-l from-white/80 to-transparent rounded-b-[10px]"></div>
                   <div class="absolute top-0 right-0 w-[2px] h-full bg-gradient-to-t from-white/80 to-transparent rounded-r-[10px]"></div> */}

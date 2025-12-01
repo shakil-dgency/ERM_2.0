@@ -6,7 +6,7 @@ import LazyLoadingVideo from "./LazyLoadingVideo";
 function ServiceCard({ data }) {
 	return (
 		<Link
-			href={`${data?.slug}`}
+			href={`/${data?.slug}`}
 			className="service_card drop-shadow-[0px_0px_10px_#ff492c] w-full max-w-full mx-auto h-[450px] md:h-[inherit] md:aspect-[1316/900] lg:aspect-[1316/700] rounded-[10px] lg:rounded-[0.9rem] overflow-hidden relative flex flex-col justify-end px-4 md:px-[30px] xl:px-[60px] py-6 xl:py-[50px] "
 			style={
 				{

@@ -48,7 +48,7 @@ async function page() {
 			sort: ["work_id:asc"],
 			pagination: {
 				page: 1,
-				pageSize: 6,
+				pageSize: 16,
 			},
 		},
 		{ encodeValuesOnly: true }
@@ -57,6 +57,7 @@ async function page() {
 	const allWorkRes = `${process.env.NEXT_PUBLIC_API_URL}/api/works?${worksquery}`;
 
 	const { data: worksData, meta } = await getData(allWorkRes, "works data");
+	
 
 	return (
 		<>

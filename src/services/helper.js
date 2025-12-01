@@ -35,7 +35,7 @@ export const setSafeLinkTargets = (selector = ".blog_body a") => {
 	links.forEach((link) => {
 		const domain = new URL(link.href).hostname.replace("www.", "");
 
-		if (domain === "escaperoommarketer.com") {
+		if (domain === process.env.NEXT_PUBLIC_OWN_DOMAIN) {
 			link.removeAttribute("target");
 		} else {
 			link.setAttribute("target", "_blank");
@@ -63,7 +63,8 @@ export async function buildMetadataFromSeo(apiURL, options = {}) {
 		next: { revalidate: 60 },
 	});
 
-	const seo = seoData?.seo;
+	let seo = seoData.length ? seoData[0]?.seo : seoData?.seo;
+	
 
 	if (!seo) {
 		return {
@@ -80,9 +81,7 @@ export async function buildMetadataFromSeo(apiURL, options = {}) {
 	const canonical = seo.canonicalURL;
 
 	const rawImageUrl = seo.metaImage?.url;
-	const imageUrl =rawImageUrl ? `${process.env.NEXT_PUBLIC_API_URL}${rawImageUrl}` : "/default-og-image.png";
-
-	console.log("meta:", seo);
+	const imageUrl = rawImageUrl ? `${process.env.NEXT_PUBLIC_API_URL}${rawImageUrl}` : "/default-og-image.png";
 
 	return {
 		title,

@@ -143,7 +143,7 @@ function FreeMarketing({ data, seoData }) {
 						let urlEncodedString = encodeURIComponent(hexString);
 
 						setTimeout(() => {
-							// location.replace(`https://escaperoommarketer.com/thank-you?%256e=${urlEncodedString}`);
+							location.replace(`${process.env.NEXT_PUBLIC_OWN_DOMAIN}/thank-you?%256e=${urlEncodedString}`);
 							setLoad(false);
 						}, 700);
 

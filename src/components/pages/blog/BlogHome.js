@@ -2,14 +2,17 @@
 "use client";
 import BlogCard from "@/components/global/BlogCard";
 import Container from "@/components/ui/Container";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import qs from "qs";
+import { InfinitySpin } from "react-loader-spinner";
+import StrokeButton from "@/components/ui/buttons/StrokeButton";
 
-function BlogHome({ initialData, initialMeta, BLOG_TAGS}) {
+function BlogHome({ initialData, initialMeta, BLOG_TAGS }) {
 	const [blogs, setBlogs] = useState(initialData);
 	const [meta, setMeta] = useState(initialMeta);
 	const [loading, setLoading] = useState(false);
 	const [tag, setTag] = useState(null);
+	const ref = useRef();
 
 	async function loadMore() {
 		if (meta.pagination.page >= meta.pagination.pageCount) return;
@@ -89,14 +92,42 @@ function BlogHome({ initialData, initialMeta, BLOG_TAGS}) {
 			const filteredJson = await filteredRes.json();
 
 			setBlogs(filteredJson.data);
-			setMeta(null)
-			
+			setMeta(null);
 		}
 		loadFilteredBlogs();
 	}, [tag]);
 
-	
-	
+	useEffect(() => {
+		const el = ref.current;
+		let isDown = false;
+		let startX, scrollLeft;
+
+		const start = (e) => {
+			isDown = true;
+			startX = e.pageX || e.touches[0].pageX;
+			scrollLeft = el.scrollLeft;
+		};
+
+		const move = (e) => {
+			if (!isDown) return;
+			const x = e.pageX || e.touches[0].pageX;
+			el.scrollLeft = scrollLeft - (x - startX);
+		};
+
+		const stop = () => (isDown = false);
+
+		el.addEventListener("mousedown", start);
+		el.addEventListener("mousemove", move);
+		el.addEventListener("mouseup", stop);
+		el.addEventListener("mouseleave", stop);
+
+		return () => {
+			el.removeEventListener("mousedown", start);
+			el.removeEventListener("mousemove", move);
+			el.removeEventListener("mouseup", stop);
+			el.removeEventListener("mouseleave", stop);
+		};
+	}, []);
 
 	return (
 		<div>
@@ -104,39 +135,54 @@ function BlogHome({ initialData, initialMeta, BLOG_TAGS}) {
 				<Container>
 					<h2 className="text-[40px] font-[700] text-neutral-950">Latest Blogs</h2>
 					<div
-						className="overflow-x-scroll lg:overflow-hidden flex gap-10 lg:gap-[70px] mt-[30px] mb-[50px] lg:mb-[100px] border-b-[1px] border-primary-500 pb-[10px]"
+						ref={ref}
 						style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+						className=" ml-1 overflow-x-scroll blog_tabs flex gap-10 lg:gap-[70px] mt-[30px] mb-[50px] lg:mb-[100px] border-b-[1px] border-primary-500 pb-[10px]"
 					>
-						<span onClick={() => setTag(null)} className={`${ tag === null ? "underline decoration-primary-500 underline-offset-[14px] decoration-[3px]" : "" } cursor-pointer duration-300`}>All Blogs</span>
+						<span
+							onClick={() => setTag(null)}
+							className={`${
+								tag === null ? "underline decoration-primary-500 underline-offset-[14px] decoration-[3px]" : ""
+							} flex-none select-none cursor-pointer duration-300`}
+						>
+							All Blogs
+						</span>
 						{BLOG_TAGS?.map((item, index) => (
-							<span onClick={() => setTag(item)} key={index} className={`${ item === tag ? "underline decoration-primary-500 underline-offset-[14px] decoration-[3px]" : "" } cursor-pointer duration-300`}>
+							<span
+								onClick={() => setTag(item)}
+								key={index}
+								className={`${
+									item === tag ? "underline decoration-primary-500 underline-offset-[14px] decoration-[3px]" : ""
+								} flex-none select-none cursor-pointer duration-300`}
+							>
 								{item}
 							</span>
 						))}
 					</div>
-					<div className="grid grid-cols-1 sm:grid-cols-2 gap-[30px]">
-						{blogs?.map((blog, index) => (
-							<BlogCard key={index} data={blog} />
-						))}
-					</div>
-					{meta &&<div className="flex justify-center mt-[50px]">
-						{meta.pagination.page < meta.pagination.pageCount && (
-							<button
-								onClick={loadMore}
-								className="cursor-pointer flex items-center gap-2 border-[1px] border-primary-500 text-[#161A1E] text-[16px] font-[700] py-2 px-4 rounded"
-							>
-								<span>{loading ? "Loading..." : "Load More"}</span>{" "}
-								<span className="pt-[2px]">
-									<svg xmlns="http://www.w3.org/2000/svg" width="11" height="8" viewBox="0 0 11 8" fill="none">
-										<path
-											d="M6.42859 7.03312L10.2313 1.47851C10.407 1.22198 10.5 0.963519 10.5 0.748684C10.5 0.333343 10.1667 0.076416 9.60869 0.076416L1.39002 0.0764156C0.832694 0.0764156 0.5 0.333019 0.5 0.747389C0.5 0.962547 0.59309 1.21688 0.769312 1.47397L4.5719 7.03117C4.81684 7.38856 5.14646 7.58647 5.50045 7.58647C5.85419 7.58655 6.18372 7.3909 6.42859 7.03312Z"
-											fill="#161A1E"
-										/>
-									</svg>
-								</span>
-							</button>
-						)}
-					</div>}
+					{blogs.length !== 0 ? (
+						<div className="grid grid-cols-1 sm:grid-cols-2 gap-[30px]">
+							{blogs?.map((blog, index) => (
+								<BlogCard key={index} data={blog} />
+							))}
+						</div>
+					): <p className="text-[24px] text-center font-[700] text-neutral-700">No Blogs Found</p>}
+					{meta && (
+						<div className="flex justify-center mt-[50px]">
+							{meta.pagination.page < meta.pagination.pageCount && (
+								<>
+									{loading ? (
+										<div className="flex justify-center ">
+											<InfinitySpin width="200" color="#FF492C" />
+										</div>
+									) : (
+										<div className="flex justify-center mt-4">
+											<StrokeButton medium={true} text="Load More" handleClick={loadMore} text_light={false} />
+										</div>
+									)}
+								</>
+							)}
+						</div>
+					)}
 				</Container>
 			</div>
 		</div>

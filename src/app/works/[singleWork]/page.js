@@ -1,9 +1,16 @@
+import StructureData from "@/components/global/StructureData";
 import Hero from "@/components/pages/about/Hero";
 import WorksDisplay from "@/components/pages/works/WorksDisplay";
-import { getData } from "@/services/helper";
+import { buildMetadataFromSeo, getData } from "@/services/helper";
+import { notFound } from "next/navigation";
 import React from "react";
 
 export const revalidate = 60;
+
+export async function generateMetadata({ params }) {
+	const { singleWork } = params;
+	return buildMetadataFromSeo(`/api/works/${singleWork}`);
+}
 
 async function page({ params }) {
 	const { singleWork } = params;
@@ -11,17 +18,27 @@ async function page({ params }) {
 
 	const { data } = await getData(url, "singleWork Page");
 
-	console.log(data);
+	if (!data) {
+		notFound();
+	}
+
+	const seo = data?.seo;
 
 	return (
-		<div>
-			<Hero data={data?.hero} work={true} lightShadow={true} />
-			<div className="pb-[140px] pt-[60px] bg-secondary-900">
-				{data?.portfolio_section?.map((item, i) => (
-					<WorksDisplay key={i} data={item} />
-				))}
+		<>
+			{seo &&
+				seo.structuredData?.map((item, i) => {
+					return <StructureData data={item} key={i} />;
+				})}
+			<div>
+				<Hero data={data?.hero} work={true} lightShadow={true} />
+				<div className="pb-[140px] pt-[60px] bg-secondary-900">
+					{data?.portfolio_section?.map((item, i) => (
+						<WorksDisplay key={i} data={item} />
+					))}
+				</div>
 			</div>
-		</div>
+		</>
 	);
 }
 

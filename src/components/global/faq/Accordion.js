@@ -37,7 +37,7 @@ export function Accordion({ children, value = null, onChange, ...props }) {
 	}, []);
 
 	return (
-		<ul {...props}>
+		<ul {...props} itemScope itemType="https://schema.org/FAQPage">
 			<AccordianContext.Provider
 				value={{
 					selected,
@@ -85,40 +85,35 @@ function AccordianItem({ children, value, trigger, index, ...props }) {
 	};
 
 	return (
-		<li {...props}>
+		<li {...props} itemScope itemProp="mainEntity" itemType="https://schema.org/Question">
 			<header
 				role="button"
 				onClick={onHeaderClick}
 				className="group relative flex justify-between items-center gap-1 border-t-[1px] border-t-[#191D23] pb-[30px] lg:pb-[50px] pt-[25px] lg:pt-[45px] text-[20px] lg:text-[32px] font-[500] text-[#fff] cursor-pointer"
 			>
-				<span className="relative z-10 mt-1">{trigger}</span>
-				<div className={`transition-transform flex-none border-[1px] bg-secondary-900 border-secondary-600 group-hover:border-transparent group-hover:drop-shadow-[0px_0px_5px_#ff492c90] duration-300 p-2 sm:p-2.5 rounded-full`}>
+				<span itemProp="name" className="relative z-10 mt-1">
+					{trigger}
+				</span>
+				<div
+					className={`transition-transform flex-none border-[1px] bg-secondary-900 border-secondary-600 group-hover:border-transparent group-hover:drop-shadow-[0px_0px_5px_#ff492c90] duration-300 p-2 sm:p-2.5 rounded-full`}
+				>
 					{open ? (
-						<Image
-							src="/global/lock_open.svg"
-							height={20}
-							width={18}
-							alt=""
-							className="w-[15px] sm:w-[20px] h-[15px] sm:h-[20px] mb-[1px] "
-						/>
+						<Image src="/global/lock_open.svg" height={20} width={18} alt="" className="w-[15px] sm:w-[20px] h-[15px] sm:h-[20px] mb-[1px] " />
 					) : (
-						<Image
-							src="/global/lock.svg"
-							height={20}
-							width={18}
-							alt=""
-							className="w-[15px] sm:w-[20px] h-[15px] sm:h-[20px] "
-						/>
+						<Image src="/global/lock.svg" height={20} width={18} alt="" className="w-[15px] sm:w-[20px] h-[15px] sm:h-[20px] " />
 					)}
 				</div>
 				<div className="absolute text-[48px] lg:text-[96px] font-[700] text-[#191d23]">0{index + 1}</div>
 			</header>
 
 			<div
+				itemScope
+				itemProp="acceptedAnswer"
+				itemType="https://schema.org/Answer"
 				className="overflow-hidden transition-[height] duration-500 max-w-[1184px] lg:ml-[40px] text-[16px] lg:text-[20px] leading-[1.6] text-[#9d9d9d]"
 				style={{ height: open ? contentHeight : 0 }}
 			>
-				<div className="lg:pt-[20px] pb-[50px]" ref={ref}>
+				<div className="lg:pt-[20px] pb-[50px]" ref={ref} itemProp="text">
 					{children}
 				</div>
 			</div>

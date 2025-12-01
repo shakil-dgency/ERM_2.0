@@ -35,10 +35,10 @@ function Features({ data }) {
 							<div
 								onClick={() => handleKeyData(item)}
 								className={`${
-									item.headline === state.title ? "bg-[linear-gradient(180deg,rgba(255,73,44,0.80)_0%,rgba(204,55,34,0.80)_100%)]" : ""
-								} py-[25px] lg:py-[35px] px-[15px] lg:px-[25px] mb-[10px] rounded-[10px] border-[1px] border-[rgba(84,101,119,0.40)] bg-[rgba(13,17,22,0.70)] cursor-pointer backdrop-blur-[10px]`}
+									item.headline === state.title ? "bg-[linear-gradient(180deg,rgba(255,73,44,0.80)_0%,rgba(204,55,34,0.80)_100%)] hover:bg-primary-400" : ""
+								} group py-[25px] lg:py-[35px] px-[15px] lg:px-[25px] mb-[10px] rounded-[10px] border-[1px] border-[rgba(84,101,119,0.40)] bg-[rgba(13,17,22,0.70)] cursor-pointer backdrop-blur-[10px]`}
 							>
-								<p className="text-[16px] lg:text-[18px] 2xl:text-[24px] hover:text-primary-500 text-neutral-50 font-[700]">{item?.title}</p>
+								<p className="text-[16px] lg:text-[18px] 2xl:text-[24px] group-hover:text-primary-500 text-neutral-50 font-[700]">{item?.title}</p>
 							</div>
 							<DisplayScreen item={item} state={state} data={data} />
 						</div>
@@ -75,10 +75,12 @@ const DisplayScreen = ({ item, state, data,handleKeyData }) => {
 							key={i}
 							onClick={() => handleKeyData(item)}
 							className={`${
-								item.headline === state.title ? "bg-[linear-gradient(180deg,rgba(255,73,44,0.80)_0%,rgba(204,55,34,0.80)_100%)]" : ""
-							} py-[25px] lg:py-[35px] px-[15px] lg:px-[25px] mb-[10px] rounded-[10px] border-[1px] border-[rgba(84,101,119,0.40)] bg-[rgba(13,17,22,0.70)] cursor-pointer backdrop-blur-[10px]`}
+								item.headline === state.title ? "bg-[linear-gradient(180deg,rgba(255,73,44,0.80)_0%,rgba(204,55,34,0.80)_100%)] hover:bg-primary-800" : ""
+							} group py-[25px] lg:py-[35px] px-[15px] lg:px-[25px] mb-[10px] rounded-[10px] border-[1px] border-[rgba(84,101,119,0.40)] bg-[rgba(13,17,22,0.70)] cursor-pointer backdrop-blur-[10px]`}
 						>
-							<p className="text-[16px] lg:text-[18px] 2xl:text-[24px] hover:text-primary-500 text-neutral-50 font-[700]">{item?.title}</p>
+							<p className={`${
+								item.headline === state.title ? "" : "group-hover:text-primary-500"
+							} text-[16px] lg:text-[18px] 2xl:text-[24px]  text-neutral-50 font-[700]`}>{item?.title}</p>
 						</div>
 					))}
 				</div>

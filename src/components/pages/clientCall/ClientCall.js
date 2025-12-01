@@ -4,52 +4,34 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
-function ClientCall({data}) {
+function ClientCall({ data }) {
 	return (
 		<div className="bg-neutral-900 relative pt-[100px] lg:pt-[140px] pb-[100px] lg:pb-[140px]">
-			{/* <Head>
-					<title>{seoData && seoData.data.attributes.seo?.metaTitle}</title>
-					<meta name="description" content={`${seoData && seoData.data.attributes.seo?.metaDescription}`} />
-					<meta name="keywords" content={`${seoData && seoData.data.attributes.seo?.keywords}`} />
-					<meta name="robots" content={`${seoData && seoData.data.attributes.seo?.metaRobots}`} />
-					<meta property="og:image" content={`${seoData && seoData.data.attributes.seo?.metaImage.data?.attributes.url}`} />
-					<meta property="og:image:width" content="400" />
-					<meta property="og:image:height" content="300" />
-					<meta name="twitter:card" content="summary_large_image" />
-					<meta name="twitter:image" content={`${seoData && seoData.data.attributes.seo?.metaImage.data?.attributes.url}`} />
-					<meta name="viewport" content="width=device-width, initial-scale=1" />
-					<link rel="canonical" href={`${seoData && seoData.data.attributes.seo?.canonicalURL}`} />
-
-					{seoData &&
-						seoData.data.attributes.seo?.structuredData?.map((data, i) => {
-							return (
-								<script
-									key={i}
-									type="application/ld+json"
-									dangerouslySetInnerHTML={{
-										__html: JSON.stringify(data),
-									}}
-								/>
-							);
-						})}
-				</Head> */}
 			<div className="absolute top-0 h-[200px] w-full bg-[linear-gradient(0deg,rgba(13,17,22,0)_0%,rgba(13,17,22,0)_50%,rgba(230,64,39,0.2)_100%)]"></div>
 			<Container>
-				<div className=" flex flex-col items-center justify-center">
+				<div className=" flex flex-col items-center justify-center relative z-10">
 					<p className="highlighted_text">{data?.Eyebrow_headline}</p>
-					<h2 className="text-neutral-50 text-center">{data?.headline}</h2>
+					<h2 className="text-neutral-50 text-center pb-2.5 pt-[15px] md:pt-5">{data?.headline}</h2>
 					<p className="text-[14px] sm:text-[16px] text-neutral-300 text-center">{data?.description}</p>
 				</div>
-				<div className="space-y-[20px] sm:space-y-0 sm:flex gap-2.5 lg:gap-5 justify-center mt-[50px]">
-					<button className="group relative overflow-hidden w-full sm:w-auto px-[30px] lg:px-[60px] py-3 lg:py-[20px] text-[16px] lg:text-[20px] font-[700] text-neutral-5 rounded-[6px] shadow bg-[url('/pages/demoCall/demo_btn.png')] bg-repeat bg-[length:100%_100%]">
+				<div className=" flex flex-col md:flex-row justify-center items-center mt-[50px]">
+					<button className="group relative overflow-hidden w-full md:w-auto px-[30px] lg:px-[60px] py-[16px] text-[16px] lg:text-[20px] font-[700] text-neutral-5 rounded-[6px] shadow bg-[url('/pages/demoCall/demo_btn.png')] bg-repeat bg-[length:100%_100%]">
 						<span className="relative z-10 text-neutral-50">Choose Your Time</span>
 						<div className="bg-[#546577] group-hover:bg-primary-500 duration-300 absolute left-2 bottom-[-40px] w-[130px] h-[80px] rounded-[50%] blur-[25px] " />
 					</button>
-					<button className="group relative overflow-hidden w-full sm:w-auto px-[30px] lg:px-[60px] py-2.5 lg:py-[16px] text-[16px] lg:text-[20px] font-[700] text-neutral-5 rounded-[6px] shadow bg-[url('/pages/demoCall/demo_btn.png')] bg-repeat bg-[length:100%_100%]">
+					<p className="text-neutral-300 leading-[1] text-[32px]">
+						<span className="hidden md:block">⇢</span>
+						<span className="md:hidden">⇣</span>
+					</p>
+					<button className="group relative overflow-hidden w-full md:w-auto px-[30px] lg:px-[60px] py-[16px] text-[16px] lg:text-[20px] font-[700] text-neutral-5 rounded-[6px] shadow bg-[url('/pages/demoCall/demo_btn.png')] bg-repeat bg-[length:100%_100%]">
 						<span className="relative z-10 text-neutral-50">Provide Your Details</span>
 						<div className="bg-[#546577] group-hover:bg-primary-500 duration-300 absolute left-2 bottom-[-40px] w-[130px] h-[80px] rounded-[50%] blur-[25px] " />
 					</button>
-					<button className="group relative overflow-hidden w-full sm:w-auto px-[30px] lg:px-[60px] py-2.5 lg:py-[16px] text-[16px] lg:text-[20px] font-[700] text-neutral-5 rounded-[6px] shadow bg-[url('/pages/demoCall/demo_btn.png')] bg-repeat bg-[length:100%_100%]">
+					<p className="text-neutral-300 leading-[1] text-[32px]">
+						<span className="hidden md:block">⇢</span>
+						<span className="md:hidden">⇣</span>
+					</p>
+					<button className="group relative overflow-hidden w-full md:w-auto px-[30px] lg:px-[60px] py-[16px] text-[16px] lg:text-[20px] font-[700] text-neutral-5 rounded-[6px] shadow bg-[url('/pages/demoCall/demo_btn.png')] bg-repeat bg-[length:100%_100%]">
 						<span className="relative z-10 text-neutral-50">Let’s Talk Growth</span>
 						<div className="bg-[#546577] group-hover:bg-primary-500 duration-300 absolute left-2 bottom-[-40px] w-[130px] h-[80px] rounded-[50%] blur-[25px] " />
 					</button>
@@ -74,7 +56,7 @@ function ClientCall({data}) {
 
 				<div className={`pt-[100px] lg:pt-[140px] max-w-[1240px] mx-auto`}>
 					<p className="text-[20px] sm:text-[26px] lg:text-[36px] text-center font-[700] text-neutral-50 mb-[50px]">
-						What You'll Get with Our Live Demo
+						{data?.advices?.headline}
 					</p>
 					<div className=" text-[#222] grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-3 gap-4">
 						{/* {contactData &&

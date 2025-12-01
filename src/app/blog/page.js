@@ -20,7 +20,7 @@ async function page() {
 			},
 			pagination: {
 				page: 1,
-				pageSize: 3, // show first 6 blogs
+				pageSize: 16, // show first 6 blogs
 			},
 		},
 		{ encodeValuesOnly: true }

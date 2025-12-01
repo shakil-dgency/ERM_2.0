@@ -68,6 +68,7 @@ function VideoPopUp({ video_url, open, setOpen }) {
 								src={video_url}
 								ref={popupVideoRef}
 								controls
+								controlsList="nofullscreen"
 								muted={false}
 								playsInline
 								preload="metadata"

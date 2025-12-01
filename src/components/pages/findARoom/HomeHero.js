@@ -52,7 +52,7 @@ function HomeHero({ location, cityName, data, image }) {
 						<div className="pt-10 md:pt-24 pb-2 ">
 							<p className="highlighted_text">{data?.eyebrow_headline}</p>
 							<h1 className="text-[24px] md:text-[54px] font-[700] text-[#fff_!important] max-w-[1127px] mx-auto">{data?.headline}</h1>
-							<p className="text-[16px] text-neutral-300 max-w-[840px] mx-auto pt-2.5">{data?.description}</p>
+							<p className="text-[16px] md:text-[20px] text-neutral-300 max-w-[840px] mx-auto pt-2.5">{data?.description}</p>
 						</div>
 
 						<div

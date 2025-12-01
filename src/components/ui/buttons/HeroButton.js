@@ -7,7 +7,7 @@ function HeroButton({text}) {
 		<div className="flex flex-none">
 			<Link
 				href={"/free-marketing"}
-				className="group flex items-center gap-2.5 text-[14px] lg:text-[18px] text-neutral-50 font-[700]  px-[15px] lg:px-[35px] py-[15px] rounded-[6px] bg-primary-600 hover:drop-shadow-[0px_0px_10px_#d42f00] transition-all duration-300"
+				className="group flex items-center uppercase gap-2.5 text-[14px] lg:text-[18px] text-neutral-50 font-[700]  px-[15px] lg:px-[35px] py-[15px] rounded-[6px] bg-primary-600 hover:drop-shadow-[0px_0px_10px_#d42f00] transition-all duration-300"
 			>
 				<Image
 					src="/global/lock.svg"

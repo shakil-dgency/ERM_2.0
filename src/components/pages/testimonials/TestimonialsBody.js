@@ -13,10 +13,10 @@ function TestimonialsBody({ data }) {
 		setOpen(true);
 	};
 	return (
-		<div className="bg-secondary-900 py-[100px] lg:py-[140px]">
-			<div className="max-w-[1316px] mx-auto space-y-[100px]">
+		<div className="bg-secondary-900 pb-[100px] lg:pb-[140px] pt-2 lg:pt-[80px] px-2.5">
+			<div className="max-w-[1316px] mx-auto space-y-[130px] md:space-y-[140px]">
 				{data?.map((item, i) => (
-					<Testimonial key={i} data={item} onOpenPopup={handleOpenPopup} />
+					<Testimonial key={i} data={item} onOpenPopup={handleOpenPopup} text_light={true} />
 				))}
 			</div>
 			<VideoPopUp video_url={popupVideoURL} open={open} setOpen={setOpen} />

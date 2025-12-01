@@ -18,7 +18,7 @@ function ButtonMain({text}) {
 	return (
 		<button
 			onClick={handleLocation}
-			className="bg-red-600 hover:bg-red-700 uppercase text-white text-[14px] xs:text-[16px] font-semibold px-[30px] xs:px-[35px] py-[12px] xs:py-[15px] rounded flex items-center justify-center gap-2 mx-auto"
+			className=" cursor-pointer bg-red-600 hover:bg-red-700 uppercase text-white text-[14px] xs:text-[16px] font-semibold px-[30px] xs:px-[35px] py-[12px] xs:py-[15px] rounded flex items-center justify-center gap-2 mx-auto"
 		>
 			{text? text:"Apply for Partner Program"}
 		</button>

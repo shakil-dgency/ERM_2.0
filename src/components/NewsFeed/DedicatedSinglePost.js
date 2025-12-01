@@ -2,8 +2,9 @@
 import React, { useEffect, useState } from "react";
 import { notFound, usePathname } from "next/navigation";
 import NewsFeedCard from "./NewsFeedCard";
+import StructureData from "../global/StructureData";
 
-function DedicatedSinglePost({ feedData }) {
+function DedicatedSinglePost({ feedData ,singleNews}) {
 	const navigate = usePathname();
 	const [filteredData, setFilteredData] = useState(null);
 	const [previousData, setPreviousData] = useState();
@@ -71,28 +72,35 @@ function DedicatedSinglePost({ feedData }) {
 		}
 	}, []);
 
-	return (
-		<div>
-			{filteredData?.length !== 0 ? (
-				<div className={``}>
-					<div className=" ">
-						{/* <SearchComponent /> */}
+	console.log(filteredData);
 
-						<div className={`min-h-[1000px]`}>
-							{/* {filteredData &&
+	return (
+		<>
+			{filteredData &&
+				filteredData[0].seo?.structuredData?.map((item, i) => {
+					return <StructureData data={item} key={i} />;
+				})}
+			<div>
+				{filteredData?.length !== 0 ? (
+					<div className={``}>
+						<div className=" ">
+							{/* <SearchComponent /> */}
+
+							<div className={`min-h-[1000px]`}>
+								{/* {filteredData &&
 						filteredData.map((data) => {
 							return <SingleCard data={data} />;
 						})} */}
 
-							<NewsFeedCard feedData={filteredData} previousData={previousData} nextData={nextData} randomFeed={randomFeed} singleNews="true" />
+								<NewsFeedCard feedData={filteredData} previousData={previousData} nextData={nextData} randomFeed={randomFeed} singleNews={singleNews} />
+							</div>
 						</div>
-						
 					</div>
-				</div>
-			) : (
-				notFound()
-			)}
-		</div>
+				) : (
+					notFound()
+				)}
+			</div>
+		</>
 	);
 }
 

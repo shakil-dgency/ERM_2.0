@@ -13,7 +13,7 @@ import { setToggle } from "@/lib/features/toggleSlice";
 
 function PartnerContact() {
 	const [name, setName] = useState("");
-	const [websiteAddress, setWebsiteAddress] = useState("");
+	const [position, setPosition] = useState("");
 	const [email, setEmail] = useState("");
 	const [phone, setPhone] = useState("");
 	const [country, setCountry] = useState("");
@@ -75,10 +75,10 @@ function PartnerContact() {
 				await phoneSchema.validate({ phone });
 				console.log("Phone number is valid");
 
-				if (name !== "" && regex.test(email) && websiteAddress !== "" && message !== "") {
+				if (name !== "" && regex.test(email) && position !== "" && message !== "") {
 					e.preventDefault();
 					contactObj = {
-						data: { name, email, phone, country, websiteAddress, message },
+						data: { name, email, phone, country, position, message },
 						subject: "Partner Program - Escape Room Marketer",
 						form: "partner-program",
 					};
@@ -96,8 +96,8 @@ function PartnerContact() {
 					let urlEncodedString = encodeURIComponent(hexString);
 
 					setTimeout(() => {
-						// location.replace(`https://escaperoommarketer.com/thank-you?%256e=${urlEncodedString}`);
-						// setLoad(false);
+						location.replace(`${process.env.NEXT_PUBLIC_OWN_DOMAIN}/thank-you?%256e=${urlEncodedString}`);
+						setLoad(false);
 					}, 500);
 
 					try {
@@ -107,10 +107,10 @@ function PartnerContact() {
 					}
 				} else {
 					e.preventDefault();
-					if (websiteAddress === "") {
-						setWebsiteAddress(null);
+					if (position === "") {
+						setPosition(null);
 						setTimeout(() => {
-							setWebsiteAddress("");
+							setPosition("");
 						}, 800);
 					} else if (name === "") {
 						setName(null);
@@ -258,15 +258,15 @@ function PartnerContact() {
 								</div>
 								<div className="sm:w-full relative">
 									<label htmlFor="" className="font-[400] text-[12px] sm:text-[14px] lg:text-[16px] text-neutral-300">
-										Website address<span className="text-primary-600 text-lg">*</span>
+										Your position<span className="text-primary-600 text-lg">*</span>
 									</label>{" "}
 									<br />
 									<input
-										onChange={(e) => setWebsiteAddress(e.target.value)}
+										onChange={(e) => setPosition(e.target.value)}
 										type="text"
 										className="outline-none border-[1px] border-[rgba(84,101,119,0.40)] bg-[rgba(53,65,77,0.20)] w-full sm:h-[50px] text-neutral-50 text-base px-2 py-1 mt-1 rounded-[4px] "
 									/>
-									{websiteAddress === null && (
+									{position === null && (
 										<p className="text-[14px] rounded absolute bottom-[-45px] left-[25%] px-[10px] py-[8px] z-10 bg-[#f1f1f1] before:content-[''] before:absolute before:left-[15%] before:top-[-50%] before:rotate-180  before:border-[10px] before:border-solid before:border-[#f1f1f1] before:border-r-[#0000] before:border-b-[#0000] before:border-l-[#0000]">
 											⚠️ Please fill out this field
 										</p>

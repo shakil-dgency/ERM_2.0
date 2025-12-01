@@ -80,8 +80,8 @@ function ContactUs({ data }) {
 					let urlEncodedString = encodeURIComponent(hexString);
 
 					setTimeout(() => {
-						// location.replace(`https://escaperoommarketer.com/thank-you?%256e=${urlEncodedString}`);
-						// setLoad(false);
+						location.replace(`${process.env.NEXT_PUBLIC_OWN_DOMAIN}/thank-you?%256e=${urlEncodedString}`);
+						setLoad(false);
 					}, 500);
 
 					try {
@@ -130,36 +130,11 @@ function ContactUs({ data }) {
 	try {
 		return (
 			<div className="bg-neutral-900 relative">
-				{/* <Head>
-					<title>{seoData && seoData.data.attributes.seo?.metaTitle}</title>
-					<meta name="description" content={`${seoData && seoData.data.attributes.seo?.metaDescription}`} />
-					<meta name="keywords" content={`${seoData && seoData.data.attributes.seo?.keywords}`} />
-					<meta name="robots" content={`${seoData && seoData.data.attributes.seo?.metaRobots}`} />
-					<meta property="og:image" content={`${seoData && seoData.data.attributes.seo?.metaImage.data?.attributes.url}`} />
-					<meta property="og:image:width" content="400" />
-					<meta property="og:image:height" content="300" />
-					<meta name="twitter:card" content="summary_large_image" />
-					<meta name="twitter:image" content={`${seoData && seoData.data.attributes.seo?.metaImage.data?.attributes.url}`} />
-					<meta name="viewport" content="width=device-width, initial-scale=1" />
-					<link rel="canonical" href={`${seoData && seoData.data.attributes.seo?.canonicalURL}`} />
-
-					{seoData &&
-						seoData.data.attributes.seo?.structuredData?.map((data, i) => {
-							return (
-								<script
-									key={i}
-									type="application/ld+json"
-									dangerouslySetInnerHTML={{
-										__html: JSON.stringify(data),
-									}}
-								/>
-							);
-						})}
-				</Head> */}
+				
 				<div className="absolute top-0 h-[200px] w-full bg-[linear-gradient(0deg,rgba(13,17,22,0)_0%,rgba(13,17,22,0)_50%,rgba(230,64,39,0.2)_100%)]"></div>
-				<div className="pt-[100px] lg:pt-[140px] px-2.5 pb-[60px] lg:pb-[140px] flex flex-col items-center justify-center">
+				<div className="relative z-10 pt-[100px] lg:pt-[140px] px-2.5 pb-[60px] lg:pb-[140px] flex flex-col items-center justify-center">
 					<p className="highlighted_text">{data?.Eyebrow_headline}</p>
-					<h2 className="text-neutral-50 text-center">{data?.headline}</h2>
+					<h2 className="text-neutral-50 text-center pb-2.5 pt-[15px] md:pt-5">{data?.headline}</h2>
 					<p className="text-[14px] sm:text-[16px] text-neutral-300 text-center">{data?.description}</p>
 				</div>
 				<div className=" px-2.5 ">

@@ -115,8 +115,8 @@ function VideoSection({ data }) {
 								<span
 									onClick={() => handleKeyData(item)}
 									className={`${
-										item?.tags === state?.tag ? "border-primary-500" : "border-neutral-500"
-									} cursor-pointer flex justify-center items-center px-[25px] 2xl:px-[45px] py-[10px] 2xl:py-[25px]  font-[600] text-neutral-500 rounded-[6px] md:rounded-[10px] border-[2px] `}
+										item?.tags === state?.tag ? "border-primary-500 text-neutral-50" : "border-neutral-500 text-neutral-500"
+									} cursor-pointer flex justify-center items-center px-[25px] 2xl:px-[45px] py-[10px] 2xl:py-[25px]  font-[600]  rounded-[6px] md:rounded-[10px] border-[2px] `}
 								>
 									{item?.tags}
 								</span>

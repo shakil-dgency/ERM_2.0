@@ -18,7 +18,7 @@ function PartnerHero({ data, stat }) {
 					<div className="pt-10 md:pt-20 pb-[35px] md:pb-[60px] ">
 						<p className="highlighted_text">{data?.hero_text?.eyebrow_headline}</p>
 						<h1 className="text-neutral-50 text-[clamp(40px,10vw,90px)] font-[700] leading-[1.2] text-center">{data?.hero_text?.headline}</h1>
-						<p className="text-[14px] sm:text-[24px] text-neutral-300 text-center  mt-3">{data?.hero_text?.description}</p>
+						<p className="max-w-[880px] mx-auto text-[16px] sm:text-[20px] text-neutral-300 text-center  mt-3">{data?.hero_text?.description}</p>
 					</div>
 
 					<ButtonMain text={data?.button_text} />
@@ -27,7 +27,7 @@ function PartnerHero({ data, stat }) {
 
 			<div className="max-w-[1024px] mx-2.5 lg:mx-auto mt-8 bg-secondary-800 px-[14px] py-[16px] shadow-md rounded-md relative z-30 flex flex-row justify-around  -mb-[60px]">
 				{stat?.map((item, i) => (
-					<div key={i} className=" w-full border-r-[1px] border-secondary-700">
+					<div key={i} className={`${i !== stat.length - 1 ? "border-r-[1px] border-neutral-800 " : ""} w-full`}>
 						<div>
 							<p className="text-neutral-50 text-center text-[20px] md:text-[36px] font-[700]">{item?.value}</p>
 							<p className="text-[12px] md:text-[16px] text-center text-neutral-300">{item?.short_description}</p>

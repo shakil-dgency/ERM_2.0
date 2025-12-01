@@ -20,7 +20,7 @@ function ComparisonBox({ data }) {
 									key={i}
 									className={`${
 										i === 0 ? "rounded-tl-[20px]" : i === data?.comparison_table?.length - 1 ? "rounded-bl-[20px]" : ""
-									} text-neutral-100 flex items-center justify-start pl-6 pr-[70px] py-[25px] border-b border-secondary-700 bg-secondary-800`}
+									} text-neutral-100 flex items-center justify-start pl-6 pr-[70px] py-4 sm:py-[28px] border-b border-secondary-700 bg-secondary-800`}
 								>
 									{item.label}
 								</p>
@@ -32,13 +32,13 @@ function ComparisonBox({ data }) {
 							className="grid bg-secondary-800 -ml-[60px] mr-[40px] -mb-[35px] rounded-[10px] relative z-10 overflow-hidden shadow-[0px_0px_10px_#ff492c] bg-[url('/pages/home/bookingMaxBg.png')] bg-repeat bg-[length:240px_240px]"
 							style={{ gridTemplateRows: `repeat(${data?.comparison_table?.length + 1}, 1fr) 0.5fr ` }}
 						>
-							<div className="flex items-center justify-center text-neutral-50 font-[700] sm:font-[600] relative z-20">{data?.column_name_1}</div>
+							<div className="flex items-center justify-center text-neutral-50 text-[14px] lg:text-[16px] text-center font-[700] relative z-20">{data?.column_name_1}</div>
 							{data?.comparison_table?.map((item, i) => (
 								<p
 									key={i}
 									className={`${
 										data?.comparison_table?.length - 1 === i ? "" : ""
-									} text-neutral-50 relative z-20 flex items-center justify-center text-center px-3 py-[25px]`}
+									} text-neutral-50 relative z-20 flex items-center justify-center text-center px-3 py-4 sm:py-[28px]`}
 								>
 									{item.erm}
 								</p>
@@ -50,11 +50,11 @@ function ComparisonBox({ data }) {
 
 						{/* Column: Agencies */}
 						<div className="grid -ml-[40px] mr-[20px]" style={{ gridTemplateRows: `repeat(${data?.comparison_table?.length + 1}, 1fr)` }}>
-							<div className="flex items-center justify-center font-[700] sm:font-[600] text-[#161a1e]">{data?.column_name_2}</div>
+							<div className="flex items-center justify-center font-[700] text-[14px] lg:text-[16px] text-center text-[#161a1e]">{data?.column_name_2}</div>
 							{data?.comparison_table?.map((item, i) => (
 								<p
 									key={i}
-									className="text-neutral-200 flex items-center justify-center text-center px-[18px] py-[25px] border-b border-secondary-700 bg-secondary-800"
+									className="text-neutral-200 flex items-center justify-center text-center px-[18px] py-4 sm:py-[28px] border-b border-secondary-700 bg-secondary-800"
 								>
 									{item.agencies}
 								</p>
@@ -63,13 +63,13 @@ function ComparisonBox({ data }) {
 
 						{/* Column: Freelancers */}
 						<div className="grid -ml-[20px]" style={{ gridTemplateRows: `repeat(${data?.comparison_table?.length + 1}, 1fr)` }}>
-							<div className=" flex items-center justify-center font-[700] sm:font-[600] text-[#161a1e]">{data?.column_name_3}</div>
+							<div className=" flex items-center justify-center text-[14px] lg:text-[16px] text-center font-[700] text-[#161a1e]">{data?.column_name_3}</div>
 							{data?.comparison_table?.map((item, i) => (
 								<p
 									key={i}
 									className={`${
 										i === 0 ? "rounded-tr-[20px]" : i === data?.comparison_table?.length - 1 ? "rounded-br-[20px]" : ""
-									} text-neutral-200 flex items-center justify-center text-center pl-3 pr-6 py-[25px] border-b border-secondary-700 bg-secondary-800`}
+									} text-neutral-200 flex items-center justify-center text-center pl-3 pr-6 py-4 sm:py-[28px] border-b border-secondary-700 bg-secondary-800`}
 								>
 									{item.freelancers}
 								</p>

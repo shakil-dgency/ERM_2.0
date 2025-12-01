@@ -15,7 +15,7 @@ function Faq({ data, allFaq }) {
 	return (
 		<div className=" ">
 			{!allFaq && <div className="flex justify-end mb-6">
-				<button onClick={handleToggleAll} className="flex items-center text-[14px] sm:text-[16px] font-[600] text-primary-600 rounded-md transition-all">
+				<button onClick={handleToggleAll} className="cursor-pointer flex items-center text-[14px] sm:text-[16px] font-[600] text-primary-600 rounded-md transition-all">
 					{openAll ? "Collapse all" : "Expand all"}
 					<span className="flex flex-col justify-center">
 						<IoMdArrowDropleft className={` ml-1.5 text-[16px] sm:text-[20px] transform duration-300 ${openAll ? "rotate-270" : "rotate-90"}`} />

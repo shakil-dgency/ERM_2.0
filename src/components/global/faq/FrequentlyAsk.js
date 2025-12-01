@@ -42,12 +42,12 @@ async function FrequentlyAsk({ data }) {
 	// const faqData = await getFaqData();
 	return (
 		<div>
-			<div id="FrequentlyAsk" className="bg-secondary-900 pt-[80px] md:pt-[100px] pb-[110px] md:pb-[150px]">
+			<div id="FrequentlyAsk" className="bg-secondary-900 pt-[80px] md:pt-[100px] pb-[100px] md:pb-[140px]">
 				<div className=" max-w-[1316px] mx-auto px-2.5">
 					<div>
-						<p className="text-[44px] xs:text-[54px] lg:text-[128px] font-[700] text-[#fff] text-center leading-[1] whitespace-nowrap">
+						<p className="text-[44px] xs:text-[64px] lg:text-[128px] font-[700] text-[#fff] text-center leading-[1] whitespace-nowrap">
 							<span className="relative -ml-[50px] lg:-ml-[100px] inline-block align-baseline">
-								<span className="highlighted_text absolute right-[50%] translate-x-[50%] lg:translate-x-0 lg:right-full top-[-20px] lg:top-6  ">{data?.Eyebrow_headline}</span>
+								<span className="highlighted_text absolute right-[40%] translate-x-[50%] 2xl:translate-x-0 2xl:right-full top-[-20px] 2xl:top-6  ">{data?.Eyebrow_headline}</span>
 								Common
 							</span>
 							<br />

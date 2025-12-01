@@ -12,8 +12,20 @@ import "swiper/css/navigation";
 import Image from "next/image";
 import LazyLoadingVideo from "@/components/global/LazyLoadingVideo";
 import Html5ZipViewer from "./Html5ZipViewer";
+import { useRef } from "react";
 
 function WorksDisplay({ data }) {
+	const videoRefs = useRef([]);
+
+	const handleVideoPlay = (index) => {
+		// Pause all other videos
+		videoRefs.current.forEach((video, i) => {
+			if (i !== index && video) {
+				video.pause();
+			}
+		});
+	};
+
 	const generateBreakpoints = (slidesFromDB) => {
 		// Define your desired breakpoint order (mobile → desktop)
 		const breakpointKeys = [480, 768, 1024, 1280];
@@ -34,7 +46,6 @@ function WorksDisplay({ data }) {
 
 			// Ensure it never goes below 1
 			slidesPerView = Math.max(slidesPerView, minSlides);
-			
 
 			breakpoints[bp] = {
 				slidesPerView,
@@ -47,49 +58,21 @@ function WorksDisplay({ data }) {
 
 	const slidesFromDB = data?.image_view; // dynamic value from API or CMS
 	const breakpoints = generateBreakpoints(slidesFromDB);
-	
 
 	return (
-		<div className={`${data?.image_view <= data?.images?.length ? "":""} pt-[40px] md:pt-[90px]`}>
+		<div className={`${data?.image_view <= data?.images?.length ? "" : ""} pt-[40px] md:pt-[90px]`}>
 			<Container>
 				<div className="max-w-[1096px] mb-10">
 					<h2 className="text-neutral-50">{data?.title}</h2>
 					<p className="text-[16px] sm:text-[18px] text-neutral-300 mt-3 md:mt-4">{data?.description}</p>
 				</div>
 				<div>
-					{/* <Swiper
-						slidesPerView={1}
-						spaceBetween={20}
-						pagination={{
-							clickable: true,
-						}}
-						navigation={true}
-						modules={[Pagination, Navigation]}
-						className="mySwiper boundedSwiper"
-						breakpoints={{
-							1024: {
-								// >= 768px
-								slidesPerView: 2,
-								spaceBetween: 30,
-							},
-						}}
-					>
-						<SwiperSlide>
-							<div className="aspect-[728/90]">
-								<Image src={"/pages/caseStudies/Black-OPS-728x90.jpg"} height={250} width={970} alt="" className="h-full w-full" />
-							</div>
-						</SwiperSlide>
-						<SwiperSlide>
-							<div className="aspect-[728/90]">
-								<Image src={"/pages/caseStudies/Black-OPS-728x90.jpg"} height={250} width={970} alt="" className="h-full w-full" />
-							</div>
-						</SwiperSlide>
-					</Swiper> */}
 					<Swiper
 						slidesPerView={1}
 						spaceBetween={20}
 						pagination={{
 							clickable: true,
+							dynamicBullets: true
 						}}
 						navigation={true}
 						modules={[Pagination, Navigation]}
@@ -115,13 +98,21 @@ function WorksDisplay({ data }) {
 							? data?.video_urls?.map((video, j) => (
 									<SwiperSlide key={j}>
 										<div style={{ aspectRatio: video?.width / video?.height }} className="cursor-pointer">
-											<LazyLoadingVideo video_url={video?.url} muted={false} controls={true} autoPlay={false} poster={video?.poster?.url} />
+											<LazyLoadingVideo
+												video_url={video?.url}
+												muted={false}
+												controls={true}
+												autoPlay={false}
+												poster={video?.poster?.url}
+												ref={(el) => (videoRefs.current[j] = el)}
+												onPlay={() => handleVideoPlay(j)}
+											/>
 										</div>
 									</SwiperSlide>
 							  ))
 							: data?.html5_ads?.map((file, z) => (
 									<SwiperSlide key={z}>
-										<div >
+										<div className="flex justify-center">
 											<Html5ZipViewer zipFile={file} />
 										</div>
 									</SwiperSlide>

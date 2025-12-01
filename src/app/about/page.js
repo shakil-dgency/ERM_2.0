@@ -62,12 +62,9 @@ async function page() {
 							<Mission data={data?.mission_vision_1} />
 						</Container>
 					</div>
-					<div className="bg-secondary-900 pt-[140px]">
+					<div className="bg-secondary-900 pt-[120px] lg:pt-[140px]">
 						<Container>
-							<div className="grid md:grid-cols-3 gap-6 mt-[60px]">
-								{/* <div className="md:-mt-[60px] w-full h-[350px] rounded-[10px] bg-[rgba(27,33,39,0.40)] backdrop-blur-[25px]"></div>
-							<div className=" w-full h-[350px] rounded-[10px] bg-[rgba(27,33,39,0.40)] backdrop-blur-[25px]"></div>
-							<div className="md:-mt-[60px] w-full h-[350px] rounded-[10px] bg-[rgba(27,33,39,0.40)] backdrop-blur-[25px]"></div> */}
+							<div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:mt-[60px]">
 								{data?.portfolio.cards.map((card, i) => (
 									<ToolsCard key={i} data={card} isAbout={true} index={i} />
 								))}

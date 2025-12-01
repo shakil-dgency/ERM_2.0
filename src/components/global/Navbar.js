@@ -255,7 +255,6 @@ function Navbar({ marketingBanner }) {
 				console.error("Fetch error:", err);
 			}
 		}
-		
 
 		fetchWorks();
 	}, []);
@@ -293,7 +292,7 @@ function Navbar({ marketingBanner }) {
 									</li>
 
 									<li id="nav6" className=" hover:text-primary-500 duration-300 flex items-center text-[14px] xl:text-[15px] relative z-20">
-										<Link href={"/bookingmax"} className={`${router.asPath === "/blog" ? "text-primary-500" : " "}`}>
+										<Link href={"/bookingmax"} className={`${router === "/bookingmax" ? "text-primary-500" : " "}`}>
 											BookingMAX
 										</Link>
 									</li>
@@ -307,13 +306,11 @@ function Navbar({ marketingBanner }) {
 										ref={worksBtnRef}
 										onClick={handleWorksPopup}
 										className={`${
-											worksData?.find((item) => item.slug === router.split("/").pop()) ? "text-primary-500" : ""
+											worksData?.find((item) => "/works/" + item.slug === router) || router === "/works" ? "text-primary-500" : ""
 										} cursor-pointer hover:text-primary-500 duration-300 flex items-center text-[14px] xl:text-[15px] relative z-20`}
 									>
-										{/* <Link href="works" className={`${router === "/works" ? "text-primary-500" : " "}`}> */}
 										Works
 										<MdOutlineArrowDropDown className={`arrow_rotate text-xl xl:text-[22px] duration-300 ${worksOpen ? "rotate-180" : ""}`} />
-										{/* </Link> */}
 									</li>
 									<div ref={insightNavRef} className="relative">
 										<li
@@ -356,7 +353,7 @@ function Navbar({ marketingBanner }) {
 												router={router}
 											/>
 											<NavCard
-												slug="find-a-room"
+												slug="escape-rooms"
 												img="/navbar/insights/EscapeRoomDirectory.svg"
 												title="Escape Room Directory"
 												description="Connecting players to your escape rooms"
@@ -483,7 +480,7 @@ function Navbar({ marketingBanner }) {
 									<Link
 										href={"/free-marketing"}
 										onClick={handleClick}
-										className="button group hover:shadow-[0px_0px_14px_#ff492c] duration-300 hidden xl:flex items-center gap-1 md:gap-2.5 font-[700] flex-[2] px-[20px] py-[8px] rounded-[6px] border-[2px] border-primary-800 hover:border-transparent relative z-20"
+										className="button group hover:shadow-[0px_0px_14px_#ff492c] duration-300 hidden xl:flex items-center gap-1 md:gap-2.5 font-[700] flex-[2] px-[20px] py-[8px] rounded-[6px] bg-primary-600 relative z-20"
 									>
 										<Image
 											src="/global/lock.svg"
@@ -512,7 +509,7 @@ function Navbar({ marketingBanner }) {
 								{router !== "/free-marketing" && (
 									<Link
 										href={"/free-marketing"}
-										className="group xl:hidden hover:text-primary-500 marketing_plan flex items-center gap-2 xs:gap-2.5 font-[500] flex-[2] px-1.5 xxs:px-[10px] py-[2px] xxs:py-1.5 xs:px-[10px] md:py-[10px] ml-[0] xl:ml-[6px] rounded border-[2px] border-primary-800  text-neutral-50 relative z-20 text-[13px] xs:text-[14px]"
+										className="group xl:hidden marketing_plan flex items-center gap-2 xs:gap-2.5 font-[500] flex-[2] px-1.5 xxs:px-[10px] py-[4px] xxs:py-1.5 xs:px-[10px] md:py-[10px] ml-[0] xl:ml-[6px] rounded bg-primary-600 text-neutral-50 relative z-20 text-[13px] xs:text-[14px]"
 									>
 										<Image
 											src="/global/lock.svg"
@@ -580,7 +577,9 @@ function Navbar({ marketingBanner }) {
 								<Link
 									// onClick={backToPreviousPage}
 									href="/works"
-									className="group text-neutral-500 hover:text-primary-500 text-center  font-semibold text-[12px] md:text-[14px] flex items-center underline underline-offset-4 "
+									className={`${
+										router === "/works" ? "text-primary-500" : " "
+									} group text-neutral-500 hover:text-primary-500 text-center  font-semibold text-[12px] md:text-[14px] flex items-center underline underline-offset-4`}
 								>
 									<MdOutlineArrowDropDown className="text-xl rotate-90 group-hover:translate-x-[-2px] duration-300" /> All Works
 								</Link>
@@ -659,7 +658,9 @@ function Navbar({ marketingBanner }) {
 									<div className="border-b-[1px] border-b-secondary-800 py-[25px]">
 										<li
 											onClick={handleSidebarService}
-											className={`group cursor-pointer flex items-center justify-between gap-2 text-[18px] ${open ? "text-primary-500" : ""}  `}
+											className={`group cursor-pointer flex items-center justify-between gap-2 text-[18px] ${open ? "text-primary-500" : ""} ${
+												service?.find((item) => item.slug === router.slice(1)) ? "text-primary-500" : ""
+											}  `}
 										>
 											Services <span className="text-[22px]">{open ? <FiMinus /> : <FiPlus />}</span>
 										</li>
@@ -688,7 +689,7 @@ function Navbar({ marketingBanner }) {
 									</li>
 									<li className="text-[18px] border-b-[1px] border-b-secondary-800 py-[25px] ">
 										<Link
-											href={"/"}
+											href={"/testimonials"}
 											onClick={handleMainSingleMenu}
 											className={`hover:text-primary-500  ${router === "/testimonials" ? "text-primary-500" : " "}`}
 										>
@@ -700,7 +701,7 @@ function Navbar({ marketingBanner }) {
 										<li
 											onClick={handleWorksPopupMobile}
 											className={`text-[18px]  flex items-center justify-between gap-2 cursor-pointer ${
-												router === "/about" || router === "/team" || router === "/faqs" ? "text-primary-500" : ""
+												worksData?.find((item) => "/works/" + item.slug === router) || router === "/works" ? "text-primary-500" : ""
 											} ${worksMobileOpen ? "text-primary-500" : ""}`}
 										>
 											Works <span className="text-[22px]">{worksMobileOpen ? <FiMinus /> : <FiPlus />}</span>
@@ -711,7 +712,9 @@ function Navbar({ marketingBanner }) {
 												<Link
 													// onClick={backToPreviousPage}
 													href="/works"
-													className="text-neutral-500 hover:text-primary-500 text-center  font-semibold text-[12px] md:text-[14px] flex items-center underline underline-offset-4 "
+													className={`${
+														router === "/works" ? "text-primary-500" : " "
+													} text-neutral-500 hover:text-primary-500 text-center  font-semibold text-[12px] md:text-[14px] flex items-center underline underline-offset-4`}
 												>
 													<MdOutlineArrowDropDown className="text-xl rotate-90" /> All Works
 												</Link>
@@ -763,7 +766,7 @@ function Navbar({ marketingBanner }) {
 												router={router}
 											/>
 											<NavCard
-												slug="find-a-room"
+												slug="escape-rooms"
 												img="/navbar/insights/EscapeRoomDirectory.svg"
 												title="Escape Room Directory"
 												description="Connecting players to your escape rooms"
@@ -775,7 +778,7 @@ function Navbar({ marketingBanner }) {
 										<li
 											onClick={handleMorePopupMobile}
 											className={`text-[18px]  flex items-center justify-between gap-2 cursor-pointer ${
-												router === "/about" || router === "/team" || router === "/partner-program" || router === "/faq" ? "text-primary-500" : ""
+												router === "/about" || router === "/team" || router === "/partner-program" || router === "/faqs" ? "text-primary-500" : ""
 											} ${mobileMoreState ? "text-primary-500" : ""}`}
 										>
 											More <span className="text-[22px]">{mobileMoreState ? <FiMinus /> : <FiPlus />}</span>

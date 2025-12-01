@@ -9,8 +9,6 @@ async function page() {
 
 	const { data } = await getData(url, "privacy page");
 
-	console.log(data);
-
 	return (
 		<div className="bg-secondary-900 py-[140px] relative">
 			<div className="absolute top-0 h-[160px] w-full bg-[linear-gradient(0deg,rgba(13,17,22,0)_0%,rgba(13,17,22,0)_50%,rgba(230,64,39,0.2)_100%)]"></div>

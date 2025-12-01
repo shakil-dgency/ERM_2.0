@@ -114,6 +114,7 @@ function CompanyProfileCard({ data }) {
 				spaceBetween={20}
 				pagination={{
 					clickable: true,
+					dynamicBullets: true,
 				}}
 				navigation={true}
 				modules={[Pagination, Navigation]}

@@ -4,7 +4,7 @@ import React from "react";
 
 const StepsCard = ({index, item}) => {
 	return (
-		<div className={`${index % 2 !== 0 ?"lg:mt-[60px]":"lg:mb-[60px]"} max-w-[378px] p-4 md:p-7 rounded-[10px] bg-[radial-gradient(137.98%_137.98%_at_100%_2.3%,_var(--Colors-Secondary-500,_#35414D)_0%,_rgba(24,30,37,0.50)_52.58%,_rgba(24,30,37,0.00)_100%)] hover:bg-[radial-gradient(137.98%_137.98%_at_100%_2.3%,_rgba(204,55,34,0.40)_0%,_rgba(24,30,37,0.50)_52.58%,_rgba(24,30,37,0.00)_100%)] duration-500`}>
+		<div className={`${index % 2 !== 0 ?"lg:mt-[60px]":"lg:mb-[60px]"} w-full text-center sm:text-start flex flex-col items-center sm:items-start max-w-full sm:max-w-[378px] px-4 py-10 md:px-7 md:py-7 rounded-[10px] bg-[radial-gradient(137.98%_137.98%_at_100%_2.3%,_var(--Colors-Secondary-500,_#35414D)_0%,_rgba(24,30,37,0.50)_52.58%,_rgba(24,30,37,0.00)_100%)] hover:bg-[radial-gradient(137.98%_137.98%_at_100%_2.3%,_rgba(204,55,34,0.40)_0%,_rgba(24,30,37,0.50)_52.58%,_rgba(24,30,37,0.00)_100%)] duration-500`}>
 			<Image src={item?.icon ? process.env.NEXT_PUBLIC_API_URL + item?.icon.url : "/"} alt="Steps" width={52} height={80} />
 			<p className="text-neutral-50 text-[20px] md:text-[24px] font-[600] mt-6 mb-2.5">{item?.title}</p>
 			<p className="text-neutral-300 text-[14px] md:text-[16px] font-[400]">

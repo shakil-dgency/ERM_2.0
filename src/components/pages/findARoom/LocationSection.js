@@ -3,6 +3,8 @@ import Container from "@/components/ui/Container";
 import React, { useState } from "react";
 import LocationCard from "./LocationCard";
 import { TiArrowSortedDown } from "react-icons/ti";
+import { InfinitySpin } from "react-loader-spinner";
+import StrokeButton from "@/components/ui/buttons/StrokeButton";
 
 function LocationSection({ item }) {
 	const [visibleCount, setVisibleCount] = useState(8);
@@ -11,7 +13,7 @@ function LocationSection({ item }) {
 	const handleLoadMore = () => {
 		setLoading(true);
 		setTimeout(() => {
-			setVisibleCount((prev) => prev + 4);
+			setVisibleCount((prev) => prev + 8);
 			setLoading(false);
 		}, 700);
 	};
@@ -22,7 +24,7 @@ function LocationSection({ item }) {
 
 	const citiesToShow = item?.city_names?.slice(0, visibleCount);
 	const hasMore = visibleCount < item?.city_names?.length;
-    const hasLess = item?.city_names?.length > 8 && visibleCount >= item?.city_names?.length;
+	const hasLess = item?.city_names?.length > 8 && visibleCount >= item?.city_names?.length;
 
 	return (
 		<Container>
@@ -42,25 +44,24 @@ function LocationSection({ item }) {
 				{item?.city_names?.length > 8 && (
 					<div className="mt-[40px] flex justify-center">
 						{hasMore ? (
-							<button
-								onClick={handleLoadMore}
-								className="flex items-center gap-1.5 px-[20px] py-[12px] font-[600] rounded-[6px] border-[1px] border-primary-600 text-primary-500 hover:text-neutral-50 hover:bg-primary-600 duration-300"
-							>
-								{loading ? "Loading..." : "See More"}
-								<TiArrowSortedDown className="mt-[2px]" />
-							</button>
+							<>
+								{loading ? (
+									<div className="flex justify-center ">
+										<InfinitySpin width="200" color="#FF492C" />
+									</div>
+								) : (
+									<div className="flex justify-center mt-4">
+										<StrokeButton medium={true} text="Load More" handleClick={handleLoadMore} text_light={false} />
+									</div>
+								)}
+							</>
 						) : hasLess ? (
-							<button
-								onClick={handleLoadLess}
-								className="flex items-center gap-1.5 px-[20px] py-[12px] font-[600] rounded-[6px] border-[1px] border-primary-600 text-primary-500 hover:text-neutral-50 hover:bg-primary-600 duration-300"
-							>
-								See Less
-								<TiArrowSortedDown className="mt-[2px] rotate-180" />
-							</button>
+							<div className="flex justify-center mt-4">
+								<StrokeButton medium={true} text="See Less" handleClick={handleLoadLess} text_light={false} />
+							</div>
 						) : null}
 					</div>
 				)}
-				
 			</div>
 		</Container>
 	);

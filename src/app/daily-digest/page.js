@@ -1,5 +1,5 @@
 import NewsFeedCard from "@/components/NewsFeed/NewsFeedCard";
-import {  getData } from "@/services/helper";
+import {  buildMetadataFromSeo, getData } from "@/services/helper";
 import React from "react";
 
 export const revalidate = 60;
@@ -9,7 +9,6 @@ async function page() {
 	const url = `${process.env.NEXT_PUBLIC_API_URL}/api/news-feeds?populate=*`;
 
 	const { data } = await getData(url, "digest page");
-	console.log(data);
 
 	return (
 		<div className="relative ">

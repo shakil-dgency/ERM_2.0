@@ -3,11 +3,13 @@ import React, { useEffect, useState } from "react";
 import Tools from "../home/comparisonSection/Tools";
 import styles from "@/styles/blog.module.css";
 import StrokeButton from "@/components/ui/buttons/StrokeButton";
+import { InfinitySpin } from "react-loader-spinner";
 
 function Letter({ data }) {
 	// console.log(data?.letter_body.length);
 	const [boxHeight, setBoxHeight] = useState(0);
 	const [inView, setInView] = useState(999);
+	const [isLoading, setIsLoading] = useState(false);
 
 	useEffect(() => {
 		const x = document.querySelector(".letter_text");
@@ -18,10 +20,14 @@ function Letter({ data }) {
 	}, [data]);
 
 	const handleView = () => {
-		setInView((prev) => prev + 500);
+		setIsLoading(true);
+		setTimeout(() => {
+			setInView(boxHeight);
+			setIsLoading(false);
+		}, 1000);
 	};
 	const handleReduceView = () => {
-		setInView((prev) => prev - 500);
+		setInView(999);
 	};
 
 	return (
@@ -46,13 +52,23 @@ function Letter({ data }) {
 
 				{/* Read more button */}
 				{boxHeight > inView ? (
-					<div className="flex justify-center mt-4 ">
-						<StrokeButton text="Read More" handleClick={handleView} text_light={false} />
-					</div>
-				) : boxHeight > 999 && (
-					<div className="flex justify-center mt-4">
-						<StrokeButton text="Read Less" handleClick={handleReduceView} text_light={false} />
-					</div>
+					<>
+						{isLoading ? (
+							<div className="flex justify-center ">
+								<InfinitySpin width="200" color="#FF492C" />
+							</div>
+						) : (
+							<div className="flex justify-center mt-4 ">
+								<StrokeButton medium={true} text="Read More" handleClick={handleView} text_light={false} />
+							</div>
+						)}
+					</>
+				) : (
+					boxHeight > 999 && (
+						<div className="flex justify-center mt-4">
+							<StrokeButton medium={true} text="Read Less" handleClick={handleReduceView} text_light={false} />
+						</div>
+					)
 				)}
 			</div>
 			{/* <div className="bg-[url('/pages/home/papertexture.png')] bg-repeat relative">

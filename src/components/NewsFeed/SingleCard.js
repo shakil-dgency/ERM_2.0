@@ -184,7 +184,7 @@ function SingleCard({ data, highlightedSearch, singleNews, previousData, nextDat
 	const handleCopyUrl = async () => {
 		try {
 			const url = handleSlug(data.slug, data.createdAt);
-			const completeUrl = "http://localhost:3000" + url;
+			const completeUrl = `${process.env.NEXT_PUBLIC_OWN_DOMAIN}` + url;
 
 			await navigator.clipboard.writeText(completeUrl);
 
@@ -207,7 +207,7 @@ function SingleCard({ data, highlightedSearch, singleNews, previousData, nextDat
 					<div className="flex justify-between gap-12">
 						<Link
 							href={handleSlug(data.slug, data.createdAt)}
-							className="post_title text-[18px] leading-[30.8px] md:leading-[inherit] sm:text-[22px] text-neutral-100 font-[500] hover:underline"
+							className="post_title text-[20px] leading-[1.4] md:leading-[inherit] sm:text-[24px] text-neutral-100 font-[600] hover:underline"
 						>
 							{highlightSearchKeyword(data.feed_title, highlightedSearch)}
 						</Link>
@@ -223,7 +223,7 @@ function SingleCard({ data, highlightedSearch, singleNews, previousData, nextDat
 					<p className="text-[14px] text-neutral-600 pt-1 font-[400]">{handleFormatedDate(data.createdAt)}</p>
 					<div className="caption my-[14px] ">
 						<div className={`${styles.text_area}`}>
-							<div className="text-neutral-200 text-[14px] sm:text-[16px] font-[400]">
+							<div className="text-neutral-400 text-[14px] sm:text-[16px] font-[400]">
 								{parseAndHighlightHTML(data.feed_description, highlightedSearch)}
 							</div>
 						</div>
@@ -255,7 +255,7 @@ function SingleCard({ data, highlightedSearch, singleNews, previousData, nextDat
 					{data.feed_description_down && (
 						<div className="caption my-[14px] pb-2">
 							<div className={`${styles.text_area}`}>
-								<div className="text-neutral-200 text-[14px] sm:text-[16px] font-[400]">
+								<div className="text-neutral-400 text-[14px] sm:text-[16px] font-[400]">
 									{parseAndHighlightHTML(data.feed_description_down, highlightedSearch)}
 								</div>
 							</div>
@@ -292,13 +292,13 @@ function SingleCard({ data, highlightedSearch, singleNews, previousData, nextDat
 								<p className="ml-[10px] mt-1 font-[500] text-neutral-400">Like</p>
 							</div>
 							<div className="flex gap-3 text-[24px]">
-								<LinkedinShareButton url={`https://hamiduzjaman.com${handleSlug(data.slug, data.createdAt)}`}>
+								<LinkedinShareButton url={`${process.env.NEXT_PUBLIC_OWN_DOMAIN}${handleSlug(data.slug, data.createdAt)}`}>
 									<FaLinkedin className="text-neutral-600 hover:text-neutral-800 duration-300 text-[22px]" />
 								</LinkedinShareButton>
-								<FacebookShareButton url={`https://hamiduzjaman.com${handleSlug(data.slug, data.createdAt)}`}>
+								<FacebookShareButton url={`${process.env.NEXT_PUBLIC_OWN_DOMAIN}${handleSlug(data.slug, data.createdAt)}`}>
 									<FaSquareFacebook className="text-neutral-600 hover:text-neutral-800 duration-300 text-[22px]" />
 								</FacebookShareButton>
-								<TwitterShareButton url={`https://hamiduzjaman.com${handleSlug(data.slug, data.createdAt)}`}>
+								<TwitterShareButton url={`${process.env.NEXT_PUBLIC_OWN_DOMAIN}${handleSlug(data.slug, data.createdAt)}`}>
 									<FaSquareXTwitter className="text-neutral-600 hover:text-neutral-800 duration-300 text-[22px]" />
 								</TwitterShareButton>
 								{/* <Image
